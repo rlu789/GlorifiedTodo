@@ -1,0 +1,13 @@
+<h3>{{collection.title}}</h3>
+
+<div *ngFor="let card of collection.cards">
+  {{card.title}}
+</div>
+
+<mat-form-field>
+  <input matInput placeholder="Card Title" [(ngModel)]="cardTitle">
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="Card Desc" [(ngModel)]="cardDesc">
+</mat-form-field>
+<button mat-raised-button color="primary" (click)='addCard(collection.id)'>Add Card</button>

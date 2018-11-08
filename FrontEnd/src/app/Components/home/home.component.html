@@ -1,5 +1,7 @@
 <div class='container'>
-  
+  <div *ngFor="let col of collectionData">
+    <app-card-collection [collection]='col'></app-card-collection>
+  </div>
 
   <mat-form-field>
     <input matInput placeholder="Collection Title" [(ngModel)]="collectionTitle">

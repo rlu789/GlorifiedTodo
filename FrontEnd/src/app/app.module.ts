@@ -5,12 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
-
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
 
 import { CardCollectionsService } from './Services/card-collections.service';
+import { CardsService } from './Services/cards.service';
+
+import { AppComponent } from './app.component';
+import { HomeComponent } from './Components/home/home.component';
+import { CardCollectionComponent } from './Components/card-collection/card-collection.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }
@@ -20,7 +22,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    CardCollectionComponent
   ],
   imports: [
     BrowserModule,
@@ -31,10 +34,12 @@ const appRoutes: Routes = [
     
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule
   ],
   providers: [
-    CardCollectionsService
+    CardCollectionsService,
+    CardsService
   ],
   bootstrap: [AppComponent]
 })
