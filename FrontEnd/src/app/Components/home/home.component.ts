@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CardCollectionsService } from '../../Services/card-collections.service';
+import { CardCollectionsService, CardCollection } from '../../Services/card-collections.service';
 
 @Component({
   selector: 'app-home',
@@ -7,20 +7,18 @@ import { CardCollectionsService } from '../../Services/card-collections.service'
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  collectionData: Array<any>;
+  collectionData: Array<CardCollection>;
   collectionTitle: string;
 
   constructor(private cardCollectionsService: CardCollectionsService) {
-    cardCollectionsService.get().subscribe((data: any) => {
+    cardCollectionsService.get().subscribe((data: Array<CardCollection>) => {
       this.collectionData = data;
-      console.log(data);
+      console.log(this.collectionData);
     });
   }
 
   addCollection(){
-    this.cardCollectionsService.add({
-      title: this.collectionTitle
-    }).subscribe((data: any) => {
+    this.cardCollectionsService.add(new CardCollection(this.collectionTitle, [])).subscribe((data: any) => {
       this.collectionData.push(data);
       console.log(data);
     });

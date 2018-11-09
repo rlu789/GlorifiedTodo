@@ -18,6 +18,6 @@ namespace BackEnd.Models
 
         public int CardCollectionId { get; set; }
 
-        public CardCollection CardCollection { get; set; }
+        //public CardCollection CardCollection { get; set; }
     }
 }

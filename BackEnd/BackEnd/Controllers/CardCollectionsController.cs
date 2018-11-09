@@ -24,7 +24,19 @@ namespace BackEnd.Controllers
         [HttpGet]
         public IEnumerable<CardCollection> GetCardCollection()
         {
-            return _context.CardCollection;
+            var collections = _context.CardCollection
+                .Include(cardCol => cardCol.Cards)
+                .ToList();
+
+            //foreach(CardCollection col in collections)
+            //{
+            //    foreach (Card c in col.Cards)
+            //    {
+            //        c.CardCollection = null;
+            //    }
+            //}
+
+            return collections;
         }
 
         // GET: api/CardCollections/5
@@ -60,22 +72,22 @@ namespace BackEnd.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(cardCollection).State = EntityState.Modified;
+            CardCollection record = _context.CardCollection
+                   .Single(b => b.Id == cardCollection.Id);
+            if (record != null)
+            {
+                foreach(Card c in cardCollection.Cards)
+                {
+                    if (c.Id == 0)
+                    {
+                        _context.Card.Add(c);
+                    }
+                }
+                _context.SaveChanges();
+                // wow nice very good
+                //record.Cards = cardCollection.Cards;
+                //_context.SaveChanges();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CardCollectionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
             }
 
             return NoContent();

@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatProgressSpinnerModule } from '@angular/material';
 
 import { CardCollectionsService } from './Services/card-collections.service';
 import { CardsService } from './Services/cards.service';
@@ -35,7 +35,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     CardCollectionsService,

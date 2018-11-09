@@ -1,13 +1,28 @@
 <h3>{{collection.title}}</h3>
 
 <div *ngFor="let card of collection.cards">
-  {{card.title}}
+  <mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{card.title}}</mat-card-title>
+    <!-- <mat-card-subtitle></mat-card-subtitle> -->
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{card.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button> -->
+  </mat-card-actions>
+</mat-card>
 </div>
 
 <mat-form-field>
   <input matInput placeholder="Card Title" [(ngModel)]="cardTitle">
 </mat-form-field>
 <mat-form-field>
-  <input matInput placeholder="Card Desc" [(ngModel)]="cardDesc">
+  <textarea matInput placeholder="Card Desc" [(ngModel)]="cardDesc"></textarea>
 </mat-form-field>
 <button mat-raised-button color="primary" (click)='addCard(collection.id)'>Add Card</button>
