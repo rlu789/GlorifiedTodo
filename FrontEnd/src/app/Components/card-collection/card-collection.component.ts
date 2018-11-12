@@ -8,7 +8,7 @@ import { CardsService, Card } from '../../Services/cards.service';
   styleUrls: ['./card-collection.component.css']
 })
 export class CardCollectionComponent implements OnInit {
-  @Input('collection') collection: CardCollection;
+  @Input('collectionData') collectionData: Array<CardCollection>;
 
   cardTitle: string;
   cardDesc: string;
@@ -18,13 +18,13 @@ export class CardCollectionComponent implements OnInit {
   ngOnInit() {
   }
 
-  addCard(id){
+  addCard(i:number, id: number){
     var c = new Card(this.cardTitle, this.cardDesc, id);
     this.cardDesc = '';
     this.cardTitle = '';
-    if (!this.collection.cards) this.collection.cards = [];
-    this.collection.cards.push(c);
-    this.cardCollectionsService.update(this.collection).subscribe((data: any) => {
+    if (!this.collectionData[i].cards) this.collectionData[i].cards = [];
+    this.collectionData[i].cards.push(c);
+    this.cardCollectionsService.update(this.collectionData[i]).subscribe((data: any) => {
       console.log(data);
     });
   }

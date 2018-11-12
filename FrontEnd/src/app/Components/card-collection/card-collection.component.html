@@ -1,28 +1,55 @@
-<h3>{{collection.title}}</h3>
-
-<div *ngFor="let card of collection.cards">
-  <mat-card>
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{card.title}}</mat-card-title>
-    <!-- <mat-card-subtitle></mat-card-subtitle> -->
-  </mat-card-header>
-  <mat-card-content>
-    <p>
-      {{card.description}}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <!-- <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button> -->
-  </mat-card-actions>
-</mat-card>
+<!-- https://codepen.io/SitePoint/pen/brmXRX?editors=0100 -->
+<div class="lists">
+  <div *ngFor="let col of collectionData; index as i" class="list">
+    <header>{{col.title}}</header>
+    <ul>
+      <div *ngFor="let card of col.cards">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{card.title}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              {{card.description}}
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <!-- <li *ngFor="let card of col.cards">
+        {{card.title}}
+        {{card.description}}
+      </li> -->
+    </ul>
+    <div class='add-card-form'>
+      <mat-form-field>
+        <input matInput placeholder="Card Title" [(ngModel)]="cardTitle">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Card Desc" [(ngModel)]="cardDesc"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)='addCard(i, col.id)'>Add Card</button>
+    </div>
+    <!-- <footer>Add a card...</footer> -->
+  </div>
 </div>
 
-<mat-form-field>
-  <input matInput placeholder="Card Title" [(ngModel)]="cardTitle">
-</mat-form-field>
-<mat-form-field>
-  <textarea matInput placeholder="Card Desc" [(ngModel)]="cardDesc"></textarea>
-</mat-form-field>
-<button mat-raised-button color="primary" (click)='addCard(collection.id)'>Add Card</button>
+<!-- <h3>{{collection.title}}</h3> -->
+
+<!-- <div *ngFor="let card of collection.cards">
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{card.title}}</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{card.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+</div> -->

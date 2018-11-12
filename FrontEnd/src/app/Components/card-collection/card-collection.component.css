@@ -1,0 +1,8 @@
+.add-card-form{
+    width: 100%;
+    padding: 10px;
+}
+
+.add-card-form .mat-form-field{
+    width: 100%;
+}

@@ -7,6 +7,7 @@ import { CardCollectionsService, CardCollection } from '../../Services/card-coll
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  loading = true;
   collectionData: Array<CardCollection>;
   collectionTitle: string;
 
@@ -14,6 +15,7 @@ export class HomeComponent implements OnInit {
     cardCollectionsService.get().subscribe((data: Array<CardCollection>) => {
       this.collectionData = data;
       console.log(this.collectionData);
+      this.loading = false;
     });
   }
 
