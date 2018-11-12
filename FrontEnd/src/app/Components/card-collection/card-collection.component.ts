@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CardCollectionsService, CardCollection } from '../../Services/card-collections.service';
 import { CardsService, Card } from '../../Services/cards.service';
+import { HttpErrorResponse } from "@angular/common/http";
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-card-collection',
@@ -13,9 +15,36 @@ export class CardCollectionComponent implements OnInit {
   cardTitle: string;
   cardDesc: string;
 
-  constructor(private cardsService: CardsService, private cardCollectionsService: CardCollectionsService) { }
+  constructor(private cardsService: CardsService, private cardCollectionsService: CardCollectionsService,
+    public snackBar: MatSnackBar) { }
 
   ngOnInit() {
+  }
+
+  deleteCol(i: number){
+    this.cardCollectionsService.remove(this.collectionData[i]).subscribe((data: any) => {
+      console.log(data);
+      this.collectionData.splice(i, 1);
+    }, (err: HttpErrorResponse) => {
+      var errMsg = err.statusText + ': ';
+      Object.keys(err.error).forEach(function(e){
+        // errMsg += ' ' + e + ": "
+        err.error[e].forEach(function(str){
+          errMsg += str;
+        })
+      })
+      console.log(err);
+      this.openSnackBar(errMsg);
+    });
+  }
+
+  deleteCard(collectionIndex: number, cardIndex: number){
+    var cardToBeDeleted = this.collectionData[collectionIndex].cards[cardIndex];
+    console.log(cardToBeDeleted);
+    this.cardsService.remove(cardToBeDeleted).subscribe((data: any) => {
+      console.log(data);
+      this.collectionData[collectionIndex].cards.splice(cardIndex, 1);
+    })
   }
 
   addCard(i:number, id: number){
@@ -23,9 +52,23 @@ export class CardCollectionComponent implements OnInit {
     this.cardDesc = '';
     this.cardTitle = '';
     if (!this.collectionData[i].cards) this.collectionData[i].cards = [];
-    this.collectionData[i].cards.push(c);
-    this.cardCollectionsService.update(this.collectionData[i]).subscribe((data: any) => {
+    this.cardsService.add(c).subscribe((data: any) => {
       console.log(data);
+      this.collectionData[i].cards.push(c);
+    }, (err: HttpErrorResponse) => {
+      var errMsg = err.statusText + ': ';
+      Object.keys(err.error).forEach(function(e){
+        // errMsg += ' ' + e + ": "
+        err.error[e].forEach(function(str){
+          errMsg += str;
+        })
+      })
+      console.log(err);
+      this.openSnackBar(errMsg);
     });
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Close');
   }
 }

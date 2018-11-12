@@ -16,6 +16,7 @@ namespace BackEnd.Models
         [Required]
         public string Description { get; set; }
 
+        [Required]
         public int CardCollectionId { get; set; }
 
         //public CardCollection CardCollection { get; set; }

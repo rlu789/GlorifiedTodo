@@ -3,10 +3,15 @@
   <div *ngFor="let col of collectionData; index as i" class="list">
     <header>{{col.title}}</header>
     <ul>
-      <div *ngFor="let card of col.cards">
+      <div *ngFor="let card of col.cards; index as cardIndex">
         <mat-card>
+          <button type="button" class="close" (click)='deleteCard(i, cardIndex)'>
+            <span>&times;</span>
+          </button>
           <mat-card-header>
-            <mat-card-title>{{card.title}}</mat-card-title>
+            <mat-card-title>
+              {{card.title}}
+            </mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <p>
@@ -27,7 +32,10 @@
       <mat-form-field>
         <textarea matInput placeholder="Card Desc" [(ngModel)]="cardDesc"></textarea>
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)='addCard(i, col.id)'>Add Card</button>
+      <div class="form-actions">
+        <button mat-raised-button color="primary" (click)='addCard(i, col.id)'>Add Card</button>
+        <button mat-raised-button color="warn" (click)='deleteCol(i)' style="float:right;">Delete List</button>
+      </div>
     </div>
     <!-- <footer>Add a card...</footer> -->
   </div>
