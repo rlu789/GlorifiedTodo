@@ -8,7 +8,7 @@ namespace BackEnd.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CardCollection",
+                name: "Board",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -17,7 +17,27 @@ namespace BackEnd.Migrations
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Board", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CardCollection",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: false),
+                    BoardId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
                     table.PrimaryKey("PK_CardCollection", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CardCollection_Board_BoardId",
+                        column: x => x.BoardId,
+                        principalTable: "Board",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,6 +65,11 @@ namespace BackEnd.Migrations
                 name: "IX_Card_CardCollectionId",
                 table: "Card",
                 column: "CardCollectionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CardCollection_BoardId",
+                table: "CardCollection",
+                column: "BoardId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -54,6 +79,9 @@ namespace BackEnd.Migrations
 
             migrationBuilder.DropTable(
                 name: "CardCollection");
+
+            migrationBuilder.DropTable(
+                name: "Board");
         }
     }
 }

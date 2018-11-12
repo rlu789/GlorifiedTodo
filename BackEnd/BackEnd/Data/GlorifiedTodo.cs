@@ -15,4 +15,6 @@ using BackEnd.Models;
         public DbSet<CardCollection> CardCollection { get; set; }
 
         public DbSet<Card> Card { get; set; }
+
+        public DbSet<BackEnd.Models.Board> Board { get; set; }
     }

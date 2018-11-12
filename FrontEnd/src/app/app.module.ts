@@ -9,21 +9,24 @@ import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, Mat
 
 import { CardCollectionsService } from './Services/card-collections.service';
 import { CardsService } from './Services/cards.service';
+import { BoardsService } from './Services/boards.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Components/home/home.component';
 import { CardCollectionComponent } from './Components/card-collection/card-collection.component';
+import { BoardComponent } from './Components/board/board.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent }
- 
+  { path: '', component: HomeComponent },
+  { path: 'board/:id', component: BoardComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CardCollectionComponent
+    CardCollectionComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     CardCollectionsService,
-    CardsService
+    CardsService,
+    BoardsService
   ],
   bootstrap: [AppComponent]
 })

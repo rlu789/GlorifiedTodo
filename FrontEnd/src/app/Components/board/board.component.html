@@ -1,0 +1,11 @@
+<div class='container'>
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <div *ngIf="!loading">
+    <app-card-collection [collectionData]='collectionData'></app-card-collection>
+
+    <mat-form-field>
+      <input matInput placeholder="Collection Title" [(ngModel)]="collectionTitle">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)='addCollection()'>Add</button>
+  </div>
+</div>

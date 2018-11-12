@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CardCollectionsService, CardCollection } from '../../Services/card-collections.service';
+import { Router } from '@angular/router';
+import { Board, BoardsService } from '../../Services/boards.service';
 import { HttpErrorResponse } from "@angular/common/http";
 import { MatSnackBar } from '@angular/material';
 
@@ -10,20 +11,26 @@ import { MatSnackBar } from '@angular/material';
 })
 export class HomeComponent implements OnInit {
   loading = true;
-  collectionData: Array<CardCollection>;
-  collectionTitle: string;
+  boardData: Array<Board>;
+  boardTitle: string;
 
-  constructor(private cardCollectionsService: CardCollectionsService, public snackBar: MatSnackBar) {
-    cardCollectionsService.get().subscribe((data: Array<CardCollection>) => {
-      this.collectionData = data;
-      console.log(this.collectionData);
+
+  constructor(private boardsService: BoardsService, public snackBar: MatSnackBar, private router: Router) {
+    boardsService.get().subscribe((data: Array<Board>) => {
+      this.boardData = data;
+      console.log(this.boardData);
       this.loading = false;
     });
   }
 
-  addCollection() {
-    this.cardCollectionsService.add(new CardCollection(this.collectionTitle, [])).subscribe((data: any) => {
-      this.collectionData.push(data);
+  viewBoard(i: number){
+    this.router.navigate(['board', this.boardData[i].id]); 
+  }
+
+  addBoard(){
+    var board = new Board(this.boardTitle);
+    this.boardsService.add(board).subscribe((data: any) => {
+      this.boardData.push(board);
       console.log(data);
     }, (err: HttpErrorResponse) => {
       var errMsg = err.statusText + ': ';
@@ -35,9 +42,7 @@ export class HomeComponent implements OnInit {
       })
       console.log(err);
       this.openSnackBar(errMsg);
-    }
-    );
-
+    });
   }
 
   openSnackBar(message: string) {

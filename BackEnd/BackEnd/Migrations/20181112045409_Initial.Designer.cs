@@ -8,16 +8,30 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(GlorifiedTodo))]
-    [Migration("20181107112941_Initial")]
+    [Migration("20181112045409_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("BackEnd.Models.Board", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Board");
+                });
 
             modelBuilder.Entity("BackEnd.Models.Card", b =>
                 {
@@ -46,19 +60,31 @@ namespace BackEnd.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BoardId");
+
                     b.Property<string>("Title")
                         .IsRequired();
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BoardId");
 
                     b.ToTable("CardCollection");
                 });
 
             modelBuilder.Entity("BackEnd.Models.Card", b =>
                 {
-                    b.HasOne("BackEnd.Models.CardCollection", "CardCollection")
+                    b.HasOne("BackEnd.Models.CardCollection")
                         .WithMany("Cards")
                         .HasForeignKey("CardCollectionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BackEnd.Models.CardCollection", b =>
+                {
+                    b.HasOne("BackEnd.Models.Board")
+                        .WithMany("CardCollections")
+                        .HasForeignKey("BoardId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

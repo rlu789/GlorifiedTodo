@@ -6,18 +6,13 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Models
 {
-    public class CardCollection
+    public class Board
     {
         public int Id { get; set; }
 
         [Required]
         public string Title { get; set; }
 
-        public List<Card> Cards { get; set; }
-
-        [Required]
-        public int BoardId { get; set; }
-
-        //public Board Board { get; set; }
+        public List<CardCollection> CardCollections { get; set; }
     }
 }

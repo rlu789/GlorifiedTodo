@@ -1,11 +1,13 @@
 <div class='container'>
   <mat-spinner *ngIf="loading"></mat-spinner>
   <div *ngIf="!loading">
-    <app-card-collection [collectionData]='collectionData'></app-card-collection>
-
+    <div *ngFor="let board of boardData, index as i">
+      {{board.title}}
+      <button mat-raised-button color="primary" (click)='viewBoard(i)'>View Board</button>
+    </div>
     <mat-form-field>
-      <input matInput placeholder="Collection Title" [(ngModel)]="collectionTitle">
+      <input matInput placeholder="Collection Title" [(ngModel)]="boardTitle">
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)='addCollection()'>Add</button>
+    <button mat-raised-button color="primary" (click)='addBoard(i)'>Add</button>
   </div>
 </div>

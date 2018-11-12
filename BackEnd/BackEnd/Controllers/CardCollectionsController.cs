@@ -62,6 +62,8 @@ namespace BackEnd.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCardCollection([FromRoute] int id, [FromBody] CardCollection cardCollection)
         {
+            // TODO redo
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
