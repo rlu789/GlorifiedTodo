@@ -2,37 +2,50 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 /* Modifying Bootstrap Styles */
-.container{
-    padding: 0;
+.container {
+  padding: 0;
+}
+
+.jumbotron {
+  border-radius: 0px;
+}
+
+@media (min-width: 576px) {
+  .jumbotron {
+    padding: 2rem 1rem;
+  }
 }
 
 /* -- End -- */
 
 /* Modifying Material Styles */
-.mat-spinner{
-    margin: 0 auto;
+.mat-spinner {
+  margin: 0 auto;
 }
 
-.mat-card{
-    margin: 10px 0;
+.mat-card {
+  margin: 10px 0;
 }
-.mat-card-header{
-    margin-right: 20px;
+
+.mat-card-header {
+  margin-right: 20px;
 }
-.mat-card-header .mat-card-header-text{
-    margin: 0;
-    width: 100%;
+
+.mat-card-header .mat-card-header-text {
+  margin: 0;
+  width: 100%;
 }
 
 /* -- End -- */
 
 body {
-    margin: 0;
-    /* font-family: 'Roboto'; */
-    font-size: 14px;
-    line-height: 1.3em;
-    background-color: #0079bf;
-  }
+  margin: 0;
+  /* font-family: 'Roboto'; */
+  font-size: 14px;
+  line-height: 1.3em;
+  background-color: #0079bf;
+}
+
 /*   
   .ui {
     height: 100vh;
@@ -41,77 +54,91 @@ body {
     background-color: #0079bf;
     color: #eee;
   } */
-  
-  .navbar {
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-  }
-  .navbar.app {
-    background-color: #0067a3;
-    font-size: 1.5rem;
-  }
-  .navbar.board {
-    font-size: 1.1rem;
-  }
-  
-  .lists {
-    height: 100vh;
-    display: flex;
-    overflow-x: auto;
-  }
-  .lists > * {
-    flex: 0 0 auto;
-    margin-left: 10px;
-  }
-  .lists::after {
-    content: '';
-    flex: 0 0 10px;
-  }
-  
-  .list {
-    width: 300px;
-    height: calc(100% - 10px - 17px);
-  }
-  .list > * {
-    background-color: #e2e4e6;
-    color: #333;
-    padding: 0 10px;
-  }
-  /* These being used? */
-  .list header {
-    line-height: 36px;
-    font-size: 16px;
-    font-weight: bold;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-  }
-  .list footer {
-    line-height: 36px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    color: #888;
-  }
-  .list ul {
-    list-style: none;
-    margin: 0;
-    max-height: calc(100% - 36px - 36px);
-    overflow-y: auto;
-  }
-  .list ul li {
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 3px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  }
-  .list ul li:not(:last-child) {
-    margin-bottom: 10px;
-  }
-  .list ul li img {
-    display: block;
-    width: calc(100% + 2 * 10px);
-    margin: -10px 0 10px -10px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-  }
-  
+
+.navbar {
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar.app {
+  background-color: #0067a3;
+  font-size: 1.5rem;
+}
+
+.navbar.board {
+  font-size: 1.1rem;
+}
+
+.lists {
+  /* height: 100vh; */
+  display: flex;
+  overflow-x: auto;
+}
+
+.lists>* {
+  flex: 0 0 auto;
+  margin-left: 10px;
+}
+
+.lists::after {
+  content: '';
+  flex: 0 0 10px;
+}
+
+.list {
+  width: 300px;
+  height: calc(100% - 10px - 17px);
+}
+
+.list>* {
+  background-color: #e2e4e6;
+  color: #333;
+  padding: 0 10px;
+}
+
+/* These being used? */
+.list header {
+  line-height: 36px;
+  font-size: 16px;
+  font-weight: bold;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.list footer {
+  line-height: 36px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: #888;
+}
+
+.list ul {
+  list-style: none;
+  margin: 0;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.list ul li {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.list ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.list ul li img {
+  display: block;
+  width: calc(100% + 2 * 10px);
+  margin: -10px 0 10px -10px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+/* .mat-card:hover{
+    background-color: grey;
+} */

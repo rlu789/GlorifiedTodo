@@ -41,9 +41,9 @@ export class CardCollectionComponent implements OnInit {
   deleteCard(collectionIndex: number, cardIndex: number){
     var cardToBeDeleted = this.collectionData[collectionIndex].cards[cardIndex];
     console.log(cardToBeDeleted);
+    this.collectionData[collectionIndex].cards.splice(cardIndex, 1);
     this.cardsService.remove(cardToBeDeleted).subscribe((data: any) => {
       console.log(data);
-      this.collectionData[collectionIndex].cards.splice(cardIndex, 1);
     })
   }
 

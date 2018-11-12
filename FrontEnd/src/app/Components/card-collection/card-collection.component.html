@@ -26,16 +26,25 @@
       </li> -->
     </ul>
     <div class='add-card-form'>
-      <mat-form-field>
-        <input matInput placeholder="Card Title" [(ngModel)]="cardTitle">
-      </mat-form-field>
-      <mat-form-field>
-        <textarea matInput placeholder="Card Desc" [(ngModel)]="cardDesc"></textarea>
-      </mat-form-field>
-      <div class="form-actions">
-        <button mat-raised-button color="primary" (click)='addCard(i, col.id)'>Add Card</button>
-        <button mat-raised-button color="warn" (click)='deleteCol(i)' style="float:right;">Delete List</button>
-      </div>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Edit
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field>
+            <input matInput placeholder="Card Title" [(ngModel)]="cardTitle">
+          </mat-form-field>
+          <mat-form-field>
+            <textarea matInput placeholder="Card Desc" [(ngModel)]="cardDesc"></textarea>
+          </mat-form-field>
+          <div class="form-actions">
+            <button mat-raised-button color="primary" (click)='addCard(i, col.id)'>Add Card</button>
+            <button mat-raised-button color="warn" (click)='deleteCol(i)' style="float:right;">Delete List</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
     <!-- <footer>Add a card...</footer> -->
   </div>
