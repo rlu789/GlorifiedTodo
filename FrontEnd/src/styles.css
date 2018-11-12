@@ -12,7 +12,7 @@
 
 @media (min-width: 576px) {
   .jumbotron {
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
   }
 }
 
@@ -34,6 +34,11 @@
 .mat-card-header .mat-card-header-text {
   margin: 0;
   width: 100%;
+  overflow-wrap: break-word;
+}
+
+.mat-card-content > *{
+  overflow-wrap: break-word;
 }
 
 /* -- End -- */

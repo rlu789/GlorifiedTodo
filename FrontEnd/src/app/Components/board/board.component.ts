@@ -45,6 +45,7 @@ export class BoardComponent implements OnInit {
       console.log(err);
       this.openSnackBar(errMsg);
     });
+    this.collectionTitle = '';
 
   }
 

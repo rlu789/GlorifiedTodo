@@ -27,10 +27,27 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['board', this.boardData[i].id]); 
   }
 
+  deleteBoard(i: number){
+    this.boardsService.remove(this.boardData[i]).subscribe((data: any) => {
+      this.boardData.splice(i, 1);
+    }, (err: HttpErrorResponse) => {
+      var errMsg = err.statusText + ': ';
+      Object.keys(err.error).forEach(function(e){
+        // errMsg += ' ' + e + ": "
+        err.error[e].forEach(function(str){
+          errMsg += str;
+        })
+      })
+      console.log(err);
+      this.openSnackBar(errMsg);
+    });
+  }
+
   addBoard(){
     var board = new Board(this.boardTitle);
+    this.boardTitle = '';
     this.boardsService.add(board).subscribe((data: any) => {
-      this.boardData.push(board);
+      this.boardData.push(data);
       console.log(data);
     }, (err: HttpErrorResponse) => {
       var errMsg = err.statusText + ': ';
