@@ -4,6 +4,7 @@
 /* Modifying Bootstrap Styles */
 .container {
   padding: 0;
+  margin-top: 15px;
 }
 
 .jumbotron {
@@ -14,6 +15,31 @@
   .jumbotron {
     padding: 1rem 1rem;
   }
+}
+
+.navbar-nav.navbar-nav-left {
+  width: 40%;
+}
+
+.navbar-nav.navbar-nav-middle {
+  width: 20%;
+  margin-top: 5px;
+}
+
+.navbar-nav.navbar-nav-middle .nav-item {
+  margin: 0 auto;
+  color: white;
+  font-family: "Brush Script MT", cursive;
+  font-size: 34px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 26.4px;
+  pointer-events: none; /* disable hover effects */
+}
+
+.navbar-nav.navbar-nav-right {
+  width: 40%;
 }
 
 /* -- End -- */
@@ -37,7 +63,7 @@
   overflow-wrap: break-word;
 }
 
-.mat-card-content > *{
+.mat-card-content > * {
   overflow-wrap: break-word;
 }
 
@@ -48,7 +74,7 @@ body {
   /* font-family: 'Roboto'; */
   font-size: 14px;
   line-height: 1.3em;
-  background-color: #0079bf;
+  background-color: #b1c2ff;
 }
 
 /*   

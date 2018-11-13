@@ -1,37 +1,7 @@
 h3 {
   border-bottom: 1px solid #0000008a;
+  margin-bottom: 15px;
 }
-
-/* https://codepen.io/the_dro/pen/pJrMZN */
-/* ul.board-list {
-  width: 100%;
-  font-size: 18px;
-  list-style-type: none;
-  padding: 0;
-}
-
-ul.board-list li {
-  display: block;
-  padding: 5px;
-  text-decoration: none;
-  transition: font-size 0.3s ease 0s, background-color 0.3s ease 0s;
-}
-
-ul.board-list li:hover {
-  background: #0000008a;
-  color: #fff;
-  cursor: pointer;
-}
-
-ul.board-list li:last-child {
-  border: none;
-}
-
-.close{
-  float: left;
-  position: relative;
-  bottom: 1px;
-} */
 
 /* https://codepen.io/FrankTrog/pen/DdisC */
 .board-tile{
@@ -84,7 +54,7 @@ ul.board-list li:last-child {
   opacity: 0;
   width:200px;
   height:100px;
-  background-color: aquamarine;
+  background-color: #673ab7;
   -webkit-transition: 0.1s ease-in;
   -moz-transition: 0.1s ease-in;
   -o-transition: 0.1s ease-in;
@@ -111,3 +81,34 @@ ul.board-list li:last-child {
 .close {
   text-shadow: initial;
 }
+
+/* https://codepen.io/the_dro/pen/pJrMZN */
+/* ul.board-list {
+  width: 100%;
+  font-size: 18px;
+  list-style-type: none;
+  padding: 0;
+}
+
+ul.board-list li {
+  display: block;
+  padding: 5px;
+  text-decoration: none;
+  transition: font-size 0.3s ease 0s, background-color 0.3s ease 0s;
+}
+
+ul.board-list li:hover {
+  background: #0000008a;
+  color: #fff;
+  cursor: pointer;
+}
+
+ul.board-list li:last-child {
+  border: none;
+}
+
+.close{
+  float: left;
+  position: relative;
+  bottom: 1px;
+} */

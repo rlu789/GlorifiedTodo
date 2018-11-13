@@ -1,16 +1,14 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav mr-auto">
+  <ul class="navbar-nav navbar-nav-left">
     <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
       true}">
       <a routerLink="/" class="nav-link">Home</a>
     </li>
   </ul>
+  <ul class="navbar-nav navbar-nav-middle">
+    <div class='nav-item'>Trello Clone</div>
+  </ul>
 </nav>
-
-<div class="jumbotron">
-  <h1 class="display-4">A Crappy Trello Clone</h1>
-  <p class="lead">Like really crappy</p>
-</div>
 
 <div class="container">
   <router-outlet></router-outlet>
