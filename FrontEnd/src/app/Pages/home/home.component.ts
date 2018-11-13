@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Board, BoardsService } from '../../Services/boards.service';
 import { HttpErrorResponse } from "@angular/common/http";
-import { MatSnackBar } from '@angular/material';
+import { ConfirmModalComponent } from '../../Modals/confirm-modal/confirm-modal.component';
+
+import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +17,8 @@ export class HomeComponent implements OnInit {
   boardTitle: string;
 
 
-  constructor(private boardsService: BoardsService, public snackBar: MatSnackBar, private router: Router) {
+  constructor(private boardsService: BoardsService, public snackBar: MatSnackBar, private router: Router,
+    public dialog: MatDialog) {
     boardsService.get().subscribe((data: Array<Board>) => {
       this.boardData = data;
       console.log(this.boardData);
@@ -23,27 +26,35 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  viewBoard(i: number){
-    this.router.navigate(['board', this.boardData[i].id]); 
+  viewBoard(i: number) {
+    this.router.navigate(['board', this.boardData[i].id]);
   }
 
-  deleteBoard(i: number){
-    this.boardsService.remove(this.boardData[i]).subscribe((data: any) => {
-      this.boardData.splice(i, 1);
-    }, (err: HttpErrorResponse) => {
-      var errMsg = err.statusText + ': ';
-      Object.keys(err.error).forEach(function(e){
-        // errMsg += ' ' + e + ": "
-        err.error[e].forEach(function(str){
-          errMsg += str;
-        })
-      })
-      console.log(err);
-      this.openSnackBar(errMsg);
+  deleteBoard(i: number) {
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.boardsService.remove(this.boardData[i]).subscribe((data: any) => {
+          this.boardData.splice(i, 1);
+        }, (err: HttpErrorResponse) => {
+          var errMsg = err.statusText + ': ';
+          Object.keys(err.error).forEach(function (e) {
+            // errMsg += ' ' + e + ": "
+            err.error[e].forEach(function (str) {
+              errMsg += str;
+            })
+          })
+          console.log(err);
+          this.openSnackBar(errMsg);
+        });
+      }
     });
   }
 
-  addBoard(){
+  addBoard() {
     var board = new Board(this.boardTitle);
     this.boardTitle = '';
     this.boardsService.add(board).subscribe((data: any) => {
@@ -51,9 +62,9 @@ export class HomeComponent implements OnInit {
       console.log(data);
     }, (err: HttpErrorResponse) => {
       var errMsg = err.statusText + ': ';
-      Object.keys(err.error).forEach(function(e){
+      Object.keys(err.error).forEach(function (e) {
         // errMsg += ' ' + e + ": "
-        err.error[e].forEach(function(str){
+        err.error[e].forEach(function (str) {
           errMsg += str;
         })
       })

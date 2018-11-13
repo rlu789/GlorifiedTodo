@@ -5,7 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatProgressSpinnerModule, MatSnackBarModule, MatExpansionModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatProgressSpinnerModule, 
+  MatSnackBarModule, MatExpansionModule, MatDialogModule } from '@angular/material';
 
 import { CardCollectionsService } from './Services/card-collections.service';
 import { CardsService } from './Services/cards.service';
@@ -15,6 +16,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { CardCollectionComponent } from './Components/card-collection/card-collection.component';
 import { BoardComponent } from './Pages/board/board.component';
+import { ConfirmModalComponent } from './Modals/confirm-modal/confirm-modal.component';
 
 const appRoutes: Routes = [
   {
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     CardCollectionComponent,
-    BoardComponent
+    BoardComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
@@ -46,12 +49,16 @@ const appRoutes: Routes = [
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatExpansionModule,
+    MatDialogModule,
   ],
   providers: [
     CardCollectionsService,
     CardsService,
     BoardsService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ConfirmModalComponent
+  ],
 })
 export class AppModule { }
