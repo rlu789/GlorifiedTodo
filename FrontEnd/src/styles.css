@@ -79,6 +79,7 @@ body {
   /* height: 100vh; */
   display: flex;
   overflow-x: auto;
+  margin-bottom: 10px;
 }
 
 .lists>* {

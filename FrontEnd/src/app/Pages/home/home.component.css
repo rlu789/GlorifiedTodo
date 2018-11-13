@@ -1,0 +1,40 @@
+h3 {
+  border-bottom: 1px solid #0000008a;
+}
+
+/* https://codepen.io/the_dro/pen/pJrMZN */
+ul.board-list {
+  width: 100%;
+  /* float: left; */
+  font-size: 18px;
+  /* font-weight: bold; */
+  list-style-type: none;
+  padding: 0;
+}
+
+ul.board-list li {
+  /* border-bottom: 1px solid #ccc; */
+  display: block;
+  /* font-weight: bold; */
+  padding: 5px;
+  text-decoration: none;
+  transition: font-size 0.3s ease 0s, background-color 0.3s ease 0s;
+  /* width: 600px; */
+}
+
+ul.board-list li:hover {
+  /* font-size: 20px; */
+  background: #0000008a;
+  color: #fff;
+  cursor: pointer;
+}
+
+ul.board-list li:last-child {
+  border: none;
+}
+
+.close{
+  float: left;
+  position: relative;
+  bottom: 1px;
+}

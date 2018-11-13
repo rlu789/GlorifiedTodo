@@ -52,9 +52,9 @@ export class CardCollectionComponent implements OnInit {
     this.cardDesc = '';
     this.cardTitle = '';
     if (!this.collectionData[i].cards) this.collectionData[i].cards = [];
-    this.cardsService.add(c).subscribe((data: any) => {
+    this.cardsService.add(c).subscribe((data: Card) => {
       console.log(data);
-      this.collectionData[i].cards.push(c);
+      this.collectionData[i].cards.push(data);
     }, (err: HttpErrorResponse) => {
       var errMsg = err.statusText + ': ';
       Object.keys(err.error).forEach(function(e){

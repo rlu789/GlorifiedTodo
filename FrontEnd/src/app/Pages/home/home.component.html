@@ -1,0 +1,39 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div *ngIf="!loading">
+  <h3>Boards</h3>
+  <ul class="board-list">
+    <div *ngFor="let board of boardData, index as i" class='row'>
+      <div class='col'>
+        <li (click)='viewBoard(i)'>
+          {{board.title}}
+        </li>
+      </div>
+      <div class='col'>
+        <button type="button" class="close" (click)='deleteBoard(i)'>
+          <span>&times;</span>
+        </button>
+      </div>
+    </div>
+  </ul>
+  <!-- <div *ngFor="let board of boardData, index as i">
+    {{board.title}}
+    <button mat-raised-button color="primary" (click)='viewBoard(i)'>View Board</button>
+    <button mat-raised-button color="warn" (click)='deleteBoard(i)'>Delete Board</button>
+  </div> -->
+  <mat-form-field>
+    <input matInput placeholder="Board Title" [(ngModel)]="boardTitle" (keyup.enter)="addBoard(i)">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)='addBoard(i)'>Add Board</button>
+  <!-- <ul class="board-list">
+    <li>Megapixels: 2</li>
+    <li>Sensor: 1/3" 3 Megapixel progressive scan CMOS</li>
+    <li>Lens: 3.6mm</li>
+    <li>Minimum Illumination: Color: 0.1 Lux/F1.6; 0 Lux/F1.6 (IR on)</li>
+    <li>IR Distance: 100ft</li>
+    <li>Protocol: ONVIF/CGI</li>
+    <li>Ethernet: RJ-45 (10/100Base-T)</li>
+    <li>Wi-Fi: Wi-Fi(IEEE802.11b/g/n)</li>
+    <li>Wi-Fi Range: 50m/165ft(open field)</li>
+    <li>Power: 12v DC, &lt; 7w</li>
+  </ul> -->
+</div>

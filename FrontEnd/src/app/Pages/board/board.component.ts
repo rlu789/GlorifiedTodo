@@ -12,9 +12,11 @@ import { MatSnackBar } from '@angular/material';
 })
 export class BoardComponent implements OnInit {
   loading = true;
+  boardId: number;
+  boardTitle: string;
+
   collectionData: Array<CardCollection>;
   collectionTitle: string;
-  boardId: number
 
   constructor(private cardCollectionsService: CardCollectionsService, public snackBar: MatSnackBar, private route: ActivatedRoute,
     private boardsService: BoardsService) {
@@ -25,6 +27,7 @@ export class BoardComponent implements OnInit {
 
     boardsService.getSingle(this.boardId).subscribe((data: Board) => {
       this.collectionData = data.cardCollections;
+      this.boardTitle = data.title;
       console.log(this.collectionData);
       this.loading = false;
     });

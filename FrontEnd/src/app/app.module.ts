@@ -12,12 +12,16 @@ import { CardsService } from './Services/cards.service';
 import { BoardsService } from './Services/boards.service';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './Components/home/home.component';
+import { HomeComponent } from './Pages/home/home.component';
 import { CardCollectionComponent } from './Components/card-collection/card-collection.component';
-import { BoardComponent } from './Components/board/board.component';
+import { BoardComponent } from './Pages/board/board.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  {
+    path: '', 
+    component: HomeComponent,
+    pathMatch: 'full'
+  },
   { path: 'board/:id', component: BoardComponent }
 ];
 
@@ -34,7 +38,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    
+
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
