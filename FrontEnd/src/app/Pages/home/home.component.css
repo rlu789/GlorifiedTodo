@@ -3,27 +3,21 @@ h3 {
 }
 
 /* https://codepen.io/the_dro/pen/pJrMZN */
-ul.board-list {
+/* ul.board-list {
   width: 100%;
-  /* float: left; */
   font-size: 18px;
-  /* font-weight: bold; */
   list-style-type: none;
   padding: 0;
 }
 
 ul.board-list li {
-  /* border-bottom: 1px solid #ccc; */
   display: block;
-  /* font-weight: bold; */
   padding: 5px;
   text-decoration: none;
   transition: font-size 0.3s ease 0s, background-color 0.3s ease 0s;
-  /* width: 600px; */
 }
 
 ul.board-list li:hover {
-  /* font-size: 20px; */
   background: #0000008a;
   color: #fff;
   cursor: pointer;
@@ -37,4 +31,83 @@ ul.board-list li:last-child {
   float: left;
   position: relative;
   bottom: 1px;
+} */
+
+/* https://codepen.io/FrankTrog/pen/DdisC */
+.board-tile{
+  position:relative;
+  width:200px;
+  height:inherit;
+  border-radius: 5px;
+  background-color: hsla(39, 100%, 2%, 0.23);
+  /* border: 1px solid hsla(39, 100%, 2%, 0.36); */
+  overflow:hidden;
+  margin-right: 10px;
+  
+  -webkit-transition: 0.1s ease-in;
+  -moz-transition: 0.1s ease-in;
+  -o-transition: 0.1s ease-in;
+  -ms-transition: 0.1s ease-in;
+  transition: 0.1s ease-in;
+}
+
+.board-tile-button{
+  opacity: 0;
+  float: right;
+  position: relative;
+  right: -18px;
+
+  -webkit-transition: 0.1s ease-in;
+  -moz-transition: 0.1s ease-in;
+  -o-transition: 0.1s ease-in;
+  -ms-transition: 0.1s ease-in;
+  transition: 0.1s ease-in;
+}
+
+.board-tile-title{
+  font-size: 18px;
+  position: relative;
+  bottom: 93px;
+  left: 10px;
+  pointer-events: none;
+  display: inline-flex;
+}
+
+.board-tile-title span{
+  overflow-wrap: break-word;
+  width: 160px;
+}
+
+.sub{
+  position:absolute;
+  /* bottom:-50px; */
+  opacity: 0;
+  width:200px;
+  height:100px;
+  background-color: aquamarine;
+  -webkit-transition: 0.1s ease-in;
+  -moz-transition: 0.1s ease-in;
+  -o-transition: 0.1s ease-in;
+  -ms-transition: 0.1s ease-in;
+  transition: 0.1s ease-in;
+}
+
+.board-tile:hover{
+  cursor: pointer;
+}
+.board-tile:hover > .sub{
+  opacity: .5;
+}
+.board-tile:hover > .board-tile-button{
+  opacity: 1;
+  right: 4px;
+  -webkit-transition: 0.1s ease-in;
+  -moz-transition: 0.1s ease-in;
+  -o-transition: 0.1s ease-in;
+  -ms-transition: 0.1s ease-in;
+  transition: 0.1s ease-in;
+}
+
+.close {
+  text-shadow: initial;
 }

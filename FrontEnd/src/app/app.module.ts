@@ -17,6 +17,7 @@ import { HomeComponent } from './Pages/home/home.component';
 import { CardCollectionComponent } from './Components/card-collection/card-collection.component';
 import { BoardComponent } from './Pages/board/board.component';
 import { ConfirmModalComponent } from './Modals/confirm-modal/confirm-modal.component';
+import { ClickStopPropagationDirective } from './Directives/click-stop-propagation.directive';
 
 const appRoutes: Routes = [
   {
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     HomeComponent,
     CardCollectionComponent,
     BoardComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    ClickStopPropagationDirective
   ],
   imports: [
     BrowserModule,
