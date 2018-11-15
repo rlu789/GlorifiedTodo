@@ -314,15 +314,7 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
-
-# OpenCover UI analysis results
-OpenCover/
-
-# Azure Stream Analytics local run output
-ASALocalRun/
-
-# MSBuild Binary and Structured Log
-*.binlog
 # Custom
 bin/
 obj/
+App_Data/

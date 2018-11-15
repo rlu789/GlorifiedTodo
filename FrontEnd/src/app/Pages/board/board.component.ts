@@ -38,13 +38,16 @@ export class BoardComponent implements OnInit {
       this.collectionData.push(data);
       console.log(data);
     }, (err: HttpErrorResponse) => {
-      var errMsg = err.statusText + ': ';
-      Object.keys(err.error).forEach(function(e){
-        // errMsg += ' ' + e + ": "
-        err.error[e].forEach(function(str){
-          errMsg += str;
+      var errMsg = err.statusText;
+      if (err.error.length !== undefined) {
+        errMsg += ': ';
+        Object.keys(err.error).forEach(function (e) {
+          // errMsg += ' ' + e + ": "
+          err.error[e].forEach(function (str) {
+            errMsg += str;
+          })
         })
-      })
+      }
       console.log(err);
       this.openSnackBar(errMsg);
     });

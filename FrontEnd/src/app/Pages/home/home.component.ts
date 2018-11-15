@@ -40,13 +40,16 @@ export class HomeComponent implements OnInit {
         this.boardsService.remove(this.boardData[i]).subscribe((data: any) => {
           this.boardData.splice(i, 1);
         }, (err: HttpErrorResponse) => {
-          var errMsg = err.statusText + ': ';
-          Object.keys(err.error).forEach(function (e) {
-            // errMsg += ' ' + e + ": "
-            err.error[e].forEach(function (str) {
-              errMsg += str;
+          var errMsg = err.statusText;
+          if (err.error.length !== undefined) {
+            errMsg += ': ';
+            Object.keys(err.error).forEach(function (e) {
+              // errMsg += ' ' + e + ": "
+              err.error[e].forEach(function (str) {
+                errMsg += str;
+              })
             })
-          })
+          }
           console.log(err);
           this.openSnackBar(errMsg);
         });
@@ -61,13 +64,16 @@ export class HomeComponent implements OnInit {
       this.boardData.push(data);
       console.log(data);
     }, (err: HttpErrorResponse) => {
-      var errMsg = err.statusText + ': ';
-      Object.keys(err.error).forEach(function (e) {
-        // errMsg += ' ' + e + ": "
-        err.error[e].forEach(function (str) {
-          errMsg += str;
+      var errMsg = err.statusText;
+      if (err.error.length !== undefined) {
+        errMsg += ': ';
+        Object.keys(err.error).forEach(function (e) {
+          // errMsg += ' ' + e + ": "
+          err.error[e].forEach(function (str) {
+            errMsg += str;
+          })
         })
-      })
+      }
       console.log(err);
       this.openSnackBar(errMsg);
     });
