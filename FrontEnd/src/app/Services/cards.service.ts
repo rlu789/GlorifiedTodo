@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class CardsService {
   private headers: HttpHeaders;
-  private accessPointUrl: string = 'http://localhost:57114/api/cards';
+  private accessPointUrl: string = 'http://localhost:57115/api/cards';
 
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});

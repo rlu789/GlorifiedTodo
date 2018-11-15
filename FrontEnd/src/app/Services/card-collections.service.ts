@@ -7,7 +7,7 @@ import { Card } from './cards.service';
 })
 export class CardCollectionsService {
   private headers: HttpHeaders;
-  private accessPointUrl: string = 'http://localhost:57114/api/cardCollections';
+  private accessPointUrl: string = 'http://localhost:57115/api/cardCollections';
 
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
