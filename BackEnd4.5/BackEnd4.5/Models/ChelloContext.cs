@@ -1,32 +1,32 @@
-﻿using BackEnd4._5.Models;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Data.SQLite;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BackEnd4._5.Models;
 
 namespace BackEnd4._5.Context
 {
     public class ChelloContext : DbContext
     {
-        public DbSet<Board> Board { get; set; }
-        public DbSet<CardCollection> CardCollection { get; set; }
-        public DbSet<Card> Card { get; set; }
-        //public DbSet<Department> Departments { get; set; }
-        //public DbSet<Enrollment> Enrollments { get; set; }
-        //public DbSet<Instructor> Instructors { get; set; }
-        //public DbSet<Student> Students { get; set; }
-        //public DbSet<OfficeAssignment> OfficeAssignments { get; set; }
-        //public DbSet<Person> People { get; set; }
+        public ChelloContext() :
+            base(new SQLiteConnection()
+            {
+                ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = AppDomain.CurrentDomain.BaseDirectory + "MyDatabase.sqlite", ForeignKeys = true }.ConnectionString
+            }, true)
+        {
+        }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            base.OnModelCreating(modelBuilder);
+        }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
-        //    modelBuilder.Entity<Board>()
-        //        .HasMany(c => c.CardCollections);
-
-        //    modelBuilder.Entity<CardCollection>()
-        //        .HasMany(c => c.Cards);
-
-        //    //modelBuilder.Entity<Department>().MapToStoredProcedures();
-        //}
+        public DbSet<Board> Boards { get; set; }
+        public DbSet<CardCollection> CardCollections { get; set; }
+        public DbSet<Card> Cards { get; set; }
     }
 }

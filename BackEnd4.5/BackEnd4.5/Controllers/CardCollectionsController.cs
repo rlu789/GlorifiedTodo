@@ -20,7 +20,7 @@ namespace BackEnd4._5.Controllers
         // POST api/values
         public async Task<CardCollection> PostCardCollection([FromBody] CardCollection cardCollection)
         {
-            _context.CardCollection.Add(cardCollection);
+            _context.CardCollections.Add(cardCollection);
             await _context.SaveChangesAsync();
 
             return cardCollection;
@@ -31,9 +31,9 @@ namespace BackEnd4._5.Controllers
         public void Delete(int id)
         {
 
-            var cardCollection = _context.CardCollection.Find(id);
+            var cardCollection = _context.CardCollections.Find(id);
 
-            _context.CardCollection.Remove(cardCollection);
+            _context.CardCollections.Remove(cardCollection);
             _context.SaveChanges();
         }
     }

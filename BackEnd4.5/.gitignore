@@ -318,3 +318,5 @@ __pycache__/
 bin/
 obj/
 App_Data/
+
+*.sqlite

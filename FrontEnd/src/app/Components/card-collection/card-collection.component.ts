@@ -34,18 +34,8 @@ export class CardCollectionComponent implements OnInit {
           console.log(data);
           this.collectionData.splice(i, 1);
         }, (err: HttpErrorResponse) => {
-          var errMsg = err.statusText;
-          if (err.error.length !== undefined) {
-            errMsg += ': ';
-            Object.keys(err.error).forEach(function (e) {
-              // errMsg += ' ' + e + ": "
-              err.error[e].forEach(function (str) {
-                errMsg += str;
-              })
-            })
-          }
           console.log(err);
-          this.openSnackBar(errMsg);
+          this.openSnackBar("To user: I.O.U one actual error message from dev");
         });
       }
     })
@@ -69,15 +59,8 @@ export class CardCollectionComponent implements OnInit {
       console.log(data);
       this.collectionData[i].cards.push(data);
     }, (err: HttpErrorResponse) => {
-      var errMsg = err.statusText + ': ';
-      Object.keys(err.error).forEach(function (e) {
-        // errMsg += ' ' + e + ": "
-        err.error[e].forEach(function (str) {
-          errMsg += str;
-        })
-      })
       console.log(err);
-      this.openSnackBar(errMsg);
+      this.openSnackBar("To user: I.O.U one actual error message from dev");
     });
   }
 

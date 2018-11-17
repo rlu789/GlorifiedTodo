@@ -26,7 +26,7 @@ export class BoardComponent implements OnInit {
     } );
 
     boardsService.getSingle(this.boardId).subscribe((data: Board) => {
-      this.collectionData = data.cardCollections;
+      this.collectionData = data.cardCollection;
       this.boardTitle = data.title;
       console.log(this.collectionData);
       this.loading = false;
@@ -38,18 +38,8 @@ export class BoardComponent implements OnInit {
       this.collectionData.push(data);
       console.log(data);
     }, (err: HttpErrorResponse) => {
-      var errMsg = err.statusText;
-      if (err.error.length !== undefined) {
-        errMsg += ': ';
-        Object.keys(err.error).forEach(function (e) {
-          // errMsg += ' ' + e + ": "
-          err.error[e].forEach(function (str) {
-            errMsg += str;
-          })
-        })
-      }
       console.log(err);
-      this.openSnackBar(errMsg);
+      this.openSnackBar("To user: I.O.U one actual error message from dev");
     });
     this.collectionTitle = '';
 

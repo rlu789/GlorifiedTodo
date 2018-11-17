@@ -21,35 +21,7 @@ namespace BackEnd4._5.Controllers
         // GET: Board
         public IEnumerable<Board> GetBoard()
         {
-            // https://www.codeproject.com/Articles/1158937/SQLite-with-Csharp-Net-and-Entity-Framework
-            SQLiteConnection sqlite_conn;          // Database Connection Object
-            SQLiteCommand sqlite_cmd;             // Database Command Object
-            SQLiteDataReader sqlite_datareader;  // Data Reader Object
-            string text = "";
-
-            sqlite_conn = new SQLiteConnection("Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "MyDatabase.sqlite;Version=3;");
-
-            sqlite_conn.Open();
-
-            sqlite_cmd = sqlite_conn.CreateCommand();
-
-            //sqlite_cmd.CommandText = @"SELECT * FROM Boards AS a 
-            //  INNER JOIN CardCollections AS b
-            //  ON a.Id = b.BoardId";
-            sqlite_cmd.CommandText = @"SELECT * FROM Boards";
-
-            sqlite_datareader = sqlite_cmd.ExecuteReader();
-            List<Board> boards = new List<Board>();
-            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
-            {
-
-                object idReader = sqlite_datareader.GetValue(0);
-                string textReader = sqlite_datareader.GetString(1);
-
-                text += idReader + " '" + textReader + "' " + "\n";
-            }
-
-            return _context.Board;
+            return _context.Boards.ToList();
         }
 
         // GET: api/Boards/5
@@ -60,7 +32,7 @@ namespace BackEnd4._5.Controllers
             //    return BadRequest(ModelState);
             //}
 
-            var board = await _context.Board.Include(i => i.CardCollections.Select(cardCollection => cardCollection.Cards))
+            var board = await _context.Boards.Include(i => i.CardCollection.Select(cardCollection => cardCollection.Card))
                 .FirstOrDefaultAsync(i => i.Id == id);
 
             //if (board == null)
@@ -79,7 +51,7 @@ namespace BackEnd4._5.Controllers
             //    return BadRequest(ModelState);
             //}
 
-            _context.Board.Add(board);
+            _context.Boards.Add(board);
             await _context.SaveChangesAsync();
 
             return board;
@@ -90,9 +62,9 @@ namespace BackEnd4._5.Controllers
         public void Delete(int id)
         {
 
-            var board = _context.Board.Find(id);
+            var board = _context.Boards.Find(id);
 
-            _context.Board.Remove(board);
+            _context.Boards.Remove(board);
             _context.SaveChanges();
         }
     }

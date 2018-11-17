@@ -36,6 +36,6 @@ export class BoardsService {
 
 export class Board{
   public id: number;
-  public cardCollections: Array<CardCollection>;
+  public cardCollection: Array<CardCollection>;
   constructor(public title: string){}
 }

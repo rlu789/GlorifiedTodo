@@ -18,40 +18,34 @@ namespace BackEnd4._5
                 SQLiteConnection.CreateFile(AppDomain.CurrentDomain.BaseDirectory + "MyDatabase.sqlite");
             }
             SQLiteConnection sqlite_conn =
-              new SQLiteConnection("Data Source="+ AppDomain.CurrentDomain.BaseDirectory +"MyDatabase.sqlite;Version=3;");
+              new SQLiteConnection("Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "MyDatabase.sqlite;Version=3;");
             // open the connection:
             sqlite_conn.Open();
 
             SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
 
             // Let the SQLiteCommand object know our SQL-Query:
-            sqlite_cmd.CommandText = @"CREATE TABLE IF NOT EXISTS [Boards] (
+            sqlite_cmd.CommandText = @"CREATE TABLE IF NOT EXISTS [Board] (
                 [Id]    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 [Title] NVARCHAR(100) NOT NULL
                 ); ";
             sqlite_cmd.ExecuteNonQuery();
 
-            sqlite_cmd.CommandText = @"CREATE TABLE IF NOT EXISTS [CardCollections] (
+            sqlite_cmd.CommandText = @"CREATE TABLE IF NOT EXISTS [CardCollection] (
                 [Id]      INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 [Title]   NVARCHAR (100) NOT NULL,
                 [BoardId] INT            NOT NULL,
-                FOREIGN KEY (BoardId) REFERENCES Boards(Id) ON DELETE CASCADE
+                FOREIGN KEY (BoardId) REFERENCES Board(Id) ON DELETE CASCADE
             ); ";
             sqlite_cmd.ExecuteNonQuery();
 
-            sqlite_cmd.CommandText = @"CREATE TABLE IF NOT EXISTS [Cards] (
+            sqlite_cmd.CommandText = @"CREATE TABLE IF NOT EXISTS [Card] (
                 [Id]               INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 [Title]            NVARCHAR (100) NOT NULL,
                 [Description]      NVARCHAR (256) NOT NULL,
                 [CardCollectionId] INT            NOT NULL,
-                FOREIGN KEY (CardCollectionId) REFERENCES CardCollections(Id) ON DELETE CASCADE
+                FOREIGN KEY (CardCollectionId) REFERENCES CardCollection(Id) ON DELETE CASCADE
             ); ";
-            sqlite_cmd.ExecuteNonQuery();
-
-            sqlite_cmd.CommandText = "INSERT INTO Boards (Title) VALUES ('Hello World');";
-            sqlite_cmd.ExecuteNonQuery();
-
-            sqlite_cmd.CommandText = "INSERT INTO CardCollections (Title, BoardId) VALUES ('Hello World', 1);";
             sqlite_cmd.ExecuteNonQuery();
 
             // Web API configuration and services

@@ -18,10 +18,10 @@ namespace BackEnd4._5.Controllers
         private ChelloContext _context = new ChelloContext();
 
         // POST api/values
-        public async Task<Card> PostCard([FromBody] Card card)
+        public Card PostCard([FromBody] Card card)
         {
-            _context.Card.Add(card);
-            await _context.SaveChangesAsync();
+            _context.Cards.Add(card);
+            _context.SaveChanges();
 
             return card;
         }
@@ -31,9 +31,9 @@ namespace BackEnd4._5.Controllers
         public void Delete(int id)
         {
 
-            var card = _context.Card.Find(id);
+            var card = _context.Cards.Find(id);
 
-            _context.Card.Remove(card);
+            _context.Cards.Remove(card);
             _context.SaveChanges();
         }
     }
