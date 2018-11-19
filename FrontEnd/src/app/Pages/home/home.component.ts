@@ -57,15 +57,17 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addBoard() {
+  addBoard($event) {
     var board = new Board(this.boardTitle);
     this.boardTitle = '';
     this.boardsService.add(board).subscribe((data: any) => {
       this.boardData.push(data);
+      $event.complete();
       // console.log(data);
     }, (err: HttpErrorResponse) => {
       console.log(err);
       this.openSnackBar("To user: I.O.U one actual error message from dev");
+      $event.complete();
     });
   }
 

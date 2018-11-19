@@ -42,6 +42,7 @@
           </mat-form-field>
           <div class="form-actions">
             <app-custom-button [color]="'primary'" [text]="'Add Card'" (clickFunc)='addCard($event, i, col.id)'></app-custom-button>
+            <!-- FIX FLOAT RIGHT LOADING SPINNER BUG -->
             <app-custom-button [color]="'warn'" [text]="'Delete List'" (clickFunc)='deleteCol($event, i)' [floatRight]="true"></app-custom-button>
           </div>
         </mat-expansion-panel>

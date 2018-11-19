@@ -33,13 +33,15 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  addCollection() {
+  addCollection($event) {
     this.cardCollectionsService.add(new CardCollection(this.collectionTitle, this.boardId, [])).subscribe((data: any) => {
       this.collectionData.push(data);
+      $event.complete();
       // console.log(data);
     }, (err: HttpErrorResponse) => {
       console.log(err);
       this.openSnackBar("To user: I.O.U one actual error message from dev");
+      $event.complete();
     });
     this.collectionTitle = '';
 

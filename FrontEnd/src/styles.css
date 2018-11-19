@@ -144,6 +144,10 @@ body {
   flex: 0 0 10px;
 }
 
+.list:first-child{
+  margin-left: initial;
+}
+
 .list {
   width: 300px;
   height: calc(100% - 10px - 17px);

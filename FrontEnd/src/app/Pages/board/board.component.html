@@ -7,5 +7,5 @@
     <input matInput placeholder="Collection Title" [(ngModel)]="collectionTitle" (keyup.enter)="addCollection()">
   </mat-form-field>
   <br />
-  <button mat-raised-button color="primary" (click)='addCollection()'>Add</button>
+  <app-custom-button [color]="'primary'" [text]="'Add List'" (clickFunc)='addCollection($event)'></app-custom-button>
 </div>

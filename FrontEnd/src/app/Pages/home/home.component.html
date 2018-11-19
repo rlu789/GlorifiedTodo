@@ -28,9 +28,9 @@
   </ul> -->
   <div>
     <mat-form-field>
-      <input matInput placeholder="Board Title" [(ngModel)]="boardTitle" (keyup.enter)="addBoard(i)">
+      <input matInput placeholder="Board Title" [(ngModel)]="boardTitle" (keyup.enter)="addBoard()">
     </mat-form-field>
     <br />
-    <button mat-raised-button color="primary" (click)='addBoard(i)'>Add Board</button>
+    <app-custom-button [color]="'primary'" [text]="'Add Board'" (clickFunc)='addBoard($event)'></app-custom-button>
   </div>
 </div>
