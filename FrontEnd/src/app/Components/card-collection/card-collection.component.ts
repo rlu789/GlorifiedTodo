@@ -25,20 +25,16 @@ export class CardCollectionComponent implements OnInit {
   ngOnInit() {
   }
 
-  editCard(collectionIndex: number, cardIndex: number){
+  editCard(collectionIndex: number, cardIndex: number) {
     var cardToBeEdited = this.collectionData[collectionIndex].card[cardIndex];
     // console.log(cardToBeEdited);
-    
+
     const dialogRef = this.dialog.open(EditCardModalComponent, {
       width: '700px',
-      data: {card: cardToBeEdited}
+      data: { card: cardToBeEdited }
     });
     dialogRef.afterClosed().subscribe((card: Card) => {
-      // move service call into modal????
-      this.cardsService.update(card).subscribe((data: Card) => {
-        this.collectionData[collectionIndex].card[cardIndex] = data;
-        // console.log(data);
-      })
+      if (card) this.collectionData[collectionIndex].card[cardIndex] = card;
     });
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Card } from '../../Services/cards.service';
+import { Card, CardsService } from '../../Services/cards.service';
 
 import { MatDialogRef, MAT_DIALOG_DATA, } from '@angular/material';
 
@@ -13,11 +13,18 @@ export class EditCardModalComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<EditCardModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {card: Card}) {
-      // console.log(data.card);
-      this.tempCard = new Card(data.card.title, data.card.description, data.card.cardCollectionId);
-      this.tempCard.id = data.card.id;
-    }
+    @Inject(MAT_DIALOG_DATA) public data: { card: Card }, public cardsService: CardsService) {
+    // console.log(data.card);
+    this.tempCard = new Card(data.card.title, data.card.description, data.card.cardCollectionId);
+    this.tempCard.id = data.card.id;
+  }
+
+  updateCard(){
+    this.cardsService.update(this.tempCard).subscribe((data: Card) => {
+      if (data) this.dialogRef.close(data);
+      else alert("WTF HAPPENED");
+    });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
