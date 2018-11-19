@@ -32,5 +32,5 @@ export class CardCollectionsService {
 
 export class CardCollection{
   public id: number;
-  constructor (public title: string, public boardId: number, public cards: Array<Card>){}
+  constructor (public title: string, public boardId: number, public card: Array<Card>){}
 }

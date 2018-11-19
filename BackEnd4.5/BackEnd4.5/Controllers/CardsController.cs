@@ -17,7 +17,7 @@ namespace BackEnd4._5.Controllers
     {
         private ChelloContext _context = new ChelloContext();
 
-        // POST api/values
+        // POST api/card
         public Card PostCard([FromBody] Card card)
         {
             _context.Cards.Add(card);
@@ -27,7 +27,7 @@ namespace BackEnd4._5.Controllers
         }
 
 
-        // DELETE api/values/5
+        // DELETE api/card/5
         public void Delete(int id)
         {
 
@@ -35,6 +35,18 @@ namespace BackEnd4._5.Controllers
 
             _context.Cards.Remove(card);
             _context.SaveChanges();
+        }
+
+
+        // PUT api/values/5
+        public Card Put(int id, [FromBody]Card card)
+        {
+            var c = _context.Cards.Find(card.Id);
+            c.Title = card.Title;
+            c.Description = card.Description;
+            c.CardCollectionId = card.CardCollectionId;
+            _context.SaveChanges();
+            return card;
         }
     }
 }

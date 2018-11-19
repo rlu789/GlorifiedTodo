@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Edit Card</h1>
+<div mat-dialog-content>
+  <div>
+    <mat-form-field class="mat-form-field-width">
+      <input matInput placeholder="Card Title" [(ngModel)]="tempCard.title">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="mat-form-field-width">
+      <textarea matInput placeholder="Card Desc" [(ngModel)]="tempCard.description"></textarea>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="tempCard">Save</button>
+</div>

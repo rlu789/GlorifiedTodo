@@ -5,10 +5,20 @@
     border-bottom-right-radius: 5px;
 }
 
-.add-card-form .mat-form-field{
-    width: 100%;
+.mat-card{
+    -webkit-transition: 0.2s ease;
+    -moz-transition: 0.2s ease;
+    -o-transition: 0.2s ease;
+    -ms-transition: 0.2s ease;
+    transition: 0.2s ease;
 }
 
-/* .form-actions{
-    
-} */
+.mat-card:hover{
+    cursor: pointer;
+    background-color: lightgrey;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    -o-transition: 0.3s ease;
+    -ms-transition: 0.3s ease;
+    transition: 0.3s ease;
+}

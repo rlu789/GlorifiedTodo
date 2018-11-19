@@ -67,6 +67,10 @@
   overflow-wrap: break-word;
 }
 
+.mat-form-field.mat-form-field-width{
+  width: 100%;
+}
+
 /* -- End -- */
 
 body {

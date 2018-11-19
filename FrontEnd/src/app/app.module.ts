@@ -18,6 +18,7 @@ import { CardCollectionComponent } from './Components/card-collection/card-colle
 import { BoardComponent } from './Pages/board/board.component';
 import { ConfirmModalComponent } from './Modals/confirm-modal/confirm-modal.component';
 import { ClickStopPropagationDirective } from './Directives/click-stop-propagation.directive';
+import { EditCardModalComponent } from './Modals/edit-card-modal/edit-card-modal.component';
 
 const appRoutes: Routes = [
   {
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     CardCollectionComponent,
     BoardComponent,
     ConfirmModalComponent,
-    ClickStopPropagationDirective
+    ClickStopPropagationDirective,
+    EditCardModalComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    EditCardModalComponent
   ],
 })
 export class AppModule { }
