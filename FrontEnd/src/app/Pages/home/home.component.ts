@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog) {
     boardsService.get().subscribe((data: Array<Board>) => {
       this.boardData = data;
-      console.log(this.boardData);
+      // console.log(this.boardData);
       this.loading = false;
     });
   }
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
     this.boardTitle = '';
     this.boardsService.add(board).subscribe((data: any) => {
       this.boardData.push(data);
-      console.log(data);
+      // console.log(data);
     }, (err: HttpErrorResponse) => {
       console.log(err);
       this.openSnackBar("To user: I.O.U one actual error message from dev");

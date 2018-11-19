@@ -19,42 +19,42 @@ namespace BackEnd4._5.Controllers
         private ChelloContext _context = new ChelloContext();
 
         // GET: Board
-        public IEnumerable<Board> GetBoard()
+        public IHttpActionResult GetBoard()
         {
-            return _context.Boards.ToList();
+            return Ok(_context.Boards);
         }
 
         // GET: api/Boards/5
-        public async Task<Board> GetSingleBoard(int id)
+        public IHttpActionResult GetSingleBoard(int id)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            var board = await _context.Boards.Include(i => i.CardCollection.Select(cardCollection => cardCollection.Card))
-                .FirstOrDefaultAsync(i => i.Id == id);
+            var board = _context.Boards.Include(i => i.CardCollection.Select(cardCollection => cardCollection.Card))
+                .FirstOrDefault(i => i.Id == id);
 
-            //if (board == null)
-            //{
-            //    return NotFound();
-            //}
+            if (board == null)
+            {
+                return NotFound();
+            }
 
-            return board;
+            return Ok(board);
         }
 
         // POST api/values
-        public async Task<Board> PostBoard([FromBody] Board board)
+        public IHttpActionResult PostBoard([FromBody] Board board)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             _context.Boards.Add(board);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
-            return board;
+            return Ok(board);
         }
         
 

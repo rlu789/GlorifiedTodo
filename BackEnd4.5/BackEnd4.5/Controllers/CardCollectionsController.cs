@@ -18,12 +18,17 @@ namespace BackEnd4._5.Controllers
         private ChelloContext _context = new ChelloContext();
 
         // POST api/values
-        public async Task<CardCollection> PostCardCollection([FromBody] CardCollection cardCollection)
+        public IHttpActionResult PostCardCollection([FromBody] CardCollection cardCollection)
         {
-            _context.CardCollections.Add(cardCollection);
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            return cardCollection;
+            _context.CardCollections.Add(cardCollection);
+            _context.SaveChanges();
+
+            return Ok(cardCollection);
         }
 
 
@@ -31,7 +36,7 @@ namespace BackEnd4._5.Controllers
         public void Delete(int id)
         {
 
-            var cardCollection = _context.CardCollections.Find(id);
+            var cardCollection = _context.CardCollections.FirstOrDefault(i => i.Id == id);
 
             _context.CardCollections.Remove(cardCollection);
             _context.SaveChanges();

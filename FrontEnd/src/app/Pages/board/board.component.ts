@@ -22,13 +22,13 @@ export class BoardComponent implements OnInit {
     private boardsService: BoardsService) {
     this.route.params.subscribe( params => {
       this.boardId = params.id;
-      console.log(this.boardId);
+      // console.log(this.boardId);
     } );
 
     boardsService.getSingle(this.boardId).subscribe((data: Board) => {
       this.collectionData = data.cardCollection;
       this.boardTitle = data.title;
-      console.log(this.collectionData);
+      // console.log(this.collectionData);
       this.loading = false;
     });
   }
@@ -36,7 +36,7 @@ export class BoardComponent implements OnInit {
   addCollection() {
     this.cardCollectionsService.add(new CardCollection(this.collectionTitle, this.boardId, [])).subscribe((data: any) => {
       this.collectionData.push(data);
-      console.log(data);
+      // console.log(data);
     }, (err: HttpErrorResponse) => {
       console.log(err);
       this.openSnackBar("To user: I.O.U one actual error message from dev");

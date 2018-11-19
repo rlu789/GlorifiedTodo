@@ -58,10 +58,10 @@ export class CardCollectionComponent implements OnInit {
 
   deleteCard(collectionIndex: number, cardIndex: number) {
     var cardToBeDeleted = this.collectionData[collectionIndex].card[cardIndex];
-    console.log(cardToBeDeleted);
+    // console.log(cardToBeDeleted);
     this.collectionData[collectionIndex].card.splice(cardIndex, 1);
     this.cardsService.remove(cardToBeDeleted).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
     })
   }
 
@@ -71,7 +71,7 @@ export class CardCollectionComponent implements OnInit {
     this.cardTitle = '';
     if (!this.collectionData[i].card) this.collectionData[i].card = [];
     this.cardsService.add(c).subscribe((data: Card) => {
-      console.log(data);
+      // console.log(data);
       this.collectionData[i].card.push(data);
     }, (err: HttpErrorResponse) => {
       console.log(err);

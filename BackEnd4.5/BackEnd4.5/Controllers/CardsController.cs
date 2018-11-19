@@ -18,12 +18,17 @@ namespace BackEnd4._5.Controllers
         private ChelloContext _context = new ChelloContext();
 
         // POST api/card
-        public Card PostCard([FromBody] Card card)
+        public IHttpActionResult PostCard([FromBody] Card card)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _context.Cards.Add(card);
             _context.SaveChanges();
 
-            return card;
+            return Ok(card);
         }
 
 
@@ -39,14 +44,25 @@ namespace BackEnd4._5.Controllers
 
 
         // PUT api/values/5
-        public Card Put(int id, [FromBody]Card card)
+        public IHttpActionResult Put(int id, [FromBody]Card card)
         {
-            var c = _context.Cards.Find(card.Id);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var c = _context.Cards.FirstOrDefault(i => i.Id == id);
+
+            if (c == null)
+            {
+                return NotFound();
+            }
+
             c.Title = card.Title;
             c.Description = card.Description;
             c.CardCollectionId = card.CardCollectionId;
             _context.SaveChanges();
-            return card;
+            return Ok(card);
         }
     }
 }
