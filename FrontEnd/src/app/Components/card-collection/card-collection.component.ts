@@ -38,7 +38,7 @@ export class CardCollectionComponent implements OnInit {
     });
   }
 
-  deleteCol(i: number) {
+  deleteCol($event, i: number) {
     const dialogRef = this.dialog.open(ConfirmModalComponent, {
       width: '500px'
     });
@@ -48,11 +48,15 @@ export class CardCollectionComponent implements OnInit {
         this.cardCollectionsService.remove(this.collectionData[i]).subscribe((data: any) => {
           console.log(data);
           this.collectionData.splice(i, 1);
+          $event.complete();
         }, (err: HttpErrorResponse) => {
           console.log(err);
           this.openSnackBar("To user: I.O.U one actual error message from dev");
+          $event.complete();
         });
       }
+      else
+        $event.complete();
     })
   }
 
@@ -65,7 +69,7 @@ export class CardCollectionComponent implements OnInit {
     })
   }
 
-  addCard(i: number, id: number) {
+  addCard($event, i: number, id: number) {
     var c = new Card(this.cardTitle, this.cardDesc, id);
     this.cardDesc = '';
     this.cardTitle = '';
@@ -73,9 +77,11 @@ export class CardCollectionComponent implements OnInit {
     this.cardsService.add(c).subscribe((data: Card) => {
       // console.log(data);
       this.collectionData[i].card.push(data);
+      $event.complete();
     }, (err: HttpErrorResponse) => {
       console.log(err);
       this.openSnackBar("To user: I.O.U one actual error message from dev");
+      $event.complete();
     });
   }
 

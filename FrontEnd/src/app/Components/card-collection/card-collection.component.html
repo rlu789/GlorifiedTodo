@@ -34,15 +34,15 @@
               Edit
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <mat-form-field>
+          <mat-form-field class="mat-form-field-width">
             <input matInput placeholder="Card Title" [(ngModel)]="cardTitle">
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field class="mat-form-field-width">
             <textarea matInput placeholder="Card Desc" [(ngModel)]="cardDesc"></textarea>
           </mat-form-field>
           <div class="form-actions">
-            <button mat-raised-button color="primary" (click)='addCard(i, col.id)'>Add Card</button>
-            <button mat-raised-button color="warn" (click)='deleteCol(i)' style="float:right;">Delete List</button>
+            <app-custom-button [color]="'primary'" [text]="'Add Card'" (clickFunc)='addCard($event, i, col.id)'></app-custom-button>
+            <app-custom-button [color]="'warn'" [text]="'Delete List'" (clickFunc)='deleteCol($event, i)' [floatRight]="true"></app-custom-button>
           </div>
         </mat-expansion-panel>
       </mat-accordion>
