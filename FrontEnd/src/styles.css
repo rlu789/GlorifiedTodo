@@ -159,13 +159,15 @@ body {
   padding: 0 10px;
 }
 
-/* These being used? */
+/* These being used? I think they are?*/
 .list header {
-  line-height: 36px;
+  padding-top: 5px;
+  line-height: 26px;
   font-size: 16px;
   font-weight: bold;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  overflow-wrap: break-word;
 }
 
 .list footer {

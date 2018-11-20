@@ -11,24 +11,9 @@
     </div>
     <div class='board-tile-title'><span>{{board.title}}</span></div>
   </div>
-  <!-- <ul class="board-list">
-
-    <div *ngFor="let board of boardData, index as i" class='row'>
-      <div class='col'>
-        <li (click)='viewBoard(i)'>
-          {{board.title}}
-        </li>
-      </div>
-      <div class='col'>
-        <button type="button" class="close" (click)='deleteBoard(i)'>
-          <span>&times;</span>
-        </button>
-      </div>
-    </div>
-  </ul> -->
   <div>
     <mat-form-field>
-      <input matInput placeholder="Board Title" [(ngModel)]="boardTitle" (keyup.enter)="addBoard()">
+      <input matInput placeholder="Board Title" [(ngModel)]="boardTitle" (keyup.enter)="addBoard($event)">
     </mat-form-field>
     <br />
     <app-custom-button [color]="'primary'" [text]="'Add Board'" (clickFunc)='addBoard($event)'></app-custom-button>

@@ -5,4 +5,5 @@
     font-weight: 400;
     /* border-bottom: 1px; */
     margin: 0 0 5px 0;
+    overflow-wrap: break-word;
 }
