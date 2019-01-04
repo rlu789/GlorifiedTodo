@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   loading = true;
   boardData: Array<Board>;
   boardTitle: string;
-
+  boardPassword: string;
 
   constructor(private boardsService: BoardsService, public snackBar: MatSnackBar, private router: Router,
     public dialog: MatDialog) {
@@ -32,12 +32,13 @@ export class HomeComponent implements OnInit {
 
   deleteBoard(i: number) {
     const dialogRef = this.dialog.open(ConfirmModalComponent, {
-      width: '500px'
+      width: '500px',
+      data: { password: this.boardData[i].password }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.boardsService.remove(this.boardData[i]).subscribe((data: any) => {
+        this.boardsService.remove(this.boardData[i], result.password).subscribe((data: any) => {
           this.boardData.splice(i, 1);
         }, (err: HttpErrorResponse) => {
           // var errMsg = err.statusText;
@@ -51,7 +52,10 @@ export class HomeComponent implements OnInit {
           //   })
           // }
           console.log(err);
-          this.openSnackBar("To user: I.O.U one actual error message from dev");
+          if (err.status === 401)
+            this.openSnackBar("Incorrect Password");
+          else
+            this.openSnackBar("To user: I.O.U one actual error message from dev");
         });
       }
     });
@@ -60,6 +64,11 @@ export class HomeComponent implements OnInit {
   addBoard($event) {
     var board = new Board(this.boardTitle);
     this.boardTitle = '';
+
+    if (this.boardPassword) {
+      board.password = this.boardPassword;
+      this.boardPassword = '';
+    }
     this.boardsService.add(board).subscribe((data: any) => {
       this.boardData.push(data);
       $event.complete();

@@ -21,7 +21,12 @@ namespace BackEnd4._5.Controllers
         // GET: Board
         public IHttpActionResult GetBoard()
         {
-            return Ok(_context.Boards);
+            var boards = _context.Boards;
+            foreach (Board b in boards)
+            {
+                b.PasswordConvert();
+            }
+            return Ok(boards);
         }
 
         // GET: api/Boards/5
@@ -40,6 +45,7 @@ namespace BackEnd4._5.Controllers
                 return NotFound();
             }
 
+            board.PasswordConvert();
             return Ok(board);
         }
 
@@ -59,13 +65,30 @@ namespace BackEnd4._5.Controllers
         
 
         // DELETE api/values/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
-
             var board = _context.Boards.Find(id);
 
-            _context.Boards.Remove(board);
-            _context.SaveChanges();
+            if (board.Password != null)
+            {
+                string password = Request.Headers.GetValues("Authorization").FirstOrDefault();
+                if (password == board.Password) // success
+                {
+                    _context.Boards.Remove(board);
+                    _context.SaveChanges();
+                    return Ok();
+                }
+                else // fail
+                {
+                    return Unauthorized();
+                }
+            }
+            else
+            {
+                _context.Boards.Remove(board);
+                _context.SaveChanges();
+                return Ok();
+            }
         }
     }
 }

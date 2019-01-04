@@ -25,8 +25,14 @@ export class BoardsService {
     return this.http.post(this.accessPointUrl, payload, {headers: this.headers});
   }
 
-  public remove(payload) {
-    return this.http.delete(this.accessPointUrl + '/' + payload.id, {headers: this.headers});
+  public remove(payload, password) {
+    if (password) {
+      var newHeader = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization': password
+      });
+    }
+    return this.http.delete(this.accessPointUrl + '/' + payload.id, {headers: newHeader});
   }
 
   public update(payload) {
@@ -37,5 +43,6 @@ export class BoardsService {
 export class Board{
   public id: number;
   public cardCollection: Array<CardCollection>;
+  public password: string;
   constructor(public title: string){}
 }

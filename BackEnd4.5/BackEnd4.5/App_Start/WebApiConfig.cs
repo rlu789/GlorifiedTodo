@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -10,6 +11,29 @@ namespace BackEnd4._5
 {
     public static class WebApiConfig
     {
+        private static bool ColumnExistsInTable(string tableName, string columnName)
+        {
+            using (var conn = new SQLiteConnection("Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "MyDatabase.sqlite;Version=3;"))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = string.Format("PRAGMA table_info({0})", tableName);
+
+                var reader = cmd.ExecuteReader();
+                int nameIndex = reader.GetOrdinal("Name");
+                while (reader.Read())
+                {
+                    if (reader.GetString(nameIndex).Equals(columnName))
+                    {
+                        conn.Close();
+                        return true;
+                    }
+                }
+                conn.Close();
+            }
+            return false;
+        }
+
         public static void Register(HttpConfiguration config)
         {
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "MyDatabase.sqlite"))
@@ -25,6 +49,8 @@ namespace BackEnd4._5
             SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
 
             // Let the SQLiteCommand object know our SQL-Query:
+            // These are the original tables within the database
+            // Later alterations can be found below
             sqlite_cmd.CommandText = @"CREATE TABLE IF NOT EXISTS [Board] (
                 [Id]    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 [Title] NVARCHAR(100) NOT NULL
@@ -48,15 +74,25 @@ namespace BackEnd4._5
             ); ";
             sqlite_cmd.ExecuteNonQuery();
 
-            // Web API configuration and services
+            // altering tables
+            // done in try catch because ColumnExistsInTable function breaks program with database commit errors
+            try
+            {
+                sqlite_cmd.CommandText = @"ALTER TABLE Board
+                    ADD [Password] NVARCHAR (100);";
+                sqlite_cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException e) { }
 
-            // Web API routes
+            // Web API configuration and services
+            // Web API routes 
             config.MapHttpAttributeRoutes();
             config.EnableCors();
 
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
+            //config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

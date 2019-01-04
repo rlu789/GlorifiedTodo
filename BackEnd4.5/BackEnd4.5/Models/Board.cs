@@ -16,10 +16,18 @@ namespace BackEnd4._5.Models
     [Table(Name = "Board")]
     public class Board
     {
+        public void PasswordConvert() // convert password into an indicator
+        {
+            if (Password != null)
+                Password = "Y";
+        }
+
         public int Id { get; set; }
 
         [Required]
         public string Title { get; set; }
+
+        public string Password { get; set; }
 
         public List<CardCollection> CardCollection { get; set; }
     }
