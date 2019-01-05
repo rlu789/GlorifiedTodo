@@ -33,7 +33,8 @@ export class HomeComponent implements OnInit {
   deleteBoard(i: number) {
     const dialogRef = this.dialog.open(ConfirmModalComponent, {
       width: '500px',
-      data: { password: this.boardData[i].password }
+      data: { password: this.boardData[i].password },
+      restoreFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {

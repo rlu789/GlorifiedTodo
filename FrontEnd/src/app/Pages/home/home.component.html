@@ -2,11 +2,10 @@
 <div *ngIf="!loading">
   <h3>Boards</h3>
   <div *ngFor="let board of boardData, index as i" style="display:inline-block; height: 100px;">
-    <div class="board-tile" (click)='viewBoard(i)'>
+    <div class="board-tile" (click)='viewBoard(i)' tabindex="0">
       <div class="sub">
       </div>
-      <button type="button" class="board-tile-button close" (click)='deleteBoard(i)' appClickStopPropagation>
-        <span>&times;</span>
+      <button type="button" class="board-tile-button fas fa-times" (click)='deleteBoard(i)' appClickStopPropagation>
       </button>
     </div>
     <div class='board-tile-title'><span>{{board.title}}</span></div>
