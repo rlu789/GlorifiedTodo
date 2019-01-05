@@ -15,6 +15,9 @@ export class BoardComponent implements OnInit {
   boardId: number;
   boardTitle: string;
 
+  editable: boolean;
+  password: string;
+
   collectionData: Array<CardCollection>;
   collectionTitle: string;
 
@@ -28,6 +31,7 @@ export class BoardComponent implements OnInit {
     boardsService.getSingle(this.boardId).subscribe((data: Board) => {
       this.collectionData = data.cardCollection;
       this.boardTitle = data.title;
+      this.editable = data.password === "Y" ? false : true;
       // console.log(this.collectionData);
       this.loading = false;
     });
@@ -44,7 +48,18 @@ export class BoardComponent implements OnInit {
       $event.complete();
     });
     this.collectionTitle = '';
+  }
 
+  unlock($event) {
+    this.boardsService.authorize(this.boardId, this.password).subscribe((data: any) => {
+      this.editable = true;
+      this.openSnackBar("Unlocked for edit");
+      $event.complete();
+    }, (err: HttpErrorResponse) => {
+      console.log(err);
+      this.openSnackBar("Incorrect password");
+      $event.complete();
+    });
   }
 
   openSnackBar(message: string) {

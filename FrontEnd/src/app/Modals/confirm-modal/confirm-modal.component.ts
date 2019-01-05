@@ -14,7 +14,7 @@ export class ConfirmModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ConfirmModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.passwordProtected = data.password;
+      if (data) this.passwordProtected = data.password;
     }
 
   confirm(): void {

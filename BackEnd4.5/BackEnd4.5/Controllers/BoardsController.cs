@@ -71,8 +71,9 @@ namespace BackEnd4._5.Controllers
 
             if (board.Password != null)
             {
-                string password = Request.Headers.GetValues("Authorization").FirstOrDefault();
-                if (password == board.Password) // success
+                IEnumerable<string> password;
+                Request.Headers.TryGetValues("Authorization", out password);
+                if (password != null && password.FirstOrDefault() == board.Password) // success
                 {
                     _context.Boards.Remove(board);
                     _context.SaveChanges();
@@ -88,6 +89,28 @@ namespace BackEnd4._5.Controllers
                 _context.Boards.Remove(board);
                 _context.SaveChanges();
                 return Ok();
+            }
+        }
+
+        [System.Web.Mvc.Route("boards/{id}/authorize")]
+        public IHttpActionResult Authorize(int id)
+        {
+            var board = _context.Boards.Find(id);
+
+            if (board == null)
+            {
+                return NotFound();
+            }
+            
+            IEnumerable<string> password;
+            Request.Headers.TryGetValues("Authorization", out password);
+            if (password != null && password.FirstOrDefault() == board.Password)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Unauthorized();
             }
         }
     }

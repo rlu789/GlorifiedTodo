@@ -1,11 +1,23 @@
 <mat-spinner *ngIf="loading"></mat-spinner>
 <div *ngIf="!loading">
   <div class='board-title'>{{boardTitle}}</div>
-  <app-card-collection [collectionData]='collectionData'></app-card-collection>
+  <app-card-collection [collectionData]='collectionData' [editable]='editable'></app-card-collection>
 
-  <mat-form-field>
-    <input matInput placeholder="Collection Title" [(ngModel)]="collectionTitle" (keyup.enter)="addCollection()">
-  </mat-form-field>
-  <br />
-  <app-custom-button [color]="'primary'" [text]="'Add List'" (clickFunc)='addCollection($event)'></app-custom-button>
+  <div *ngIf="editable">
+    <mat-form-field>
+      <input matInput placeholder="Collection Title" [(ngModel)]="collectionTitle" (keyup.enter)="addCollection()">
+    </mat-form-field>
+    <br />
+    <app-custom-button [color]="'primary'" [text]="'Add List'" (clickFunc)='addCollection($event)'></app-custom-button>
+  </div>
+  <div *ngIf="!editable">
+    <mat-form-field>
+      <input matInput type='password' placeholder="Password" [(ngModel)]="password" (keyup.enter)="unlock()">
+    </mat-form-field>
+    <br />
+    <app-custom-button [color]="'primary'" [text]="'Unlock for Edit'" (clickFunc)='unlock($event)'></app-custom-button>
+    <app-custom-alert [type]="'i'" [title]="'Password Required'">
+      <p>This board is protected by a password. Please enter the password to unlock the ability to edit this board</p>
+    </app-custom-alert>
+  </div>
 </div>

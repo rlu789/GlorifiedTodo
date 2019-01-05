@@ -13,6 +13,11 @@
     transition: 0.2s ease;
 }
 
+.uneditable.mat-card:hover{
+    cursor: default;
+    background-color: white;
+}
+
 .mat-card:hover{
     cursor: pointer;
     background-color: lightgrey;

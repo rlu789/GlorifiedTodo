@@ -20,6 +20,7 @@ import { ConfirmModalComponent } from './Modals/confirm-modal/confirm-modal.comp
 import { ClickStopPropagationDirective } from './Directives/click-stop-propagation.directive';
 import { EditCardModalComponent } from './Modals/edit-card-modal/edit-card-modal.component';
 import { CustomButtonComponent } from './Custom/custom-button/custom-button.component';
+import { CustomAlertComponent } from './Custom/custom-alert/custom-alert.component';
 
 const appRoutes: Routes = [
   {
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     ConfirmModalComponent,
     ClickStopPropagationDirective,
     EditCardModalComponent,
-    CustomButtonComponent
+    CustomButtonComponent,
+    CustomAlertComponent
   ],
   imports: [
     BrowserModule,

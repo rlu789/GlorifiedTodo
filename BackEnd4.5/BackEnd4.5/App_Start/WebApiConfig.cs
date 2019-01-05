@@ -84,7 +84,7 @@ namespace BackEnd4._5
             }
             catch (SQLiteException e) { }
 
-            // Web API configuration and services
+            // Web API configuration and services  
             // Web API routes 
             config.MapHttpAttributeRoutes();
             config.EnableCors();
@@ -92,12 +92,12 @@ namespace BackEnd4._5
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
-            //config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{id}/{action}",
+                defaults: new { id = RouteParameter.Optional, action = RouteParameter.Optional }
             );
         }
     }

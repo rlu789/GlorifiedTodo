@@ -1,4 +1,7 @@
 <button mat-raised-button [color]="color" (click)='click()' [class.float-right]="floatRight" [disabled]='loading'>
-  <div *ngIf="loading" class="spinner"></div>
+  <div *ngIf="loading">
+    &nbsp;
+    <div class="spinner"></div>
+  </div>
   <span *ngIf="!loading">{{text}}</span>
 </button>

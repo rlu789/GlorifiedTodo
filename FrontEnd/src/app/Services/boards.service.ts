@@ -13,6 +13,12 @@ export class BoardsService {
     this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
   }
 
+  private generateHeaders(password: string): HttpHeaders{
+    var headers = {'Content-Type': 'application/json; charset=utf-8'}
+    if (password) headers['Authorization'] = password;
+    return new HttpHeaders(headers);
+  }
+
   public get() {
     return this.http.get(this.accessPointUrl, {headers: this.headers});
   }
@@ -21,22 +27,20 @@ export class BoardsService {
     return this.http.get(this.accessPointUrl +'/'+id, {headers: this.headers});
   }
 
-  public add(payload) {
+  public add(payload: Board) {
     return this.http.post(this.accessPointUrl, payload, {headers: this.headers});
   }
 
-  public remove(payload, password) {
-    if (password) {
-      var newHeader = new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8',
-        'Authorization': password
-      });
-    }
-    return this.http.delete(this.accessPointUrl + '/' + payload.id, {headers: newHeader});
+  public remove(payload: Board, password: string) {
+    return this.http.delete(this.accessPointUrl + '/' + payload.id, {headers: this.generateHeaders(password)});
   }
 
-  public update(payload) {
+  public update(payload: Board) {
     return this.http.put(this.accessPointUrl + '/' + payload.id, payload, {headers: this.headers});
+  }
+
+  public authorize(id: number, password: string){
+    return this.http.post(this.accessPointUrl + '/' + id + '/authorize', undefined, {headers: this.generateHeaders(password)});
   }
 }
 

@@ -1,0 +1,9 @@
+<div class="custom-alert" [ngClass]=typeClass 
+  *ngIf="isVisible === true || (isVisible && isVisible.get('validator').value)">
+  <span [ngClass]=iconClass></span>
+  <button *ngIf="dismissible" type="button" class="close fas fa-times" (click)='dismiss()'></button>
+  <h3 *ngIf="title">{{title}}</h3>
+  <div class='content'>
+    <ng-content></ng-content>
+  </div>
+</div>

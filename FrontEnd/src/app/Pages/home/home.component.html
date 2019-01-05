@@ -21,5 +21,8 @@
     </mat-form-field>
     <br />
     <app-custom-button [color]="'primary'" [text]="'Add Board'" (clickFunc)='addBoard($event)'></app-custom-button>
+    <app-custom-alert [type]="'i'" [title]="'Password Protected Boards'">
+      <p>Adding a password is completely optional but... like... better safe than sorry lol</p>
+    </app-custom-alert>
   </div>
 </div>

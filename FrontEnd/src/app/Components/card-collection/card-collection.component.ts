@@ -15,6 +15,7 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 })
 export class CardCollectionComponent implements OnInit {
   @Input('collectionData') collectionData: Array<CardCollection>;
+  @Input('editable') editable: boolean;
 
   cardTitle: string;
   cardDesc: string;
