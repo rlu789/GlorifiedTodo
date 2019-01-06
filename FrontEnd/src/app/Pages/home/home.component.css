@@ -76,7 +76,6 @@ h3 {
   cursor: pointer;
 }
 
-.board-tile:focus-within > .sub,
 .board-tile:hover > .sub,
 .board-tile:focus > .sub{
   opacity: .5;
