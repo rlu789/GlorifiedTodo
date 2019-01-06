@@ -11,18 +11,20 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 })
 export class EditCardModalComponent implements OnInit {
   tempCard: Card;
+  password: string;
 
   constructor(
     public dialogRef: MatDialogRef<EditCardModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { card: Card }, public cardsService: CardsService,
+    @Inject(MAT_DIALOG_DATA) public data: { card: Card, password: string }, public cardsService: CardsService,
     public snackBar: MatSnackBar) {
     // console.log(data.card);
     this.tempCard = new Card(data.card.title, data.card.description, data.card.cardCollectionId);
     this.tempCard.id = data.card.id;
+    this.password = data.password;
   }
 
   updateCard() {
-    this.cardsService.update(this.tempCard).subscribe((data: Card) => {
+    this.cardsService.update(this.tempCard, this.password).subscribe((data: Card) => {
       if (data) this.dialogRef.close(data);
       else alert("WTF HAPPENED");
     }, (err: HttpErrorResponse) => {

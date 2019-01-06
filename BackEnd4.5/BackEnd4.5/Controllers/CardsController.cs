@@ -9,6 +9,7 @@ using BackEnd4._5.Context;
 using BackEnd4._5.Models;
 using System.Threading.Tasks;
 using System.Web.Http.Cors;
+using BackEnd4._5.Handlers;
 
 namespace BackEnd4._5.Controllers
 {
@@ -24,6 +25,10 @@ namespace BackEnd4._5.Controllers
             {
                 return BadRequest(ModelState);
             }
+            
+            var board = _context.Boards.Find(_context.CardCollections.Find(card.CardCollectionId).BoardId);
+            if (board == null) return NotFound();
+            if (!AuthorizationHandler.PasswordMatched(board.Password, Request)) return Unauthorized();
 
             _context.Cards.Add(card);
             _context.SaveChanges();
@@ -33,13 +38,18 @@ namespace BackEnd4._5.Controllers
 
 
         // DELETE api/card/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
 
             var card = _context.Cards.Find(id);
 
+            var board = _context.Boards.Find(_context.CardCollections.Find(card.CardCollectionId).BoardId);
+            if (board == null) return NotFound();
+            if (!AuthorizationHandler.PasswordMatched(board.Password, Request)) return Unauthorized();
+
             _context.Cards.Remove(card);
             _context.SaveChanges();
+            return Ok();
         }
 
 
@@ -57,6 +67,10 @@ namespace BackEnd4._5.Controllers
             {
                 return NotFound();
             }
+
+            var board = _context.Boards.Find(_context.CardCollections.Find(card.CardCollectionId).BoardId);
+            if (board == null) return NotFound();
+            if (!AuthorizationHandler.PasswordMatched(board.Password, Request)) return Unauthorized();
 
             c.Title = card.Title;
             c.Description = card.Description;

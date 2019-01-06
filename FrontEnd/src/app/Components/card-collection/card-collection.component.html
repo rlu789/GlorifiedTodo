@@ -5,8 +5,8 @@
     <header>{{col.title}}</header>
     <ul>
       <div *ngFor="let card of col.card; index as cardIndex">
-        <mat-card *ngIf="editable" (click)="editCard(i, cardIndex)" class='mat-card-editable'>
-          <button type="button" class="close" (click)='deleteCard(i, cardIndex)'>
+        <mat-card *ngIf="editable" (click)="editCard(i, cardIndex)" class='mat-card-editable' tabindex="0">
+          <button type="button" class="close" (click)='deleteCard(i, cardIndex)' appClickStopPropagation>
             <span>&times;</span>
           </button>
           <mat-card-header>
@@ -20,7 +20,7 @@
             </p>
           </mat-card-content>
         </mat-card>
-        <mat-card *ngIf="!editable">
+        <mat-card *ngIf="!editable" tabindex="0">
           <mat-card-header>
             <mat-card-title>
               {{card.title}}
@@ -55,5 +55,6 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
+    <footer></footer>
   </div>
 </div>

@@ -9,6 +9,7 @@ using BackEnd4._5.Context;
 using BackEnd4._5.Models;
 using System.Threading.Tasks;
 using System.Web.Http.Cors;
+using BackEnd4._5.Handlers;
 
 namespace BackEnd4._5.Controllers
 {
@@ -25,6 +26,10 @@ namespace BackEnd4._5.Controllers
                 return BadRequest(ModelState);
             }
 
+            var board = _context.Boards.Find(cardCollection.BoardId);
+            if (board == null) return NotFound();
+            if (!AuthorizationHandler.PasswordMatched(board.Password, Request)) return Unauthorized();
+
             _context.CardCollections.Add(cardCollection);
             _context.SaveChanges();
 
@@ -33,13 +38,18 @@ namespace BackEnd4._5.Controllers
 
 
         // DELETE api/values/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
 
             var cardCollection = _context.CardCollections.FirstOrDefault(i => i.Id == id);
 
+            var board = _context.Boards.Find(cardCollection.BoardId);
+            if (board == null) return NotFound();
+            if (!AuthorizationHandler.PasswordMatched(board.Password, Request)) return Unauthorized();
+
             _context.CardCollections.Remove(cardCollection);
             _context.SaveChanges();
+            return Ok();
         }
     }
 }

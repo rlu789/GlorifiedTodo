@@ -16,6 +16,7 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 export class CardCollectionComponent implements OnInit {
   @Input('collectionData') collectionData: Array<CardCollection>;
   @Input('editable') editable: boolean;
+  @Input('password') password: string;
 
   cardTitle: string;
   cardDesc: string;
@@ -32,7 +33,7 @@ export class CardCollectionComponent implements OnInit {
 
     const dialogRef = this.dialog.open(EditCardModalComponent, {
       width: '700px',
-      data: { card: cardToBeEdited }
+      data: { card: cardToBeEdited, password: this.password }
     });
     dialogRef.afterClosed().subscribe((card: Card) => {
       if (card) this.collectionData[collectionIndex].card[cardIndex] = card;
@@ -46,8 +47,7 @@ export class CardCollectionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.cardCollectionsService.remove(this.collectionData[i]).subscribe((data: any) => {
-          console.log(data);
+        this.cardCollectionsService.remove(this.collectionData[i], this.password).subscribe((data: any) => {
           this.collectionData.splice(i, 1);
           $event.complete();
         }, (err: HttpErrorResponse) => {
@@ -64,9 +64,9 @@ export class CardCollectionComponent implements OnInit {
   deleteCard(collectionIndex: number, cardIndex: number) {
     var cardToBeDeleted = this.collectionData[collectionIndex].card[cardIndex];
     // console.log(cardToBeDeleted);
-    this.collectionData[collectionIndex].card.splice(cardIndex, 1);
-    this.cardsService.remove(cardToBeDeleted).subscribe((data: any) => {
+    this.cardsService.remove(cardToBeDeleted, this.password).subscribe((data: any) => {
       // console.log(data);
+      this.collectionData[collectionIndex].card.splice(cardIndex, 1);
     })
   }
 
@@ -75,7 +75,7 @@ export class CardCollectionComponent implements OnInit {
     this.cardDesc = '';
     this.cardTitle = '';
     if (!this.collectionData[i].card) this.collectionData[i].card = [];
-    this.cardsService.add(c).subscribe((data: Card) => {
+    this.cardsService.add(c, this.password).subscribe((data: Card) => {
       // console.log(data);
       this.collectionData[i].card.push(data);
       $event.complete();

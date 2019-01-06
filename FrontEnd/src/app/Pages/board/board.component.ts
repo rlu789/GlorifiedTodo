@@ -38,7 +38,7 @@ export class BoardComponent implements OnInit {
   }
 
   addCollection($event) {
-    this.cardCollectionsService.add(new CardCollection(this.collectionTitle, this.boardId, [])).subscribe((data: any) => {
+    this.cardCollectionsService.add(new CardCollection(this.collectionTitle, this.boardId, []), this.password).subscribe((data: any) => {
       this.collectionData.push(data);
       $event.complete();
       // console.log(data);

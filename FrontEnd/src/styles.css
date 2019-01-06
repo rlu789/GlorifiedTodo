@@ -185,6 +185,7 @@ body {
 }
 
 .list footer {
+  padding-top: 5px;
   line-height: 36px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
