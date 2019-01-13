@@ -26,16 +26,9 @@ export class EditCardModalComponent implements OnInit {
   updateCard() {
     this.cardsService.update(this.tempCard, this.password).subscribe((data: Card) => {
       if (data) this.dialogRef.close(data);
-      else alert("WTF HAPPENED");
-    }, (err: HttpErrorResponse) => {
-      console.log(err);
-      this.openSnackBar("To user: I.O.U one actual error message from dev");
     });
   }
-
-  openSnackBar(message: string) {
-    this.snackBar.open(message, 'Close');
-  }
+  
   onNoClick(): void {
     this.dialogRef.close();
   }

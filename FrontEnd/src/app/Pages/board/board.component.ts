@@ -23,10 +23,9 @@ export class BoardComponent implements OnInit {
 
   constructor(private cardCollectionsService: CardCollectionsService, public snackBar: MatSnackBar, private route: ActivatedRoute,
     private boardsService: BoardsService) {
-    this.route.params.subscribe( params => {
+    this.route.params.subscribe(params => {
       this.boardId = params.id;
-      // console.log(this.boardId);
-    } );
+    });
 
     boardsService.getSingle(this.boardId).subscribe((data: Board) => {
       this.collectionData = data.cardCollection;
@@ -43,8 +42,6 @@ export class BoardComponent implements OnInit {
       $event.complete();
       // console.log(data);
     }, (err: HttpErrorResponse) => {
-      console.log(err);
-      this.openSnackBar("To user: I.O.U one actual error message from dev");
       $event.complete();
     });
     this.collectionTitle = '';
@@ -56,8 +53,6 @@ export class BoardComponent implements OnInit {
       this.openSnackBar("Unlocked for edit");
       $event.complete();
     }, (err: HttpErrorResponse) => {
-      console.log(err);
-      this.openSnackBar("Incorrect password");
       $event.complete();
     });
   }

@@ -6,7 +6,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { ConfirmModalComponent } from '../../Modals/confirm-modal/confirm-modal.component';
 import { EditCardModalComponent } from '../../Modals/edit-card-modal/edit-card-modal.component';
 
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-card-collection',
@@ -22,7 +22,7 @@ export class CardCollectionComponent implements OnInit {
   cardDesc: string;
 
   constructor(private cardsService: CardsService, private cardCollectionsService: CardCollectionsService,
-    public snackBar: MatSnackBar, public dialog: MatDialog) { }
+    public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -51,8 +51,6 @@ export class CardCollectionComponent implements OnInit {
           this.collectionData.splice(i, 1);
           $event.complete();
         }, (err: HttpErrorResponse) => {
-          console.log(err);
-          this.openSnackBar("To user: I.O.U one actual error message from dev");
           $event.complete();
         });
       }
@@ -80,13 +78,7 @@ export class CardCollectionComponent implements OnInit {
       this.collectionData[i].card.push(data);
       $event.complete();
     }, (err: HttpErrorResponse) => {
-      console.log(err);
-      this.openSnackBar("To user: I.O.U one actual error message from dev");
       $event.complete();
     });
-  }
-
-  openSnackBar(message: string) {
-    this.snackBar.open(message, 'Close');
   }
 }

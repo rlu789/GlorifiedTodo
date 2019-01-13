@@ -41,22 +41,6 @@ export class HomeComponent implements OnInit {
       if (result) {
         this.boardsService.remove(this.boardData[i], result.password).subscribe((data: any) => {
           this.boardData.splice(i, 1);
-        }, (err: HttpErrorResponse) => {
-          // var errMsg = err.statusText;
-          // if (err.error.length !== undefined) {
-          //   errMsg += ': ';
-          //   Object.keys(err.error).forEach(function (e) {
-          //     // errMsg += ' ' + e + ": "
-          //     err.error[e].forEach(function (str) {
-          //       errMsg += str;
-          //     })
-          //   })
-          // }
-          console.log(err);
-          if (err.status === 401)
-            this.openSnackBar("Incorrect Password");
-          else
-            this.openSnackBar("To user: I.O.U one actual error message from dev");
         });
       }
     });
@@ -75,14 +59,8 @@ export class HomeComponent implements OnInit {
       $event.complete();
       // console.log(data);
     }, (err: HttpErrorResponse) => {
-      console.log(err);
-      this.openSnackBar("To user: I.O.U one actual error message from dev");
       $event.complete();
     });
-  }
-
-  openSnackBar(message: string) {
-    this.snackBar.open(message, 'Close');
   }
 
   ngOnInit() {

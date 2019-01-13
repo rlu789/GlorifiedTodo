@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Card } from './cards.service';
-import * as common from './common';
+import { ServiceBaseService } from './service-base.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardCollectionsService {
   private headers: HttpHeaders;
-  private accessPointUrl: string = common.accessPointUrlBase + 'cardCollections';
+  private accessPointUrl: string = this.serviceBaseService.accessPointUrlBase + 'cardCollections';
 
-  constructor(private http: HttpClient) {
-    this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
+  constructor(private http: HttpClient, public serviceBaseService: ServiceBaseService) {
+    this.headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
   }
 
   // public get() {
@@ -19,11 +19,13 @@ export class CardCollectionsService {
   // }
 
   public add(payload: CardCollection, password: string) {
-    return this.http.post(this.accessPointUrl, payload, {headers: common.generateHeaders(password)});
+    return this.serviceBaseService.serviceCallBase(this.serviceBaseService.Constants.Post, this.accessPointUrl,
+      this.serviceBaseService.generateHeaders(password), payload);
   }
 
   public remove(payload: CardCollection, password: string) {
-    return this.http.delete(this.accessPointUrl + '/' + payload.id, {headers: common.generateHeaders(password)});
+    return this.serviceBaseService.serviceCallBase(this.serviceBaseService.Constants.Delete, this.accessPointUrl + '/' + payload.id,
+      this.serviceBaseService.generateHeaders(password));
   }
 
   // public update(payload: CardCollection) {
@@ -31,7 +33,7 @@ export class CardCollectionsService {
   // }
 }
 
-export class CardCollection{
+export class CardCollection {
   public id: number;
-  constructor (public title: string, public boardId: number, public card: Array<Card>){}
+  constructor(public title: string, public boardId: number, public card: Array<Card>) { }
 }

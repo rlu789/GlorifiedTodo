@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatProgressSpinnerModule, 
   MatSnackBarModule, MatExpansionModule, MatDialogModule } from '@angular/material';
 
+import { ServiceBaseService } from './Services/service-base.service';
 import { CardCollectionsService } from './Services/card-collections.service';
 import { CardsService } from './Services/cards.service';
 import { BoardsService } from './Services/boards.service';
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
     MatDialogModule,
   ],
   providers: [
+    ServiceBaseService,
     CardCollectionsService,
     CardsService,
     BoardsService
