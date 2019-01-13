@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Board, BoardsService } from '../../Services/boards.service';
 import { HttpErrorResponse } from "@angular/common/http";
 import { ConfirmModalComponent } from '../../Modals/confirm-modal/confirm-modal.component';
+import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -15,7 +16,17 @@ export class HomeComponent implements OnInit {
   loading = true;
   boardData: Array<Board>;
   boardTitle: string;
-  boardPassword: string;
+  boardPassword = new FormControl('');
+  boardPasswordRepeat = new FormControl('', [this.matchValidator(this.boardPassword)]);
+  boardPasswordRepeatFocus = false;
+
+  matchValidator(strToMatch: FormControl): ValidatorFn { // TODO move to common location
+    return (control: AbstractControl): { [key: string]: string } | null => {
+      if (strToMatch.value && control.value !== strToMatch.value) {
+        return { 'match': 'match' };
+      }
+    };
+  }
 
   constructor(private boardsService: BoardsService, public snackBar: MatSnackBar, private router: Router,
     public dialog: MatDialog) {
@@ -23,6 +34,9 @@ export class HomeComponent implements OnInit {
       this.boardData = data;
       // console.log(this.boardData);
       this.loading = false;
+    });
+    this.boardPassword.valueChanges.subscribe((value: string) => {
+      if (!value) this.boardPasswordRepeat.reset();
     });
   }
 
@@ -47,20 +61,30 @@ export class HomeComponent implements OnInit {
   }
 
   addBoard($event) {
-    var board = new Board(this.boardTitle);
-    this.boardTitle = '';
+    this.boardPasswordRepeatFocus = false;
+    this.boardPasswordRepeat.updateValueAndValidity();
+    this.boardPasswordRepeat.markAsDirty();
+    this.boardPasswordRepeat.markAsTouched();
+    if (this.boardPasswordRepeat.valid) {
+      var board = new Board(this.boardTitle);
+      this.boardTitle = '';
 
-    if (this.boardPassword) {
-      board.password = this.boardPassword;
-      this.boardPassword = '';
+      if (this.boardPassword.value) {
+        board.password = this.boardPassword.value;
+        this.boardPassword.setValue('');
+      }
+      this.boardsService.add(board).subscribe((data: any) => {
+        this.boardData.push(data);
+        $event.complete();
+        // console.log(data);
+      }, (err: HttpErrorResponse) => {
+        $event.complete();
+      });
     }
-    this.boardsService.add(board).subscribe((data: any) => {
-      this.boardData.push(data);
+    else {
+      this.boardPasswordRepeatFocus = true;
       $event.complete();
-      // console.log(data);
-    }, (err: HttpErrorResponse) => {
-      $event.complete();
-    });
+    }
   }
 
   ngOnInit() {

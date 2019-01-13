@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatProgressSpinnerModule, 
@@ -19,6 +19,7 @@ import { CardCollectionComponent } from './Components/card-collection/card-colle
 import { BoardComponent } from './Pages/board/board.component';
 import { ConfirmModalComponent } from './Modals/confirm-modal/confirm-modal.component';
 import { ClickStopPropagationDirective } from './Directives/click-stop-propagation.directive';
+import { FocusDirective } from './Directives/focus.directive';
 import { EditCardModalComponent } from './Modals/edit-card-modal/edit-card-modal.component';
 import { CustomButtonComponent } from './Custom/custom-button/custom-button.component';
 import { CustomAlertComponent } from './Custom/custom-alert/custom-alert.component';
@@ -40,15 +41,17 @@ const appRoutes: Routes = [
     BoardComponent,
     ConfirmModalComponent,
     ClickStopPropagationDirective,
+    FocusDirective,
     EditCardModalComponent,
     CustomButtonComponent,
-    CustomAlertComponent
+    CustomAlertComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes, {useHash: true}),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
 
     MatButtonModule,

@@ -109,6 +109,17 @@
   animation: spinner .6s linear infinite;
 }
 
+.expand {
+  overflow: hidden;
+}
+.expand > * {
+  margin-top: -100%;
+  transition: all 0.8s;
+}
+.expand.expanded > * {
+  margin-top: 0;
+}
+
 body {
   margin: 0;
   /* font-family: 'Roboto'; */

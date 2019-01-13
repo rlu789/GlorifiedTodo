@@ -16,8 +16,16 @@
     </mat-form-field>
     <br />
     <mat-form-field>
-      <input matInput placeholder="Board Password (Optional)" [(ngModel)]="boardPassword" (keyup.enter)="addBoard($event)">
+      <input matInput type="password" placeholder="Board Password (Optional)" [formControl]="boardPassword" (keyup.enter)="addBoard($event)">
     </mat-form-field>
+    <br />
+    <mat-form-field class="expand" [class.expanded]="boardPassword.value">
+      <input matInput type="password" placeholder="Repeat Board Password" [formControl]="boardPasswordRepeat" (keyup.enter)="addBoard($event)"
+        appFocus
+        [(focus)]="boardPasswordRepeatFocus">
+      <mat-error *ngIf="boardPasswordRepeat.errors && boardPasswordRepeat.errors.match">Passwords don't match</mat-error>
+    </mat-form-field>
+    <br />
     <br />
     <app-custom-button [color]="'primary'" [text]="'Add Board'" (clickFunc)='addBoard($event)'></app-custom-button>
     <app-custom-alert [type]="'i'" [title]="'Password Protected Boards'">
