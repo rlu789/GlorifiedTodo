@@ -21,6 +21,7 @@
     <br />
     <mat-form-field class="expand" [class.expanded]="boardPassword.value">
       <input matInput type="password" placeholder="Repeat Board Password" [formControl]="boardPasswordRepeat" (keyup.enter)="addBoard($event)"
+        [attr.tabindex]="boardPassword.value ? 0 : -1"
         appFocus
         [(focus)]="boardPasswordRepeatFocus">
       <mat-error *ngIf="boardPasswordRepeat.errors && boardPasswordRepeat.errors.match">Passwords don't match</mat-error>

@@ -17,7 +17,7 @@ export class ServiceBaseService {
 
   constructor(private http: HttpClient, public snackBar: MatSnackBar) { }
 
-  public serviceCallBase(callType: number, url: string, reqHeaders: HttpHeaders, payload?: {} | [any]): Observable<any> {
+  public call(callType: number, url: string, reqHeaders: HttpHeaders, payload?: {} | [any]): Observable<any> {
     var observableToReturn = new Observable(observableToReturn => {
       var call;
       switch (callType) {
@@ -67,7 +67,7 @@ export class ServiceBaseService {
   }
 
   private openSnackBar(message: string) {
-    this.snackBar.open(message, 'Close');
+    this.snackBar.open(message, 'Close', { duration: 2500});
   }
 
   public generateHeaders(password: string): HttpHeaders {

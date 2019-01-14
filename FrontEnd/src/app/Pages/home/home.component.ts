@@ -61,7 +61,6 @@ export class HomeComponent implements OnInit {
   }
 
   addBoard($event) {
-    this.boardPasswordRepeatFocus = false;
     this.boardPasswordRepeat.updateValueAndValidity();
     this.boardPasswordRepeat.markAsDirty();
     this.boardPasswordRepeat.markAsTouched();

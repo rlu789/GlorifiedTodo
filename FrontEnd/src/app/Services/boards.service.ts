@@ -8,26 +8,26 @@ import { ServiceBaseService } from './service-base.service';
 })
 export class BoardsService {
   private headers: HttpHeaders;
-  private accessPointUrl: string = this.serviceBaseService.accessPointUrlBase + 'boards';
+  private accessPointUrl: string = this.serviceBase.accessPointUrlBase + 'boards';
 
-  constructor(private http: HttpClient, public serviceBaseService: ServiceBaseService) {
+  constructor(private http: HttpClient, public serviceBase: ServiceBaseService) {
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
   }
 
   public get() {
-    return this.serviceBaseService.serviceCallBase(this.serviceBaseService.Constants.Get, this.accessPointUrl, this.headers);
+    return this.serviceBase.call(this.serviceBase.Constants.Get, this.accessPointUrl, this.headers);
   }
 
   public getSingle(id: number) {
-    return this.serviceBaseService.serviceCallBase(this.serviceBaseService.Constants.Get, this.accessPointUrl + '/' + id, this.headers);
+    return this.serviceBase.call(this.serviceBase.Constants.Get, this.accessPointUrl + '/' + id, this.headers);
   }
 
   public add(payload: Board) {
-    return this.serviceBaseService.serviceCallBase(this.serviceBaseService.Constants.Post, this.accessPointUrl, this.headers, payload);
+    return this.serviceBase.call(this.serviceBase.Constants.Post, this.accessPointUrl, this.headers, payload);
   }
 
   public remove(payload: Board, password: string) {
-    return this.serviceBaseService.serviceCallBase(this.serviceBaseService.Constants.Delete, this.accessPointUrl + '/' + payload.id, this.serviceBaseService.generateHeaders(password), payload);
+    return this.serviceBase.call(this.serviceBase.Constants.Delete, this.accessPointUrl + '/' + payload.id, this.serviceBase.generateHeaders(password), payload);
   }
 
   // public update(payload: Board) {
@@ -35,8 +35,8 @@ export class BoardsService {
   // }
 
   public authorize(id: number, password: string) {
-    return this.serviceBaseService.serviceCallBase(this.serviceBaseService.Constants.Post, 
-      this.accessPointUrl + '/' + id + '/authorize', this.serviceBaseService.generateHeaders(password));
+    return this.serviceBase.call(this.serviceBase.Constants.Post, 
+      this.accessPointUrl + '/' + id + '/authorize', this.serviceBase.generateHeaders(password));
   }
 }
 

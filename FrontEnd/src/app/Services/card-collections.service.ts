@@ -8,9 +8,9 @@ import { ServiceBaseService } from './service-base.service';
 })
 export class CardCollectionsService {
   private headers: HttpHeaders;
-  private accessPointUrl: string = this.serviceBaseService.accessPointUrlBase + 'cardCollections';
+  private accessPointUrl: string = this.serviceBase.accessPointUrlBase + 'cardCollections';
 
-  constructor(private http: HttpClient, public serviceBaseService: ServiceBaseService) {
+  constructor(private http: HttpClient, public serviceBase: ServiceBaseService) {
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
   }
 
@@ -19,13 +19,13 @@ export class CardCollectionsService {
   // }
 
   public add(payload: CardCollection, password: string) {
-    return this.serviceBaseService.serviceCallBase(this.serviceBaseService.Constants.Post, this.accessPointUrl,
-      this.serviceBaseService.generateHeaders(password), payload);
+    return this.serviceBase.call(this.serviceBase.Constants.Post, this.accessPointUrl,
+      this.serviceBase.generateHeaders(password), payload);
   }
 
   public remove(payload: CardCollection, password: string) {
-    return this.serviceBaseService.serviceCallBase(this.serviceBaseService.Constants.Delete, this.accessPointUrl + '/' + payload.id,
-      this.serviceBaseService.generateHeaders(password));
+    return this.serviceBase.call(this.serviceBase.Constants.Delete, this.accessPointUrl + '/' + payload.id,
+      this.serviceBase.generateHeaders(password));
   }
 
   // public update(payload: CardCollection) {
