@@ -70,7 +70,7 @@ export class ServiceBaseService {
     this.snackBar.open(message, 'Close', { duration: 2500});
   }
 
-  public generateHeaders(password: string): HttpHeaders {
+  public generateHeaders(password?: string): HttpHeaders {
     var headers = { 'Content-Type': 'application/json; charset=utf-8' }
     if (password) headers['Authorization'] = password;
     return new HttpHeaders(headers);

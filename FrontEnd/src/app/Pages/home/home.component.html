@@ -1,6 +1,6 @@
 <mat-spinner *ngIf="loading"></mat-spinner>
 <div *ngIf="!loading">
-  <h3>Boards</h3>
+  <app-custom-heading [title]="'Boards'"></app-custom-heading>
   <div *ngFor="let board of boardData, index as i" style="display:inline-block; height: 100px;">
     <div class="board-tile" (click)='viewBoard(i)' (keydown.enter)='viewBoard(i)' tabindex="0">
       <div class="sub">

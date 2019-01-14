@@ -1,0 +1,20 @@
+h1,
+h2,
+h3 {
+  padding-bottom: 4px;
+}
+
+.heading-underline {
+  border-bottom: 1px solid #0000008a;
+  margin-bottom: 15px;
+}
+
+.icon-container{
+    display: inline;
+    bottom: 2px;
+    position: relative;
+}
+
+.icon-button{
+    cursor: pointer;
+}

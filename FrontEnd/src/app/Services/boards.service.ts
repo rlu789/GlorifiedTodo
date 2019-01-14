@@ -30,9 +30,10 @@ export class BoardsService {
     return this.serviceBase.call(this.serviceBase.Constants.Delete, this.accessPointUrl + '/' + payload.id, this.serviceBase.generateHeaders(password), payload);
   }
 
-  // public update(payload: Board) {
-  //   return this.http.put(this.accessPointUrl + '/' + payload.id, payload, {headers: this.headers});
-  // }
+  public update(payload: Board, password: string) {
+    return this.serviceBase.call(this.serviceBase.Constants.Put, this.accessPointUrl + '/' + payload.id,
+      this.serviceBase.generateHeaders(password), payload);
+  }
 
   public authorize(id: number, password: string) {
     return this.serviceBase.call(this.serviceBase.Constants.Post, 
@@ -44,5 +45,12 @@ export class Board {
   public id: number;
   public cardCollection: Array<CardCollection>;
   public password: string;
-  constructor(public title: string) { }
+  constructor(public title?: string) { }
+
+  public clone(b: Board){
+    this.id = b.id;
+    this.cardCollection = b.cardCollection;
+    this.title = b.title;
+    this.password = undefined;
+  }
 }

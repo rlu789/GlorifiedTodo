@@ -23,6 +23,8 @@ import { FocusDirective } from './Directives/focus.directive';
 import { EditCardModalComponent } from './Modals/edit-card-modal/edit-card-modal.component';
 import { CustomButtonComponent } from './Custom/custom-button/custom-button.component';
 import { CustomAlertComponent } from './Custom/custom-alert/custom-alert.component';
+import { CustomHeadingComponent } from './Custom/custom-heading/custom-heading.component';
+import { EditBoardModalComponent } from './Modals/edit-board-modal/edit-board-modal.component';
 
 const appRoutes: Routes = [
   {
@@ -45,6 +47,8 @@ const appRoutes: Routes = [
     EditCardModalComponent,
     CustomButtonComponent,
     CustomAlertComponent,
+    CustomHeadingComponent,
+    EditBoardModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +76,8 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent],
   entryComponents: [
     ConfirmModalComponent,
-    EditCardModalComponent
+    EditCardModalComponent,
+    EditBoardModalComponent
   ],
 })
 export class AppModule { }

@@ -13,10 +13,8 @@ export class EditCardModalComponent implements OnInit {
   tempCard: Card;
   password: string;
 
-  constructor(
-    public dialogRef: MatDialogRef<EditCardModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { card: Card, password: string }, public cardsService: CardsService,
-    public snackBar: MatSnackBar) {
+  constructor(public dialogRef: MatDialogRef<EditCardModalComponent>, @Inject(MAT_DIALOG_DATA) public data: { card: Card, password: string }, 
+      public cardsService: CardsService, public snackBar: MatSnackBar) {
     // console.log(data.card);
     this.tempCard = new Card(data.card.title, data.card.description, data.card.cardCollectionId);
     this.tempCard.id = data.card.id;

@@ -5,6 +5,9 @@ import { BoardsService, Board } from '../../Services/boards.service';
 import { HttpErrorResponse } from "@angular/common/http";
 import { MatSnackBar } from '@angular/material';
 
+import { MatDialog } from '@angular/material';
+import { EditBoardModalComponent } from '../../Modals/edit-board-modal/edit-board-modal.component';
+
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -13,32 +16,43 @@ import { MatSnackBar } from '@angular/material';
 export class BoardComponent implements OnInit {
   loading = true;
   boardId: number;
-  boardTitle: string;
+  board: Board;
 
   editable: boolean;
   password: string;
 
-  collectionData: Array<CardCollection>;
   collectionTitle: string;
 
   constructor(private cardCollectionsService: CardCollectionsService, public snackBar: MatSnackBar, private route: ActivatedRoute,
-    private boardsService: BoardsService) {
+    private boardsService: BoardsService, public dialog: MatDialog) {
     this.route.params.subscribe(params => {
       this.boardId = params.id;
     });
 
     boardsService.getSingle(this.boardId).subscribe((data: Board) => {
-      this.collectionData = data.cardCollection;
-      this.boardTitle = data.title;
+      this.board = data;
       this.editable = data.password === "Y" ? false : true;
-      // console.log(this.collectionData);
       this.loading = false;
+    });
+  }
+
+  editBoard() {
+    const dialogRef = this.dialog.open(EditBoardModalComponent, {
+      width: '500px',
+      data: { board: this.board, password: this.password }
+    });
+
+    dialogRef.afterClosed().subscribe((data: { board: Board, password: string} | undefined) => {
+      if (data) {
+        this.board.title = data.board.title;
+        if (data.password) this.password = data.password;
+      }
     });
   }
 
   addCollection($event) {
     this.cardCollectionsService.add(new CardCollection(this.collectionTitle, this.boardId, []), this.password).subscribe((data: any) => {
-      this.collectionData.push(data);
+      this.board.cardCollection.push(data);
       $event.complete();
       // console.log(data);
     }, (err: HttpErrorResponse) => {
@@ -58,7 +72,7 @@ export class BoardComponent implements OnInit {
   }
 
   openSnackBar(message: string) {
-    this.snackBar.open(message, 'Close');
+    this.snackBar.open(message, 'Close', { duration: 1500 });
   }
 
   ngOnInit() {

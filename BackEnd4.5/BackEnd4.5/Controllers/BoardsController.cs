@@ -10,6 +10,7 @@ using BackEnd4._5.Models;
 using System.Threading.Tasks;
 using System.Web.Http.Cors;
 using System.Data.SQLite;
+using BackEnd4._5.Handlers;
 
 namespace BackEnd4._5.Controllers
 {
@@ -62,7 +63,32 @@ namespace BackEnd4._5.Controllers
 
             return Ok(board);
         }
-        
+
+
+        // PUT api/values/5
+        public IHttpActionResult Put(int id, [FromBody]Board board)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var b = _context.Boards.FirstOrDefault(i => i.Id == id);
+
+            if (b == null)
+            {
+                return NotFound();
+            }
+            
+            if (!AuthorizationHandler.PasswordMatched(b.Password, Request)) return Unauthorized();
+
+            b.Title = board.Title;
+            if (board.Password != null && board.Password.Length > 0) b.Password = board.Password;
+            _context.SaveChanges();
+            b.PasswordConvert();
+            return Ok(b);
+        }
+
 
         // DELETE api/values/5
         public IHttpActionResult Delete(int id)
