@@ -4,9 +4,7 @@
   <p>Are you sure you want to continue?</p>
   <div *ngIf="passwordProtected">
     <p>If you are certain please enter the password for this board</p>
-    <mat-form-field>
-      <input matInput placeholder="Password" [(ngModel)]="password" type="password">
-    </mat-form-field>
+    <app-custom-text [type]="'password'" [placeholder]="'Password'" [(fld)]="password"></app-custom-text>
   </div>
 </div>
 <div mat-dialog-actions>

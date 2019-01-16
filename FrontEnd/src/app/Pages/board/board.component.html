@@ -5,16 +5,12 @@
   <app-card-collection [collectionData]='board.cardCollection' [editable]='editable' [password]='password'></app-card-collection>
 
   <div *ngIf="editable">
-    <mat-form-field>
-      <input matInput placeholder="Collection Title" [(ngModel)]="collectionTitle" (keyup.enter)="addCollection()">
-    </mat-form-field>
+    <app-custom-text [placeholder]="'Collection Title'" [(fld)]="collectionTitle" (onEnterFunc)="addCollection()"></app-custom-text>
     <br />
     <app-custom-button [color]="'primary'" [text]="'Add List'" (clickFunc)='addCollection($event)'></app-custom-button>
   </div>
   <div *ngIf="!editable">
-    <mat-form-field>
-      <input matInput type='password' placeholder="Password" [(ngModel)]="password" (keyup.enter)="unlock()">
-    </mat-form-field>
+    <app-custom-text [type]="'password'" [placeholder]="'Password'" [(fld)]="password" (onEnterFunc)="unlock()"></app-custom-text>
     <br />
     <app-custom-button [color]="'primary'" [text]="'Unlock for Edit'" (clickFunc)='unlock($event)'></app-custom-button>
     <app-custom-alert [type]="'i'" [title]="'Password Required'">

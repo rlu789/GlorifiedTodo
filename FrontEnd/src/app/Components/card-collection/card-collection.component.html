@@ -42,9 +42,7 @@
               Edit
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <mat-form-field class="mat-form-field-width">
-            <input matInput placeholder="Card Title" [(ngModel)]="cardTitle">
-          </mat-form-field>
+          <app-custom-text [fullWidth]="true" [placeholder]="'Card Title'" [(fld)]="cardTitle"></app-custom-text>
           <mat-form-field class="mat-form-field-width">
             <textarea matInput placeholder="Card Desc" [(ngModel)]="cardDesc"></textarea>
           </mat-form-field>

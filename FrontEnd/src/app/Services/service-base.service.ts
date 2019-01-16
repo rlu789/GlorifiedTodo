@@ -19,7 +19,7 @@ export class ServiceBaseService {
 
   public call(callType: number, url: string, reqHeaders: HttpHeaders, payload?: {} | [any]): Observable<any> {
     var observableToReturn = new Observable(observableToReturn => {
-      var call;
+      var call: Observable<any>;
       switch (callType) {
         case 0:
           call = this.http.get(url, { headers: reqHeaders });
@@ -67,7 +67,7 @@ export class ServiceBaseService {
   }
 
   private openSnackBar(message: string) {
-    this.snackBar.open(message, 'Close', { duration: 2500});
+    this.snackBar.open(message, 'Close');
   }
 
   public generateHeaders(password?: string): HttpHeaders {

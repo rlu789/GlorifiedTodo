@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   matchValidator(strToMatch: FormControl): ValidatorFn { // TODO move to common location
     return (control: AbstractControl): { [key: string]: string } | null => {
       if (strToMatch.value && control.value !== strToMatch.value) {
-        return { 'match': 'match' };
+        return { 'match': 'Passwords don\'t match' };
       }
     };
   }

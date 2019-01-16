@@ -6,9 +6,7 @@
     </mat-form-field>
   </div>
   <div *ngIf="!password">
-    <mat-form-field class="mat-form-field-width">
-      <input matInput type="password" placeholder="Board Password (Optional)" [(ngModel)]="tempBoard.password">
-    </mat-form-field>
+    <app-custom-text [type]="'password'" [placeholder]="'Board Password (Optional)'" [(fld)]="tempBoard.password" [fullWidth]="true"></app-custom-text>
   </div>
 </div>
 <div mat-dialog-actions>

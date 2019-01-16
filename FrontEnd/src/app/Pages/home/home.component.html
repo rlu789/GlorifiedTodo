@@ -11,21 +11,13 @@
     <div class='board-tile-title'><span>{{board.title}}</span></div>
   </div>
   <div>
-    <mat-form-field>
-      <input matInput placeholder="Board Title" [(ngModel)]="boardTitle" (keyup.enter)="addBoard($event)">
-    </mat-form-field>
+    <app-custom-text [placeholder]="'Board Title'" [(fld)]="boardTitle" (onEnterFunc)="addBoard($event)"></app-custom-text>
     <br />
-    <mat-form-field>
-      <input matInput type="password" placeholder="Board Password (Optional)" [formControl]="boardPassword" (keyup.enter)="addBoard($event)">
-    </mat-form-field>
+    <!-- TODO get rid of the break shit  -->
+    <app-custom-text [type]="'password'" [placeholder]="'Board Password (Optional)'" [(fld)]="boardPassword" (onEnterFunc)="addBoard($event)"></app-custom-text>
     <br />
-    <mat-form-field class="expand" [class.expanded]="boardPassword.value">
-      <input matInput type="password" placeholder="Repeat Board Password" [formControl]="boardPasswordRepeat" (keyup.enter)="addBoard($event)"
-        [attr.tabindex]="boardPassword.value ? 0 : -1"
-        appFocus
-        [(focus)]="boardPasswordRepeatFocus">
-      <mat-error *ngIf="boardPasswordRepeat.errors && boardPasswordRepeat.errors.match">Passwords don't match</mat-error>
-    </mat-form-field>
+    <app-custom-text [type]="'password'" [placeholder]="'Repeat Board Password'" [(fld)]="boardPasswordRepeat" (onEnterFunc)="addBoard($event)"
+      [visible]="boardPassword.value" [(focusTrigger)]="boardPasswordRepeatFocus"></app-custom-text>
     <br />
     <br />
     <app-custom-button [color]="'primary'" [text]="'Add Board'" (clickFunc)='addBoard($event)'></app-custom-button>

@@ -13,8 +13,16 @@ h3 {
     display: inline;
     bottom: 2px;
     position: relative;
+    cursor: pointer;
+    transition: all .25s;
+    -webkit-transition: color .25s;
+    -ms-transition: color .25s;
+    color: #212529;
 }
 
-.icon-button{
-    cursor: pointer;
+.icon-container:hover{
+  transition: all .25s;
+  -webkit-transition: color .25s;
+  -ms-transition: color .25s;
+  color: #ffd740;
 }

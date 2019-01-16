@@ -25,6 +25,7 @@ export class FocusDirective implements OnChanges {
   @HostListener("blur", ["$event.target"])
   onBlur() {
     this.focus = false;
+    this.focusChange.emit(this.focus);
   }
 
   ngOnChanges() {

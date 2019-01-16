@@ -1,0 +1,5 @@
+<mat-form-field [class.mat-form-field-width]="fullWidth" class="expand" [class.expanded]="visible">
+  <input matInput [placeholder]="placeholder" [formControl]="_fld" (keyup.enter)="enterKeyUp()" (keyup)="update()"
+    [attr.tabindex]="visible ? 0 : -1" appFocus [(focus)]="focusTrigger" [attr.type]="type">
+  <mat-error *ngIf="_fld.errors">{{errMsg}}</mat-error>
+</mat-form-field>

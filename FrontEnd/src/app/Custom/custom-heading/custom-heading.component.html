@@ -1,6 +1,5 @@
 <h3 [class.heading-underline]="underline">
   {{title}}
-  <div *ngIf="icon" class="icon-container">
-    <span [ngClass]=icon class="icon-button" tabindex="0" (click)="click()" (keydown.enter)="click()"></span>
+  <div *ngIf="icon" class="icon-container" [ngClass]=icon tabindex="0" (click)="click()" (keydown.enter)="click()">
   </div>
 </h3>
