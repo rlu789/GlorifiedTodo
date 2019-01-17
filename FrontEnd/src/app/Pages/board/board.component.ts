@@ -42,7 +42,7 @@ export class BoardComponent implements OnInit {
       data: { board: this.board, password: this.password }
     });
 
-    dialogRef.afterClosed().subscribe((data: { board: Board, password: string} | undefined) => {
+    dialogRef.afterClosed().subscribe((data: { board: Board, password: string } | undefined) => {
       if (data) {
         this.board.title = data.board.title;
         if (data.password) this.password = data.password;

@@ -1,17 +1,9 @@
 <h1 mat-dialog-title>Edit Board</h1>
 <div mat-dialog-content>
-  <div>
-    <mat-form-field class="mat-form-field-width">
-      <input matInput placeholder="Board Title" [(ngModel)]="tempBoard.title">
-    </mat-form-field>
-  </div>
-  <div *ngIf="!boardCurrentPassword">
-    <app-custom-text [type]="'password'" [placeholder]="'Board Password (Optional)'" [(fld)]="passwordCtrl"
-      [fullWidth]="true"></app-custom-text>
-
-    <app-custom-text [type]="'password'" [placeholder]="'Repeat Board Password'" [(fld)]="passwordCtrlRepeat"
-      [fullWidth]="true" [visible]="passwordCtrl.value"></app-custom-text>
-  </div>
+  <app-custom-text [placeholder]="'Board Title'" [(fld)]="title" [fullWidth]="true"></app-custom-text>
+  <app-custom-text [type]="'password'" [placeholder]="(boardCurrentPassword ? 'Update' : 'Add') + ' Board Password (Optional)'" [(fld)]="passwordCtrl" [fullWidth]="true"></app-custom-text>
+  <app-custom-text [type]="'password'" [placeholder]="'Repeat Board Password'" [(fld)]="passwordCtrlRepeat" [fullWidth]="true"
+    [visible]="passwordCtrl.value"></app-custom-text>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
