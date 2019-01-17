@@ -49,7 +49,7 @@ export class Board {
 
   public clone(b: Board){
     this.id = b.id;
-    this.cardCollection = b.cardCollection;
+    // this.cardCollection = b.cardCollection; currently not used by board api post methods
     this.title = b.title;
     this.password = undefined;
   }

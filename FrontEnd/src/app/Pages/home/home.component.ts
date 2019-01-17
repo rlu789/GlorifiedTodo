@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { Board, BoardsService } from '../../Services/boards.service';
 import { HttpErrorResponse } from "@angular/common/http";
 import { ConfirmModalComponent } from '../../Modals/confirm-modal/confirm-modal.component';
-import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
+import * as CustomValidators from '../../Custom/Validators';
 
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -17,16 +18,8 @@ export class HomeComponent implements OnInit {
   boardData: Array<Board>;
   boardTitle: string;
   boardPassword = new FormControl('');
-  boardPasswordRepeat = new FormControl('', [this.matchValidator(this.boardPassword)]);
+  boardPasswordRepeat = new FormControl('', [CustomValidators.matchValidator(this.boardPassword)]);
   boardPasswordRepeatFocus = false;
-
-  matchValidator(strToMatch: FormControl): ValidatorFn { // TODO move to common location
-    return (control: AbstractControl): { [key: string]: string } | null => {
-      if (strToMatch.value && control.value !== strToMatch.value) {
-        return { 'match': 'Passwords don\'t match' };
-      }
-    };
-  }
 
   constructor(private boardsService: BoardsService, public snackBar: MatSnackBar, private router: Router,
     public dialog: MatDialog) {

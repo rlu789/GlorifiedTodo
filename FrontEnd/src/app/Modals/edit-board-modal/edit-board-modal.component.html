@@ -5,8 +5,12 @@
       <input matInput placeholder="Board Title" [(ngModel)]="tempBoard.title">
     </mat-form-field>
   </div>
-  <div *ngIf="!password">
-    <app-custom-text [type]="'password'" [placeholder]="'Board Password (Optional)'" [(fld)]="tempBoard.password" [fullWidth]="true"></app-custom-text>
+  <div *ngIf="!boardCurrentPassword">
+    <app-custom-text [type]="'password'" [placeholder]="'Board Password (Optional)'" [(fld)]="passwordCtrl"
+      [fullWidth]="true"></app-custom-text>
+
+    <app-custom-text [type]="'password'" [placeholder]="'Repeat Board Password'" [(fld)]="passwordCtrlRepeat"
+      [fullWidth]="true" [visible]="passwordCtrl.value" [(focusTrigger)]="passwordCtrlRepeatFocus"></app-custom-text>
   </div>
 </div>
 <div mat-dialog-actions>
