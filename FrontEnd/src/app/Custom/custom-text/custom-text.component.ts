@@ -15,6 +15,7 @@ export class CustomTextComponent implements OnInit {
   @Input('placeholder') placeholder: string;
   @Input('type') type: string = 'text';
   @Input('fullWidth') fullWidth: boolean;
+  @Input('textArea') textArea: boolean = false;
 
   @Output()
   fldChange = new EventEmitter<FormControl | number | string>();
