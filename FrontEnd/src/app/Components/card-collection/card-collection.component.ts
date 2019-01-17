@@ -42,7 +42,8 @@ export class CardCollectionComponent implements OnInit {
 
   deleteCol($event, i: number) {
     const dialogRef = this.dialog.open(ConfirmModalComponent, {
-      width: '500px'
+      width: '500px',
+      restoreFocus: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

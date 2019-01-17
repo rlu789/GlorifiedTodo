@@ -1,9 +1,9 @@
 <mat-form-field [class.mat-form-field-width]="fullWidth" class="expand" [class.expanded]="visible">
-  <input *ngIf="!textArea" matInput [placeholder]="placeholder" [formControl]="_fld" (keyup.enter)="enterKeyUp()" (keyup)="update()"
+  <input *ngIf="!textArea" matInput [placeholder]="placeholder" [formControl]="control" (keyup.enter)="enterKeyUp()" (keyup)="update()"
     [attr.tabindex]="visible ? 0 : -1" appFocus [(focus)]="focusTrigger" [attr.type]="type">
-  <mat-error *ngIf="_fld.errors">{{errMsg}}</mat-error>
+  <mat-error *ngIf="control.errors">{{errMsg}}</mat-error>
   
   <!-- TODO maybe move this to new component -->
-  <textarea *ngIf="textArea" matInput [placeholder]="placeholder" [formControl]="_fld" (keyup.enter)="enterKeyUp()" (keyup)="update()"
+  <textarea *ngIf="textArea" matInput [placeholder]="placeholder" [formControl]="control" (keyup.enter)="enterKeyUp()" (keyup)="update()"
     [attr.tabindex]="visible ? 0 : -1" appFocus [(focus)]="focusTrigger"></textarea>
 </mat-form-field>

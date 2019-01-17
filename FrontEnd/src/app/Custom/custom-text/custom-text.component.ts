@@ -7,8 +7,8 @@ import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from
   styleUrls: ['./custom-text.component.css']
 })
 export class CustomTextComponent implements OnInit {
-  private _fld: FormControl;
-  private originalFld: FormControl | number | string;
+  private control: FormControl;
+  private isRawValue: boolean = false;
   private focusValue: boolean;
   private errMsg: string;
 
@@ -21,22 +21,22 @@ export class CustomTextComponent implements OnInit {
   fldChange = new EventEmitter<FormControl | number | string>();
   @Input()
   get fld() {
-    return this._fld;
+    return this.control;
   }
   set fld(fld: FormControl | number | string) {
-    this.originalFld = fld;
-    if (this.originalFld instanceof FormControl) {
-      this._fld = this.originalFld;
+    if (fld instanceof FormControl) {
+      this.control = fld;
     }
     else {
-      this._fld = new FormControl(this.originalFld);
+      this.control = new FormControl(fld);
+      this.isRawValue = true;
     }
 
-    this._fld.valueChanges.subscribe(() => {
-      if (this._fld.errors) {
+    this.control.valueChanges.subscribe(() => {
+      if (this.control.errors) {
         var errors = [];
-        Object.keys(this._fld.errors).forEach((key) => {
-          errors.push(this._fld.errors[key]);
+        Object.keys(this.control.errors).forEach((key) => {
+          errors.push(this.control.errors[key]);
         });
         this.errMsg = errors.join(", ");
       }
@@ -67,8 +67,8 @@ export class CustomTextComponent implements OnInit {
   }
 
   update() {
-    if (!(this.originalFld instanceof FormControl)) { // on change, emit raw value back up to parent
-      this.fldChange.emit(this._fld.value);
+    if (this.isRawValue) { // on change, emit raw value back up to parent
+      this.fldChange.emit(this.control.value);
     }
   }
 }
