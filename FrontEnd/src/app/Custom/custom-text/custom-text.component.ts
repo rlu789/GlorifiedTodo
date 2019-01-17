@@ -38,7 +38,8 @@ export class CustomTextComponent implements OnInit {
       if (this.control.errors) {
         var errors = [];
         Object.keys(this.control.errors).forEach((key) => {
-          errors.push(this.control.errors[key]);
+          if (key === "required") errors.push("This field is required");
+          else errors.push(this.control.errors[key]);
         });
         this.errMsg = errors.join(", ");
       }

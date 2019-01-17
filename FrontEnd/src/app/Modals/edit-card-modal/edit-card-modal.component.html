@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Edit Card</h1>
 <div mat-dialog-content>
-  <app-custom-text [fullWidth]="true" [placeholder]="'Card Title'" [(fld)]="tempCard.title"></app-custom-text>
-  <app-custom-text [textArea]="true" [fullWidth]="true" [placeholder]="'Card Description'" [(fld)]="tempCard.description"></app-custom-text>
+  <app-custom-text [fullWidth]="true" [placeholder]="'Card Title'" [(fld)]="title"></app-custom-text>
+  <app-custom-text [textArea]="true" [fullWidth]="true" [placeholder]="'Card Description'" [(fld)]="description"></app-custom-text>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>

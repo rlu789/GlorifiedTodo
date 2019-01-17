@@ -1,4 +1,4 @@
-import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn, AbstractControlOptions, AsyncValidatorFn} from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn, AbstractControlOptions, AsyncValidatorFn } from '@angular/forms';
 
 export class CustomValidators {
     public static matchValidator(strToMatch: FormControl): ValidatorFn {
@@ -10,11 +10,40 @@ export class CustomValidators {
     };
 }
 
-export class CustomFormControl extends FormControl{
+export class CustomFormControl extends FormControl {
     public hasFocus: boolean = false;
 
-    constructor(formState?: any, validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null, asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null){
+    constructor(formState?: any, validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null, asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null) {
         super(formState, validatorOrOpts, asyncValidator);
     }
+}
 
+export class CustomFormGroup extends FormGroup {
+    private ctrls: CustomFormControl[] = [];
+
+    constructor(controls: {
+        [key: string]: CustomFormControl;
+    }, validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null, asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null) {
+        super(controls, validatorOrOpts, asyncValidator);
+        Object.keys(controls).forEach((c) => {
+            this.ctrls.push(controls[c]);
+        });
+    }
+    /**
+        * Calls `updateValueAndValidity` and checks if any `FormControl` is invalid.
+        * If invalid, focus is applied to the first invalid field.
+        * Returns true if form is valid
+        */
+    public formSubmittable(): boolean {
+        this.updateValueAndValidity();
+        if (this.invalid) {
+            for (let i in this.ctrls) {
+                if (this.ctrls[i].invalid) {
+                    this.ctrls[i].hasFocus = true;
+                    break;
+                }
+            }
+        }
+        return this.valid;
+    }
 }
