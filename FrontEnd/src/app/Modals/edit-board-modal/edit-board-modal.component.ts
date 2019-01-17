@@ -3,8 +3,7 @@ import { Board, BoardsService } from '../../Services/boards.service';
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormControl } from '@angular/forms';
-import * as CustomValidators from '../../Custom/Validators';
+import { CustomValidators, CustomFormControl } from '../../Custom/Base';
 
 @Component({
   selector: 'app-edit-board-modal',
@@ -14,9 +13,8 @@ import * as CustomValidators from '../../Custom/Validators';
 export class EditBoardModalComponent implements OnInit {
   tempBoard: Board;
   boardCurrentPassword: string;
-  passwordCtrl = new FormControl('');
-  passwordCtrlRepeat = new FormControl('', CustomValidators.matchValidator(this.passwordCtrl));
-  passwordCtrlRepeatFocus: boolean = false;
+  passwordCtrl = new CustomFormControl('');
+  passwordCtrlRepeat = new CustomFormControl('', CustomValidators.matchValidator(this.passwordCtrl));
 
   constructor(public dialogRef: MatDialogRef<EditBoardModalComponent>, private boardsService: BoardsService,
     @Inject(MAT_DIALOG_DATA) public data: { board: Board, password: string }) {
@@ -45,6 +43,6 @@ export class EditBoardModalComponent implements OnInit {
         });
       });
     }
-    else this.passwordCtrlRepeatFocus = true;
+    else this.passwordCtrlRepeat.hasFocus = true;
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { CustomFormControl } from '../Base';
 
 @Component({
   selector: 'app-custom-text',
@@ -7,7 +8,8 @@ import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from
   styleUrls: ['./custom-text.component.css']
 })
 export class CustomTextComponent implements OnInit {
-  private control: FormControl;
+  // todo phase out vanilla formcontrol is no longer used
+  private control: CustomFormControl | FormControl;
   private isRawValue: boolean = false;
   private focusValue: boolean;
   private errMsg: string;
@@ -18,12 +20,12 @@ export class CustomTextComponent implements OnInit {
   @Input('textArea') textArea: boolean = false;
 
   @Output()
-  fldChange = new EventEmitter<FormControl | number | string>();
+  fldChange = new EventEmitter<number | string>();
   @Input()
   get fld() {
     return this.control;
   }
-  set fld(fld: FormControl | number | string) {
+  set fld(fld: CustomFormControl | FormControl | number | string) {
     if (fld instanceof FormControl) {
       this.control = fld;
     }
@@ -43,16 +45,6 @@ export class CustomTextComponent implements OnInit {
     });
   }
   @Input('visible') visible: boolean = true;
-
-  @Output() focusTriggerChange = new EventEmitter();
-  @Input()
-  get focusTrigger() {
-    return this.focusValue;
-  }
-  set focusTrigger(val: boolean) {
-    this.focusValue = val;
-    this.focusTriggerChange.emit(val);
-  }
 
   @Output('onEnterFunc') onEnterFunc = new EventEmitter();
 

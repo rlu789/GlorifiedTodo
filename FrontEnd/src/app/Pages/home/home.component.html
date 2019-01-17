@@ -17,7 +17,7 @@
     <app-custom-text [type]="'password'" [placeholder]="'Board Password (Optional)'" [(fld)]="boardPassword" (onEnterFunc)="addBoard($event)"></app-custom-text>
     <br />
     <app-custom-text [type]="'password'" [placeholder]="'Repeat Board Password'" [(fld)]="boardPasswordRepeat" (onEnterFunc)="addBoard($event)"
-      [visible]="boardPassword.value" [(focusTrigger)]="boardPasswordRepeatFocus"></app-custom-text>
+      [visible]="boardPassword.value"></app-custom-text>
     <br />
     <br />
     <app-custom-button [color]="'primary'" [text]="'Add Board'" (clickFunc)='addBoard($event)'></app-custom-button>
