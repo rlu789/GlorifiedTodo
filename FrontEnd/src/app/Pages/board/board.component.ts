@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material';
 
 import { MatDialog } from '@angular/material';
 import { EditBoardModalComponent } from '../../Modals/edit-board-modal/edit-board-modal.component';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-board',
@@ -73,6 +74,33 @@ export class BoardComponent implements OnInit {
 
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Close', { duration: 1500 });
+  }
+
+  exportToExcel($event) {
+    var b = this.board;
+    console.log(b);
+
+    var ws = XLSX.utils.aoa_to_sheet([[b.title]]);
+    var col = 0;
+    var row = 1;
+    b.cardCollection.forEach(collection => {
+      XLSX.utils.sheet_add_aoa(ws, [[collection.title]], { origin: { r: row, c: col } });
+      var cardCells = [];
+      collection.card.forEach((card) => {
+        cardCells.push([card.title, card.description]);
+      });
+      XLSX.utils.sheet_add_aoa(ws, cardCells, { origin: { r: row + 1, c: col } });
+      col += 2;
+    });
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, 'test.xlsx');
+
+    $event.complete();
   }
 
   ngOnInit() {
