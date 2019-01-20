@@ -242,7 +242,13 @@ img {
 
 .img-card {
   display: block;
-  width: calc(100% + 20px);
+  width: calc(100% + 32px);
+  position: relative;
+  right: 16px;
+  bottom: 16px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-bottom: 0px;
 }
 
 .img-add {
