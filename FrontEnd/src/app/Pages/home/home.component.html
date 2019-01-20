@@ -5,7 +5,8 @@
     <div class="board-tile" (click)='viewBoard(i)' (keydown.enter)='viewBoard(i)' tabindex="0">
       <div class="sub">
       </div>
-      <button type="button" class="board-tile-button fas fa-times" (click)='deleteBoard(i)' (keydown.enter)='deleteBoard(i)' appClickStopPropagation>
+      <button type="button" class="board-tile-button fas fa-times" (click)='deleteBoard(i)' (keydown.enter)='deleteBoard(i)'
+        appClickStopPropagation>
       </button>
     </div>
     <div class='board-tile-title'><span>{{board.title}}</span></div>
@@ -14,10 +15,11 @@
     <app-custom-text [placeholder]="'Board Title'" [(fld)]="boardTitle" (onEnterFunc)="addBoard($event)"></app-custom-text>
     <br />
     <!-- TODO get rid of the break shit  -->
-    <app-custom-text [type]="'password'" [placeholder]="'Board Password (Optional)'" [(fld)]="boardPassword" (onEnterFunc)="addBoard($event)"></app-custom-text>
+    <app-custom-text [type]="'password'" [placeholder]="'Board Password (Optional)'" [(fld)]="boardPassword"
+      (onEnterFunc)="addBoard($event)"></app-custom-text>
     <br />
-    <app-custom-text [type]="'password'" [placeholder]="'Repeat Board Password'" [(fld)]="boardPasswordRepeat" (onEnterFunc)="addBoard($event)"
-      [visible]="boardPassword.value"></app-custom-text>
+    <app-custom-text [type]="'password'" [placeholder]="'Repeat Board Password'" [(fld)]="boardPasswordRepeat"
+      (onEnterFunc)="addBoard($event)" [visible]="boardPassword.value"></app-custom-text>
     <br />
     <br />
     <app-custom-button [color]="'primary'" [text]="'Add Board'" (clickFunc)='addBoard($event)'></app-custom-button>
@@ -25,4 +27,5 @@
       <p>Adding a password is completely optional but will prevent unknown users from editing a board</p>
     </app-custom-alert>
   </div>
+  <!-- <img /> -->
 </div>

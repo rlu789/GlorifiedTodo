@@ -21,6 +21,8 @@ namespace BackEnd4._5.Models
         [Required]
         public int CardCollectionId { get; set; }
 
+        public string ImgData { get; set; }
+
         //public CardCollection CardCollection { get; set; }
     }
 }

@@ -74,12 +74,28 @@ namespace BackEnd4._5
             ); ";
             sqlite_cmd.ExecuteNonQuery();
 
+            //sqlite_cmd.CommandText = @"CREATE TABLE IF NOT EXISTS [Image] (
+            //    [Id]               INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            //    [Data]            BLOB NOT NULL,
+            //    [CardId] INT            NOT NULL,
+            //    FOREIGN KEY (CardId) REFERENCES Card(Id) ON DELETE CASCADE
+            //); ";
+            //sqlite_cmd.ExecuteNonQuery();
+
             // altering tables
             // done in try catch because ColumnExistsInTable function breaks program with database commit errors
             try
             {
                 sqlite_cmd.CommandText = @"ALTER TABLE Board
                     ADD [Password] NVARCHAR (100);";
+                sqlite_cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException e) { }
+
+            try
+            {
+                sqlite_cmd.CommandText = @"ALTER TABLE Card
+                    ADD [ImgData] BLOB;";
                 sqlite_cmd.ExecuteNonQuery();
             }
             catch (SQLiteException e) { }

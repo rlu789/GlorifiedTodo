@@ -5,12 +5,14 @@
     <header>{{col.title}}</header>
     <ul>
       <div *ngFor="let card of col.card; index as cardIndex">
-        <mat-card *ngIf="editable" (click)="editCard(i, cardIndex)" (keydown.enter)="editCard(i, cardIndex)" class='mat-card-editable' tabindex="0">
-          <button type="button" class="close" (click)='deleteCard(i, cardIndex)' appClickStopPropagation>
+        <mat-card *ngIf="editable" (click)="editCard(i, cardIndex)" (keydown.enter)="editCard(i, cardIndex)" class='mat-card-editable'
+          tabindex="0">
+          <button type="button" class="close card-close" (click)='deleteCard(i, cardIndex)' appClickStopPropagation>
             <span>&times;</span>
           </button>
           <mat-card-header>
             <mat-card-title>
+              <img *ngIf="card.imgData" [src]="card.imgData">
               {{card.title}}
             </mat-card-title>
           </mat-card-header>
@@ -23,6 +25,7 @@
         <mat-card *ngIf="!editable" tabindex="0">
           <mat-card-header>
             <mat-card-title>
+              <img *ngIf="card.imgData" [src]="card.imgData">
               {{card.title}}
             </mat-card-title>
           </mat-card-header>
@@ -44,9 +47,16 @@
           </mat-expansion-panel-header>
           <app-custom-text [fullWidth]="true" [placeholder]="'Card Title'" [(fld)]="cardTitle"></app-custom-text>
           <app-custom-text [textArea]="true" [fullWidth]="true" [placeholder]="'Card Desc'" [(fld)]="cardDesc"></app-custom-text>
+
+          <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+          <button mat-raised-button (click)="fileInput.click()">Select Image File</button> <br />
+          <img style="height: 300px; width: 233px;" *ngIf="imgData" [src]="imgData" />
+          <br />
+
           <div class="form-actions">
             <app-custom-button [color]="'primary'" [text]="'Add Card'" (clickFunc)='addCard($event, i, col.id)'></app-custom-button>
             <app-custom-button [color]="'warn'" [text]="'Delete List'" (clickFunc)='deleteCol($event, i)' [floatRight]="true"></app-custom-button>
+
           </div>
         </mat-expansion-panel>
       </mat-accordion>

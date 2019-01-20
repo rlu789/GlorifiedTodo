@@ -34,7 +34,8 @@ export class CardsService {
 }
 
 export class Card {
-  public id: number
+  public id: number;
+  public imgData: string;
   constructor(public title?: string, public description?: string, public cardCollectionId?: number) { }
 
   public clone(c: Card) {
@@ -42,5 +43,6 @@ export class Card {
     this.title = c.title;
     this.description = c.description;
     this.cardCollectionId = c.cardCollectionId;
+    this.imgData = c.imgData;
   }
 }

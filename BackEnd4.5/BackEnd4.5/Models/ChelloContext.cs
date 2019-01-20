@@ -28,5 +28,6 @@ namespace BackEnd4._5.Context
         public DbSet<Board> Boards { get; set; }
         public DbSet<CardCollection> CardCollections { get; set; }
         public DbSet<Card> Cards { get; set; }
+        //public DbSet<Image> Images { get; set; }
     }
 }

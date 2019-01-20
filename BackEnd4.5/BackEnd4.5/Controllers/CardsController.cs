@@ -73,8 +73,10 @@ namespace BackEnd4._5.Controllers
             if (!AuthorizationHandler.PasswordMatched(board.Password, Request)) return Unauthorized();
 
             c.Title = card.Title;
+            c.ImgData = card.ImgData;
             c.Description = card.Description;
             c.CardCollectionId = card.CardCollectionId;
+
             _context.SaveChanges();
             return Ok(card);
         }
