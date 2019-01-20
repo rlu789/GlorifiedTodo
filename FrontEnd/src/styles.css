@@ -84,6 +84,11 @@
   width: 100%;
 }
 
+.mat-dialog-content {
+  /* fix for vert scroll appearing when everything still in column */
+  line-height: 1;
+}
+
 /* -- End -- */
 
 /* Loading spinner */
@@ -178,6 +183,9 @@ body {
 .list {
   width: 315px;
   height: calc(100% - 10px - 17px);
+
+  /* fix for vert scroll appearing when everything still in column */
+  line-height: 1;
 }
 
 .list>* {
