@@ -58,13 +58,13 @@ export class HomeComponent implements OnInit {
     this.boardPasswordRepeat.markAsTouched();
     if (this.boardPasswordRepeat.valid) {
       var board = new Board(this.boardTitle);
-      this.boardTitle = '';
 
       if (this.boardPassword.value) {
         board.password = this.boardPassword.value;
-        this.boardPassword.setValue('');
       }
       this.boardsService.add(board).subscribe((data: any) => {
+        this.boardTitle = '';
+        this.boardPassword.setValue('');
         this.boardData.push(data);
         $event.complete();
         // console.log(data);

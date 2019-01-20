@@ -246,11 +246,12 @@ img {
 }
 
 .img-add {
-  height: 300px;
-  width: 250px;
+  max-height: 300px;
+  max-width: 250px;
 }
 
 .img-edit {
-  width: calc(100% - 20px);
-  margin: 15px 15px 30px 15px;
+  margin-bottom: 20px;
+  max-width: calc(100% - 0px);
+  max-height: 600px;
 }
