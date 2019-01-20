@@ -34,11 +34,7 @@
           </mat-expansion-panel-header>
           <app-custom-text [fullWidth]="true" [placeholder]="'Card Title'" [(fld)]="cardTitle"></app-custom-text>
           <app-custom-text [textArea]="true" [fullWidth]="true" [placeholder]="'Card Desc'" [(fld)]="cardDesc"></app-custom-text>
-
-          <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-          <button mat-raised-button (click)="fileInput.click()">Select Image</button> <br />
-          <img class="img-add" *ngIf="imgData" [src]="imgData" />
-          <br />
+          <app-custom-file [(imgData)]="imgData"></app-custom-file>
 
           <div class="form-actions">
             <app-custom-button [color]="'primary'" [text]="'Add Card'" (clickFunc)='addCard($event, i, col.id)'></app-custom-button>

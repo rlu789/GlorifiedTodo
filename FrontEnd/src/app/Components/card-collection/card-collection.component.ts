@@ -90,25 +90,4 @@ export class CardCollectionComponent implements OnInit {
       $event.complete();
     });
   }
-
-  onFileChanged(event) {
-    var self = this;
-    const blob = new Blob([event.target.files[0]], { type: "image/png" });
-
-    var r = new FileReader();
-    r.onload = function () {
-      console.log(r.result);
-      // document.querySelector('img').src = r.result as string;
-      // http://jsfiddle.net/poej7r6k/
-      self.imgData = r.result as string;
-    };
-    r.readAsDataURL(blob);
-
-    // console.log(blob);
-
-    // const imageUrl = URL.createObjectURL(blob);
-    // const img = document.querySelector('img');
-    // img.addEventListener('load', () => URL.revokeObjectURL(imageUrl));
-    // document.querySelector('img').src = imageUrl;
-  }
 }

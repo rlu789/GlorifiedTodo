@@ -26,6 +26,7 @@ import { CustomAlertComponent } from './Custom/custom-alert/custom-alert.compone
 import { CustomHeadingComponent } from './Custom/custom-heading/custom-heading.component';
 import { EditBoardModalComponent } from './Modals/edit-board-modal/edit-board-modal.component';
 import { CustomTextComponent } from './Custom/custom-text/custom-text.component';
+import { CustomFileComponent } from './Custom/custom-file/custom-file.component';
 
 const appRoutes: Routes = [
   {
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
     CustomHeadingComponent,
     EditBoardModalComponent,
     CustomTextComponent,
+    CustomFileComponent,
   ],
   imports: [
     BrowserModule,
