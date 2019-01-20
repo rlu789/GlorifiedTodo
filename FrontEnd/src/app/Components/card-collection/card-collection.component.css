@@ -22,13 +22,6 @@
     transition: 0.3s ease;
 }
 
-img{
-    display: block;
-    width: 247px;
-    border-radius: 4px;
-    margin: 10px 0;
-}
-
 .card-close{
     position: relative;
     left: 12px;

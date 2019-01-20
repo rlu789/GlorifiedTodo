@@ -32,10 +32,13 @@ export class CardCollectionComponent implements OnInit {
     var cardToBeEdited = this.collectionData[collectionIndex].card[cardIndex];
     // console.log(cardToBeEdited);
 
-    const dialogRef = this.dialog.open(EditCardModalComponent, {
-      width: '700px',
-      data: { card: cardToBeEdited, password: this.password }
-    });
+    var dialogConfig = {
+      width: '1000px',
+      height: undefined,
+      data: { card: cardToBeEdited, password: this.password, editable: this.editable }
+    }
+    if (cardToBeEdited.imgData) dialogConfig.height = '900px';
+    const dialogRef = this.dialog.open(EditCardModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((card: Card) => {
       if (card) this.collectionData[collectionIndex].card[cardIndex] = card;
     });
@@ -96,6 +99,7 @@ export class CardCollectionComponent implements OnInit {
     r.onload = function () {
       console.log(r.result);
       // document.querySelector('img').src = r.result as string;
+      // http://jsfiddle.net/poej7r6k/
       self.imgData = r.result as string;
     };
     r.readAsDataURL(blob);

@@ -112,11 +112,13 @@
 .expand {
   overflow: hidden;
 }
-.expand > * {
+
+.expand>* {
   margin-top: -100%;
   transition: all 0.4s;
 }
-.expand.expanded > * {
+
+.expand.expanded>* {
   margin-top: 0;
 }
 
@@ -174,7 +176,7 @@ body {
 }
 
 .list {
-  width: 300px;
+  width: 315px;
   height: calc(100% - 10px - 17px);
 }
 
@@ -232,3 +234,23 @@ body {
 /* .mat-card:hover{
     background-color: grey;
 } */
+
+img {
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.img-card {
+  display: block;
+  width: calc(100% + 20px);
+}
+
+.img-add {
+  height: 300px;
+  width: 250px;
+}
+
+.img-edit {
+  width: calc(100% - 20px);
+  margin: 15px 15px 30px 15px;
+}

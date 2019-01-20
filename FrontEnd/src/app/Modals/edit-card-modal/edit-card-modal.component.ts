@@ -14,21 +14,24 @@ import { CustomFormControl, CustomFormGroup } from '../../Custom/Base';
 })
 export class EditCardModalComponent implements OnInit {
   tempCard: Card;
+  editable: boolean;
   password: string;
 
   title: CustomFormControl;
   description: CustomFormControl;
   group: CustomFormGroup;
 
-  constructor(public dialogRef: MatDialogRef<EditCardModalComponent>, @Inject(MAT_DIALOG_DATA) public data: { card: Card, password: string },
+  constructor(public dialogRef: MatDialogRef<EditCardModalComponent>, @Inject(MAT_DIALOG_DATA) public data: { card: Card, password: string, editable: boolean },
     public cardsService: CardsService, public snackBar: MatSnackBar) {
     // console.log(data.card);
+    this.password = data.password;
+    this.editable = data.editable;
+
     this.tempCard = new Card();
     this.tempCard.clone(data.card);
-    this.password = data.password;
  
-    this.title = new CustomFormControl(this.tempCard.title, Validators.required);
-    this.description = new CustomFormControl(this.tempCard.description, Validators.required);
+    this.title = new CustomFormControl({value: this.tempCard.title, disabled: !this.editable}, Validators.required);
+    this.description = new CustomFormControl({value: this.tempCard.description, disabled: !this.editable}, Validators.required);
     this.group = new CustomFormGroup({
       title: this.title,
       description: this.description

@@ -5,27 +5,14 @@
     <header>{{col.title}}</header>
     <ul>
       <div *ngFor="let card of col.card; index as cardIndex">
-        <mat-card *ngIf="editable" (click)="editCard(i, cardIndex)" (keydown.enter)="editCard(i, cardIndex)" class='mat-card-editable'
+        <mat-card (click)="editCard(i, cardIndex)" (keydown.enter)="editCard(i, cardIndex)" class='mat-card-editable'
           tabindex="0">
           <button type="button" class="close card-close" (click)='deleteCard(i, cardIndex)' appClickStopPropagation>
             <span>&times;</span>
           </button>
           <mat-card-header>
             <mat-card-title>
-              <img *ngIf="card.imgData" [src]="card.imgData">
-              {{card.title}}
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              {{card.description}}
-            </p>
-          </mat-card-content>
-        </mat-card>
-        <mat-card *ngIf="!editable" tabindex="0">
-          <mat-card-header>
-            <mat-card-title>
-              <img *ngIf="card.imgData" [src]="card.imgData">
+              <img class='img-card' *ngIf="card.imgData" [src]="card.imgData">
               {{card.title}}
             </mat-card-title>
           </mat-card-header>
@@ -49,8 +36,8 @@
           <app-custom-text [textArea]="true" [fullWidth]="true" [placeholder]="'Card Desc'" [(fld)]="cardDesc"></app-custom-text>
 
           <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-          <button mat-raised-button (click)="fileInput.click()">Select Image File</button> <br />
-          <img style="height: 300px; width: 233px;" *ngIf="imgData" [src]="imgData" />
+          <button mat-raised-button (click)="fileInput.click()">Select Image</button> <br />
+          <img class="img-add" *ngIf="imgData" [src]="imgData" />
           <br />
 
           <div class="form-actions">
