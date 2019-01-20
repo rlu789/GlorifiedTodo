@@ -7,7 +7,7 @@
       <div *ngFor="let card of col.card; index as cardIndex">
         <mat-card (click)="editCard(i, cardIndex)" (keydown.enter)="editCard(i, cardIndex)" class='mat-card-editable'
           tabindex="0">
-          <button type="button" class="close card-close" (click)='deleteCard(i, cardIndex)' appClickStopPropagation>
+          <button *ngIf="editable" type="button" class="close card-close" (click)='deleteCard(i, cardIndex)' appClickStopPropagation>
             <span>&times;</span>
           </button>
           <mat-card-header>
