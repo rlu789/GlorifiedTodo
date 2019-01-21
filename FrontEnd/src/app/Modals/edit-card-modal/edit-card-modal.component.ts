@@ -49,6 +49,13 @@ export class EditCardModalComponent implements OnInit {
     }
   }
 
+  imageChange() {
+    if (this.tempCard.imgData) {
+      this.dialogRef.updateSize("1000px", "900px");
+    }
+    else this.dialogRef.updateSize("700px", undefined);
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }

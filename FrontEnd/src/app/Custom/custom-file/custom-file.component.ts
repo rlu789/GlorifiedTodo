@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./custom-file.component.css']
 })
 export class CustomFileComponent implements OnInit {
-  private imgDataValue: string;
+  imgDataValue: string;
 
   @Output()
   imgDataChange = new EventEmitter<string>();
@@ -17,10 +17,13 @@ export class CustomFileComponent implements OnInit {
   set imgData(val) {
     this.imgDataValue = val;
     this.imgDataChange.emit(val);
+    if (this.onChangeCallback) this.onChangeCallback.emit();
   }
   @Input('inputClass') inputClass: string = "img-add";
   @Input('removable') removable: boolean = false;
   @Input('showBtns') showBtns: boolean = true;
+
+  @Output('onChangeCallback') onChangeCallback = new EventEmitter<any>();
 
   onFileChanged(event) {
     var self = this;
