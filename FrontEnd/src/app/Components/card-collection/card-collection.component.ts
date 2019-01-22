@@ -18,10 +18,6 @@ export class CardCollectionComponent implements OnInit {
   @Input('editable') editable: boolean;
   @Input('password') password: string;
 
-  cardTitle: string;
-  cardDesc: string;
-  imgData: string;
-
   constructor(private cardsService: CardsService, private cardCollectionsService: CardCollectionsService,
     public dialog: MatDialog) { }
 
@@ -44,7 +40,7 @@ export class CardCollectionComponent implements OnInit {
     });
   }
 
-  deleteCol($event, i: number) {
+  deleteCol($event: { btnEvent: any, index: number }) {
     const dialogRef = this.dialog.open(ConfirmModalComponent, {
       width: '500px',
       restoreFocus: true
@@ -52,15 +48,15 @@ export class CardCollectionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.cardCollectionsService.remove(this.collectionData[i], this.password).subscribe((data: any) => {
-          this.collectionData.splice(i, 1);
-          $event.complete();
+        this.cardCollectionsService.remove(this.collectionData[$event.index], this.password).subscribe((data: any) => {
+          this.collectionData.splice($event.index, 1);
+          $event.btnEvent.complete();
         }, (err: HttpErrorResponse) => {
-          $event.complete();
+          $event.btnEvent.complete();
         });
       }
       else
-        $event.complete();
+        $event.btnEvent.complete();
     })
   }
 
@@ -73,21 +69,15 @@ export class CardCollectionComponent implements OnInit {
     })
   }
 
-  addCard($event, i: number, id: number) {
-    var c = new Card(this.cardTitle, this.cardDesc, id);
-    if (this.imgData) {
-      c.imgData = this.imgData;
-    }
-    if (!this.collectionData[i].card) this.collectionData[i].card = [];
-    this.cardsService.add(c, this.password).subscribe((data: Card) => {
+  addCard($event: {btnEvent: any, onCompleteEvent: Function, card: Card, index: number, collectionId: number}) {
+    if (!this.collectionData[$event.index].card) this.collectionData[$event.index].card = [];
+    this.cardsService.add($event.card, this.password).subscribe((data: Card) => {
       // console.log(data);
-      this.collectionData[i].card.push(data);
-      this.cardDesc = '';
-      this.cardTitle = '';
-      this.imgData = '';
-      $event.complete();
+      this.collectionData[$event.index].card.push(data);
+      $event.onCompleteEvent();
+      $event.btnEvent.complete();
     }, (err: HttpErrorResponse) => {
-      $event.complete();
+      $event.btnEvent.complete();
     });
   }
 }

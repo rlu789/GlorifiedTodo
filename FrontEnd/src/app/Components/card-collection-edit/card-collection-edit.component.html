@@ -1,0 +1,12 @@
+<app-custom-text [fullWidth]="true" [placeholder]="'Card Title'" [(fld)]="cardTitle"></app-custom-text>
+<app-custom-text [textArea]="true" [fullWidth]="true" [placeholder]="'Card Desc'" [(fld)]="cardDesc"></app-custom-text>
+<app-custom-file [(imgData)]="imgData"></app-custom-file>
+
+<div class="form-actions">
+  <app-custom-button [color]="'primary'" [text]="'Add Card'" (clickFunc)='addFunc($event)'></app-custom-button>
+  <app-custom-button [color]="'warn'" [text]="'Delete List'" (clickFunc)='deleteFunc($event)' [floatRight]="true"></app-custom-button>
+</div>
+<!-- <div class="form-actions">
+  <app-custom-button [color]="'primary'" [text]="'Add Card'" (clickFunc)='addCard($event, i, col.id)'></app-custom-button>
+  <app-custom-button [color]="'warn'" [text]="'Delete List'" (clickFunc)='deleteCol($event, i)' [floatRight]="true"></app-custom-button>
+</div> -->

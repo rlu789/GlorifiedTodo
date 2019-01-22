@@ -27,6 +27,7 @@ import { CustomHeadingComponent } from './Custom/custom-heading/custom-heading.c
 import { EditBoardModalComponent } from './Modals/edit-board-modal/edit-board-modal.component';
 import { CustomTextComponent } from './Custom/custom-text/custom-text.component';
 import { CustomFileComponent } from './Custom/custom-file/custom-file.component';
+import { CardCollectionEditComponent } from './Components/card-collection-edit/card-collection-edit.component';
 
 const appRoutes: Routes = [
   {
@@ -53,6 +54,7 @@ const appRoutes: Routes = [
     EditBoardModalComponent,
     CustomTextComponent,
     CustomFileComponent,
+    CardCollectionEditComponent,
   ],
   imports: [
     BrowserModule,
