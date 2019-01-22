@@ -1,42 +1,46 @@
-.add-card-form{
-    width: 100%;
-    padding: 10px 10px 5px 10px;
+.add-card-form {
+  width: 100%;
+  padding: 10px 10px 5px 10px;
 }
 
-.mat-card{
-    -webkit-transition: 0.2s ease;
-    -moz-transition: 0.2s ease;
-    -o-transition: 0.2s ease;
-    -ms-transition: 0.2s ease;
-    transition: 0.2s ease;
-}
-
-.mat-card-editable.mat-card:focus,
-.mat-card-editable.mat-card:hover{
-    cursor: pointer;
-    background-color: lightgrey;
-    -webkit-transition: 0.3s ease;
-    -moz-transition: 0.3s ease;
-    -o-transition: 0.3s ease;
-    -ms-transition: 0.3s ease;
-    transition: 0.3s ease;
-}
-
-.img-card{
-    -webkit-transition: 0.3s ease;
-    -moz-transition: 0.3s ease;
-    -o-transition: 0.3s ease;
-    -ms-transition: 0.3s ease;
-    transition: 0.3s ease;
+.mat-card {
+  -webkit-transition: 0.2s ease;
+  -moz-transition: 0.2s ease;
+  -o-transition: 0.2s ease;
+  -ms-transition: 0.2s ease;
+  transition: 0.2s ease;
 }
 
 .mat-card-editable.mat-card:focus,
-.mat-card-editable.mat-card:hover > .img-card{
-    opacity: 0.8;
+.mat-card-editable.mat-card:hover {
+  cursor: pointer;
+  background-color: lightgrey;
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+  -ms-transition: 0.3s ease;
+  transition: 0.3s ease;
 }
 
-.card-close{
-    position: relative;
-    left: 12px;
-    bottom: 14px;
+.img-card {
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+  -ms-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.mat-card-editable.mat-card:focus,
+.mat-card-editable.mat-card:hover>.img-card {
+  opacity: 0.7;
+}
+
+.card-close {
+  position: relative;
+  left: 12px;
+  bottom: 14px;
+}
+
+.card-description {
+    white-space: pre-line;
 }
