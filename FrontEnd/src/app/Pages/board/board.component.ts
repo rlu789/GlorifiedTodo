@@ -23,6 +23,17 @@ export class BoardComponent implements OnInit {
   password: string;
 
   collectionTitle: string;
+  collectionColor: string;
+  boardColors: { text: string, value: number | string }[] = [{
+    text: 'None',
+    value: undefined
+  }, {
+    text: 'Red',
+    value: 'Red'
+  }, {
+    text: 'Green',
+    value: 'Green'
+  }];
 
   constructor(private cardCollectionsService: CardCollectionsService, public snackBar: MatSnackBar, private route: ActivatedRoute,
     private boardsService: BoardsService, public dialog: MatDialog) {
@@ -52,7 +63,7 @@ export class BoardComponent implements OnInit {
   }
 
   addCollection($event) {
-    this.cardCollectionsService.add(new CardCollection(this.collectionTitle, this.boardId, []), this.password).subscribe((data: any) => {
+    this.cardCollectionsService.add(new CardCollection(this.collectionTitle, this.boardId, this.collectionColor), this.password).subscribe((data: any) => {
       this.board.cardCollection.push(data);
       $event.complete();
       // console.log(data);

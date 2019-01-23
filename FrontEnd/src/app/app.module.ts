@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatProgressSpinnerModule, 
-  MatSnackBarModule, MatExpansionModule, MatDialogModule, MatMenuModule } from '@angular/material';
+  MatSnackBarModule, MatExpansionModule, MatDialogModule, MatMenuModule, MatSelectModule } from '@angular/material';
 
 import { ServiceBaseService } from './Services/service-base.service';
 import { CardCollectionsService } from './Services/card-collections.service';
@@ -29,6 +29,7 @@ import { CustomTextComponent } from './Custom/custom-text/custom-text.component'
 import { CustomFileComponent } from './Custom/custom-file/custom-file.component';
 import { CardCollectionEditComponent } from './Components/card-collection-edit/card-collection-edit.component';
 import { CustomMenuComponent } from './Custom/custom-menu/custom-menu.component';
+import { CustomSelectComponent } from './Custom/custom-select/custom-select.component';
 
 const appRoutes: Routes = [
   {
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
     CustomFileComponent,
     CardCollectionEditComponent,
     CustomMenuComponent,
+    CustomSelectComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatExpansionModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule
   ],
   providers: [
     ServiceBaseService,

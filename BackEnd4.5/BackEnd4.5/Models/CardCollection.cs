@@ -19,5 +19,7 @@ namespace BackEnd4._5.Models
 
         [Required]
         public int BoardId { get; set; }
+
+        public string Color { get; set; }
     }
 }

@@ -1,0 +1,5 @@
+<mat-form-field>
+  <mat-select [placeholder]="placeholder" [(value)]="fld">
+    <mat-option *ngFor="let option of options" [value]="option.value">{{option.text}}</mat-option>
+  </mat-select>
+</mat-form-field>

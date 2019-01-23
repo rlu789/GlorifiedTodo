@@ -84,10 +84,14 @@
   width: 100%;
 }
 
-.mat-dialog-content {
-  /* fix for vert scroll appearing when everything still in column */
-  line-height: 1;
+textarea.mat-input-element {
+  line-height: -moz-block-height;
 }
+
+/* fix for vert scroll appearing when everything still in column */
+/* .mat-dialog-content {
+  line-height: 1;
+} */
 
 /* -- End -- */
 
@@ -169,6 +173,13 @@ body {
 .lists>* {
   flex: 0 0 auto;
   margin-left: 10px;
+}
+
+.lists>.list.red>* {
+  background-color: #ff9292;
+}
+.lists>.list.green>* {
+  background-color: #99f58e;
 }
 
 .lists::after {

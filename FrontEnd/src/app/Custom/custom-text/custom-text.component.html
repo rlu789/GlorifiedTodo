@@ -7,6 +7,6 @@
 <!-- TODO maybe move this to new component -->
 <mat-form-field *ngIf="textArea" [class.mat-form-field-width]="fullWidth" class="expand" [class.expanded]="visible">
   <textarea *ngIf="textArea" matInput [placeholder]="placeholder" [formControl]="control" (keyup.enter)="enterKeyUp()" (blur)="update()"
-    (keyup)="update()" [attr.tabindex]="visible ? 0 : -1" appFocus [(focus)]="control.hasFocus" matTextareaAutosize matAutosizeMaxRows="10"></textarea>
+    (keyup)="update()" [attr.tabindex]="visible ? 0 : -1" appFocus [(focus)]="control.hasFocus" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="10"></textarea>
   <mat-error *ngIf="control.errors">{{errMsg}}</mat-error>
 </mat-form-field>

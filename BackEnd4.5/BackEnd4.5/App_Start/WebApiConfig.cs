@@ -100,6 +100,14 @@ namespace BackEnd4._5
             }
             catch (SQLiteException e) { }
 
+            try
+            {
+                sqlite_cmd.CommandText = @"ALTER TABLE CardCollection
+                    ADD [Color] NVARCHAR (25);";
+                sqlite_cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException e) { }
+
             // Web API configuration and services  
             // Web API routes 
             config.MapHttpAttributeRoutes();

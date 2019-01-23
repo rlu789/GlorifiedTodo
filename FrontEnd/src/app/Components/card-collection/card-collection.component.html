@@ -1,7 +1,10 @@
 <!-- https://codepen.io/SitePoint/pen/brmXRX?editors=0100 -->
 <!-- appClickStopPropagation -->
 <div class="lists">
-  <div *ngFor="let col of collectionData; index as i" class="list">
+  <div *ngFor="let col of collectionData; index as i" class="list" [ngClass]="{
+    'red': col.color === 'Red',
+    'green': col.color === 'Green'
+  }">
     <header>{{col.title}}</header>
     <ul>
       <div *ngFor="let card of col.card; index as cardIndex">
