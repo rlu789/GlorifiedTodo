@@ -16,7 +16,6 @@ export class CardCollectionEditComponent implements OnInit {
   @Input('collectionId') collectionId: number;
 
   @Output('addEvent') addEvent = new EventEmitter<{ btnEvent: any, onCompleteEvent: Function, card: Card, index: number, collectionId: number }>();
-  @Output('deleteEvent') deleteEvent = new EventEmitter<{ btnEvent: any, index: number }>();
 
   constructor() {
   }
@@ -43,12 +42,4 @@ export class CardCollectionEditComponent implements OnInit {
       collectionId: this.collectionId
     });
   }
-
-  deleteFunc($event) {
-    this.deleteEvent.emit({
-      btnEvent: $event,
-      index: this.index
-    });
-  }
-
 }

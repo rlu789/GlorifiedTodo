@@ -1,16 +1,20 @@
 .btn-menu {
-    padding: 5px 8px;
-    border-radius: 4px;
+  padding: 5px 8px;
+  border-radius: 4px;
 
-    -webkit-transition: 0.1s ease;
-    -moz-transition: 0.1s ease;
-    -o-transition: 0.1s ease;
-    -ms-transition: 0.1s ease;
-    transition: 0.1s ease;
+  -webkit-transition: 0.1s ease;
+  -moz-transition: 0.1s ease;
+  -o-transition: 0.1s ease;
+  -ms-transition: 0.1s ease;
+  transition: 0.1s ease;
 }
 
 .btn-menu:focus,
 .btn-menu:hover {
-    background-color: darkgrey;
-    cursor: pointer;
+  background-color: darkgrey;
+  cursor: pointer;
+}
+
+.mat-menu-item>span {
+  float: right;
 }

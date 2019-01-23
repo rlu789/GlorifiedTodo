@@ -7,12 +7,20 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./custom-menu.component.css']
 })
 export class CustomMenuComponent implements OnInit {
-  @Input('items') items: [string];
+  private iconClass: string;
+
+  @Input('icon') icon: string;
+  @Input('items') items: {text: string, icon: string}[];
   @Output('func') func = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+    this.buildIconClass();
+  }
+
+  private buildIconClass(): void {
+    this.iconClass = "btn-base btn-menu float-right " + this.icon;
   }
 
   optionClicked(option: string) {

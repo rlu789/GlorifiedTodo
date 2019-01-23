@@ -7,7 +7,6 @@ import { ConfirmModalComponent } from '../../Modals/confirm-modal/confirm-modal.
 import { EditCardModalComponent } from '../../Modals/edit-card-modal/edit-card-modal.component';
 
 import { MatDialog } from '@angular/material';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-card-collection',
@@ -15,10 +14,22 @@ import { Observable } from 'rxjs';
   styleUrls: ['./card-collection.component.css']
 })
 export class CardCollectionComponent implements OnInit {
-  dropDownItems = ["Delete"];
-  dropDownItemsFunc($event: string, collectionIndex: number, cardIndex: number) {
+  dropDownColItems = [{text:"Edit", icon: "fas fa-pen"}, {text:"Delete", icon: "fas fa-trash-alt"}];
+  dropDownColItemsFunc($event: string, collectionIndex: number) {
     switch ($event) {
-      case this.dropDownItems[0]:
+      case this.dropDownColItems[0].text:
+        alert("TODO");
+        break;
+      case this.dropDownColItems[1].text:
+        this.deleteCol(collectionIndex);
+        break;
+    }
+  }
+
+  dropDownCardItems = [{text:"Delete", icon: "fas fa-trash-alt"}];
+  dropDownCardItemsFunc($event: string, collectionIndex: number, cardIndex: number) {
+    switch ($event) {
+      case this.dropDownCardItems[0].text:
         this.deleteCard(collectionIndex, cardIndex);
         break;
     }
@@ -50,7 +61,7 @@ export class CardCollectionComponent implements OnInit {
     });
   }
 
-  deleteCol($event: { btnEvent: any, index: number }) {
+  deleteCol(index: number) {
     const dialogRef = this.dialog.open(ConfirmModalComponent, {
       width: '500px',
       restoreFocus: true
@@ -58,17 +69,34 @@ export class CardCollectionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.cardCollectionsService.remove(this.collectionData[$event.index], this.password).subscribe((data: any) => {
-          this.collectionData.splice($event.index, 1);
-          $event.btnEvent.complete();
+        this.cardCollectionsService.remove(this.collectionData[index], this.password).subscribe((data: any) => {
+          this.collectionData.splice(index, 1);
         }, (err: HttpErrorResponse) => {
-          $event.btnEvent.complete();
         });
       }
-      else
-        $event.btnEvent.complete();
     })
   }
+
+  // OLD keep in case
+  // deleteCol($event: { btnEvent: any, index: number }) {
+  //   const dialogRef = this.dialog.open(ConfirmModalComponent, {
+  //     width: '500px',
+  //     restoreFocus: true
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result) {
+  //       this.cardCollectionsService.remove(this.collectionData[$event.index], this.password).subscribe((data: any) => {
+  //         this.collectionData.splice($event.index, 1);
+  //         $event.btnEvent.complete();
+  //       }, (err: HttpErrorResponse) => {
+  //         $event.btnEvent.complete();
+  //       });
+  //     }
+  //     else
+  //       $event.btnEvent.complete();
+  //   })
+  // }
 
   deleteCard(collectionIndex: number, cardIndex: number) {
     var cardToBeDeleted = this.collectionData[collectionIndex].card[cardIndex];
