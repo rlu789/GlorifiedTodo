@@ -1,0 +1,9 @@
+<button class="btn-base btn-menu fas fa-ellipsis-v float-right" [matMenuTriggerFor]="menu" appClickStopPropagation>
+</button>
+<mat-menu #menu="matMenu">
+  <div *ngFor="let item of items">
+    <button mat-menu-item (click)="optionClicked(item)">
+      <span>{{item}}</span>
+    </button>
+  </div>
+</mat-menu>

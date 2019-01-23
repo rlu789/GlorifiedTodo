@@ -270,3 +270,10 @@ img {
   margin: 0 auto 20px auto;
   display: block;
 }
+
+.btn-base {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}

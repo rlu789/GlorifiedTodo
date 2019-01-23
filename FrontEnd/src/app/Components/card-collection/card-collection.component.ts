@@ -7,6 +7,7 @@ import { ConfirmModalComponent } from '../../Modals/confirm-modal/confirm-modal.
 import { EditCardModalComponent } from '../../Modals/edit-card-modal/edit-card-modal.component';
 
 import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-card-collection',
@@ -14,6 +15,15 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./card-collection.component.css']
 })
 export class CardCollectionComponent implements OnInit {
+  dropDownItems = ["Delete"];
+  dropDownItemsFunc($event: string, collectionIndex: number, cardIndex: number) {
+    switch ($event) {
+      case this.dropDownItems[0]:
+        this.deleteCard(collectionIndex, cardIndex);
+        break;
+    }
+  }
+
   @Input('collectionData') collectionData: Array<CardCollection>;
   @Input('editable') editable: boolean;
   @Input('password') password: string;
@@ -69,7 +79,7 @@ export class CardCollectionComponent implements OnInit {
     })
   }
 
-  addCard($event: {btnEvent: any, onCompleteEvent: Function, card: Card, index: number, collectionId: number}) {
+  addCard($event: { btnEvent: any, onCompleteEvent: Function, card: Card, index: number, collectionId: number }) {
     if (!this.collectionData[$event.index].card) this.collectionData[$event.index].card = [];
     this.cardsService.add($event.card, this.password).subscribe((data: Card) => {
       // console.log(data);

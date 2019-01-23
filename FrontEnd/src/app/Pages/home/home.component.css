@@ -17,12 +17,6 @@
 }
 
 .board-tile-button{
-  /* Initial styling to remove default button styles */
-  padding: 0;
-  background-color: transparent;
-  border: 0;
-  -webkit-appearance: none;
-
   opacity: 0;
   float: right;
   position: relative;
