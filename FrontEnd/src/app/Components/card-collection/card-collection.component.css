@@ -11,6 +11,19 @@
   transition: 0.2s ease;
 }
 
+.mat-card-editable.mat-card {
+  padding: 0px;
+}
+
+.mat-card-editable .mat-card-header {
+  padding: 16px 0 0 16px;
+  margin-right: 12px;
+}
+
+.mat-card-editable .mat-card-content {
+  padding: 0 16px 16px 16px;
+}
+
 .mat-card-editable.mat-card:focus,
 .mat-card-editable.mat-card:hover {
   cursor: pointer;
