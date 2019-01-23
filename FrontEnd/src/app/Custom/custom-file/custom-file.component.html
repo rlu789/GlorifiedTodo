@@ -2,7 +2,7 @@
 <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
 <div *ngIf="showBtns" class="file-form-actions">
   <button mat-stroked-button (click)="fileInput.click()">Select Image</button>
-  <button *ngIf="removable || imgDataValue" mat-stroked-button color="warn" (click)="remove()" class="float-right">Remove Image</button>
+  <button *ngIf="imgDataValue" mat-stroked-button color="warn" (click)="remove()" class="float-right">Remove Image</button>
 </div>
 <br />
 <br />
