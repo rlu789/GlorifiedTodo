@@ -4,10 +4,10 @@ import { CardCollectionsService, CardCollection } from '../../Services/card-coll
 import { BoardsService, Board } from '../../Services/boards.service';
 import { HttpErrorResponse } from "@angular/common/http";
 import { MatSnackBar } from '@angular/material';
-
 import { MatDialog } from '@angular/material';
 import { EditBoardModalComponent } from '../../Modals/edit-board-modal/edit-board-modal.component';
 import * as XLSX from 'xlsx';
+import { Constants } from '../../Custom/Base';
 
 @Component({
   selector: 'app-board',
@@ -24,16 +24,7 @@ export class BoardComponent implements OnInit {
 
   collectionTitle: string;
   collectionColor: string;
-  boardColors: { text: string, value: number | string }[] = [{
-    text: 'None',
-    value: undefined
-  }, {
-    text: 'Red',
-    value: 'Red'
-  }, {
-    text: 'Green',
-    value: 'Green'
-  }];
+  boardColors: { text: string, value: number | string }[] = Constants.boardColors;
 
   constructor(private cardCollectionsService: CardCollectionsService, public snackBar: MatSnackBar, private route: ActivatedRoute,
     private boardsService: BoardsService, public dialog: MatDialog) {

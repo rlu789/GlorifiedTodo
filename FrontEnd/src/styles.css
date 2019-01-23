@@ -181,6 +181,22 @@ body {
 .lists>.list.green>* {
   background-color: #99f58e;
 }
+.lists>.list.orange>* {
+  background-color: #ffae68;
+}
+.lists>.list.blue>* {
+  background-color: #61a7ff;
+}
+.lists>.list.purple>* {
+  background-color: #e186ff;
+}
+
+.list.dark>header {
+  color: white;
+}
+.lists>.list.dark>* {
+  background-color: #5d5d5d;
+}
 
 .lists::after {
   content: '';
@@ -205,7 +221,6 @@ body {
   padding: 0 10px;
 }
 
-/* These being used? I think they are?*/
 .list header {
   padding-top: 5px;
   line-height: 26px;
@@ -215,6 +230,7 @@ body {
   border-top-right-radius: 5px;
   overflow-wrap: break-word;
 }
+
 
 .list footer {
   padding-top: 5px;

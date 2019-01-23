@@ -1,5 +1,30 @@
 import { FormGroup, FormControl, Validators, AbstractControl, ValidatorFn, AbstractControlOptions, AsyncValidatorFn } from '@angular/forms';
 
+export class Constants {
+    public static boardColors: { text: string, value: number | string }[] = [{
+        text: 'None',
+        value: undefined
+    }, {
+        text: 'Red',
+        value: 'Red'
+    }, {
+        text: 'Green',
+        value: 'Green'
+    }, {
+        text: 'Orange',
+        value: 'Orange'
+    }, {
+        text: 'Blue',
+        value: 'Blue'
+    }, {
+        text: 'Purple',
+        value: 'Purple'
+    }, {
+        text: 'Dark',
+        value: 'Dark'
+    }];
+}
+
 export class CustomValidators {
     public static matchValidator(strToMatch: FormControl): ValidatorFn {
         return (control: AbstractControl): { [key: string]: string } | null => {
