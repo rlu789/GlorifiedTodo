@@ -1,7 +1,13 @@
-<button mat-raised-button [color]="color" (click)='click()' [class.float-right]="floatRight" [disabled]='loading'>
+<ng-container *ngIf="type === 'mat-raised-button'">
+  <button mat-raised-button [color]="color" (click)='click()' [class.float-right]="floatRight" [disabled]='loading'>
+    <ng-container *ngTemplateOutlet="buttonInner"></ng-container>
+  </button>
+</ng-container>
+
+<ng-template #buttonInner>
   <div *ngIf="loading">
     &nbsp;
     <div class="spinner"></div>
   </div>
   <span *ngIf="!loading">{{text}}</span>
-</button>
+</ng-template>

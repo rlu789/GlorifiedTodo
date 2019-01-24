@@ -15,6 +15,6 @@
   cursor: pointer;
 }
 
-.mat-menu-item>span {
-  float: right;
+.mat-menu-item>i {
+  margin-right: 16px;
 }

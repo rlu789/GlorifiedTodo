@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./custom-button.component.css']
 })
 export class CustomButtonComponent implements OnInit {
+  @Input('type') type: 'mat-button' | 'mat-raised-button' | 'mat-stroked-button' | 'mat-flat-button' | 
+    'mat-fab' | 'mat-mini-fab' = 'mat-raised-button';
   @Input('text') text: string;
   @Input('color') color: string;
   @Input('floatRight') floatRight: boolean;

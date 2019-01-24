@@ -1,9 +1,9 @@
 <button [className]="iconClass" [matMenuTriggerFor]="menu" appClickStopPropagation>
 </button>
 <mat-menu #menu="matMenu">
-  <div *ngFor="let item of items">
+  <ng-container *ngFor="let item of items">
     <button mat-menu-item (click)="optionClicked(item.text)">
       <i *ngIf="item.icon" [className]="item.icon"></i><span>{{item.text}}</span> 
     </button>
-  </div>
+  </ng-container>
 </mat-menu>

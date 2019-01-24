@@ -40,7 +40,7 @@ export class ServiceBaseService {
         observableToReturn.next(data);
       }, (err: HttpErrorResponse) => {
         console.log(err);
-        var errMsg = err.error && err.error.message || err.statusText;
+        var errMsg: string = err.error && err.error.message || err.statusText;
         // THIS IS THE OLD FORMAT FOR NON 4.5 BACKEND
         // if (err.error.length !== undefined) {
         //   errMsg += ': ';
@@ -58,6 +58,8 @@ export class ServiceBaseService {
             })
           })
         }
+        if (err.status === 0 && errMsg === "Unknown Error")
+          errMsg = "Connection Error";
         this.openSnackBar(errMsg);
         observableToReturn.error(err);
       });
