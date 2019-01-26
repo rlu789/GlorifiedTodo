@@ -22,6 +22,7 @@ export class CustomSelectComponent implements OnInit {
 
   @Input("options") options: [{text: string, value: number | string}];
   @Input("placeholder") placeholder: string;
+  @Input("fullWidth") fullWidth: boolean;
 
   constructor() { }
 

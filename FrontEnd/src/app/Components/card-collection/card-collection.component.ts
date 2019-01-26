@@ -5,6 +5,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 
 import { ConfirmModalComponent } from '../../Modals/confirm-modal/confirm-modal.component';
 import { EditCardModalComponent } from '../../Modals/edit-card-modal/edit-card-modal.component';
+import { EditCollectionModalComponent } from '../../Modals/edit-collection-modal/edit-collection-modal.component';
 
 import { MatDialog } from '@angular/material';
 
@@ -14,26 +15,8 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./card-collection.component.css']
 })
 export class CardCollectionComponent implements OnInit {
-  dropDownColItems = [{text:"Edit", icon: "fas fa-pen"}, {text:"Delete", icon: "fas fa-trash-alt"}];
-  dropDownColItemsFunc($event: string, collectionIndex: number) {
-    switch ($event) {
-      case this.dropDownColItems[0].text:
-        alert("TODO");
-        break;
-      case this.dropDownColItems[1].text:
-        this.deleteCol(collectionIndex);
-        break;
-    }
-  }
-
-  dropDownCardItems = [{text:"Delete", icon: "fas fa-trash-alt"}];
-  dropDownCardItemsFunc($event: string, collectionIndex: number, cardIndex: number) {
-    switch ($event) {
-      case this.dropDownCardItems[0].text:
-        this.deleteCard(collectionIndex, cardIndex);
-        break;
-    }
-  }
+  dropDownColItems = [{ text: "Edit", icon: "fas fa-pen" }, { text: "Delete", icon: "fas fa-trash-alt" }];
+  dropDownCardItems = [{ text: "Delete", icon: "fas fa-trash-alt" }];
 
   @Input('collectionData') collectionData: Array<CardCollection>;
   @Input('editable') editable: boolean;
@@ -43,6 +26,32 @@ export class CardCollectionComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+  dropDownColItemsFunc($event: string, collectionIndex: number) {
+    switch ($event) {
+      case this.dropDownColItems[0].text:
+        const dialogRef = this.dialog.open(EditCollectionModalComponent, {
+          width: '500px',
+          data: { collection: this.collectionData[collectionIndex], password: this.password }
+        });
+        dialogRef.afterClosed().subscribe((data: CardCollection) => {
+          this.collectionData[collectionIndex].title = data.title;
+          this.collectionData[collectionIndex].color = data.color;
+        });
+        break;
+      case this.dropDownColItems[1].text:
+        this.deleteCol(collectionIndex);
+        break;
+    }
+  }
+
+  dropDownCardItemsFunc($event: string, collectionIndex: number, cardIndex: number) {
+    switch ($event) {
+      case this.dropDownCardItems[0].text:
+        this.deleteCard(collectionIndex, cardIndex);
+        break;
+    }
   }
 
   editCard(collectionIndex: number, cardIndex: number) {

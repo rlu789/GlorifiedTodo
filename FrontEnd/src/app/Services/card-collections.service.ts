@@ -28,13 +28,13 @@ export class CardCollectionsService {
       this.serviceBase.generateHeaders(password));
   }
 
-  // public update(payload: CardCollection) {
-  //   return this.http.put(this.accessPointUrl + '/' + payload.id, payload, {headers: this.headers});
-  // }
+  public update(payload: CardCollection, password: string) {
+    return this.serviceBase.call(this.serviceBase.Constants.Put, this.accessPointUrl + '/' + payload.id,
+      this.serviceBase.generateHeaders(password), payload);
+  }
 }
 
 export class CardCollection {
-  public id: number;
   public card: Array<Card>
-  constructor(public title: string, public boardId: number, public color?: string) { }
+  constructor(public title: string, public boardId: number, public color?: string, public id?: number) { }
 }

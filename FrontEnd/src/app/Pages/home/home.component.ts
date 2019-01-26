@@ -53,10 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   addBoard($event) {
-    this.boardPasswordRepeat.updateValueAndValidity();
-    this.boardPasswordRepeat.markAsDirty();
-    this.boardPasswordRepeat.markAsTouched();
-    if (this.boardPasswordRepeat.valid) {
+    if (this.boardPasswordRepeat.controlSubmittable()) {
       var board = new Board(this.boardTitle);
 
       if (this.boardPassword.value) {
@@ -73,7 +70,6 @@ export class HomeComponent implements OnInit {
       });
     }
     else {
-      this.boardPasswordRepeat.hasFocus = true;
       $event.complete();
     }
   }

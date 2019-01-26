@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Edit Collection</h1>
+<div mat-dialog-content>
+  <app-custom-text [placeholder]="'Collection Title'" [(fld)]="colTitle" [fullWidth]="true"></app-custom-text>
+  <app-custom-select [(fld)]="colColor" [options]="boardColors" [placeholder]="'Board Color'" [fullWidth]="true"></app-custom-select>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="updateCol()">Update</button>
+</div>

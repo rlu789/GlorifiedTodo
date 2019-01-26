@@ -30,6 +30,7 @@ import { CustomFileComponent } from './Custom/custom-file/custom-file.component'
 import { CardCollectionEditComponent } from './Components/card-collection-edit/card-collection-edit.component';
 import { CustomMenuComponent } from './Custom/custom-menu/custom-menu.component';
 import { CustomSelectComponent } from './Custom/custom-select/custom-select.component';
+import { EditCollectionModalComponent } from './Modals/edit-collection-modal/edit-collection-modal.component';
 
 const appRoutes: Routes = [
   {
@@ -59,6 +60,7 @@ const appRoutes: Routes = [
     CardCollectionEditComponent,
     CustomMenuComponent,
     CustomSelectComponent,
+    EditCollectionModalComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +91,8 @@ const appRoutes: Routes = [
   entryComponents: [
     ConfirmModalComponent,
     EditCardModalComponent,
-    EditBoardModalComponent
+    EditBoardModalComponent,
+    EditCollectionModalComponent
   ],
 })
 export class AppModule { }

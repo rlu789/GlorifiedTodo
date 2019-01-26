@@ -41,6 +41,16 @@ export class CustomFormControl extends FormControl {
     constructor(formState?: any, validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null, asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null) {
         super(formState, validatorOrOpts, asyncValidator);
     }
+
+    public controlSubmittable(): boolean {
+        this.updateValueAndValidity();
+        if (this.invalid) {
+            this.markAsDirty();
+            this.markAsTouched();
+            this.hasFocus = true;
+        }
+        return this.valid;
+    }
 }
 
 export class CustomFormGroup extends FormGroup {
