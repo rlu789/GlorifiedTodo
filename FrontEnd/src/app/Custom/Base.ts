@@ -14,6 +14,9 @@ export class Constants {
         text: 'Orange',
         value: 'Orange'
     }, {
+        text: 'Yellow',
+        value: 'Yellow'
+    },{
         text: 'Blue',
         value: 'Blue'
     }, {
@@ -26,10 +29,17 @@ export class Constants {
 }
 
 export class CustomValidators {
+    public static whiteSpaceValidator(): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: string } | null => {
+            if (control.value.length && (!control.value.trim() || control.value[0] === ' ' || control.value[control.value.length - 1] === ' ')) {
+                return { 'white-sace': 'Field has whitespace errors' };
+            }
+        }
+    };
     public static matchValidator(strToMatch: FormControl): ValidatorFn {
         return (control: AbstractControl): { [key: string]: string } | null => {
             if (strToMatch.value && control.value !== strToMatch.value) {
-                return { 'match': 'Passwords don\'t match' };
+                return { 'match': 'Fields don\'t match' };
             }
         }
     };
@@ -70,13 +80,9 @@ export class CustomFormGroup extends FormGroup {
         * Returns true if form is valid
         */
     public formSubmittable(): boolean {
-        this.updateValueAndValidity();
-        if (this.invalid) {
-            for (let i in this.ctrls) {
-                if (this.ctrls[i].invalid) {
-                    this.ctrls[i].hasFocus = true;
-                    break;
-                }
+        for (let i in this.ctrls) {
+            if (!this.ctrls[i].controlSubmittable()) {
+                break;
             }
         }
         return this.valid;

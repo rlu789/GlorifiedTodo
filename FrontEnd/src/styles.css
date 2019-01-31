@@ -184,11 +184,14 @@ body {
 .lists>.list.orange>* {
   background-color: #ffae68;
 }
+.lists>.list.yellow>* {
+  background-color: #ffef7a;
+}
 .lists>.list.blue>* {
   background-color: #61a7ff;
 }
 .lists>.list.purple>* {
-  background-color: #e186ff;
+  background-color: #be6dfb;
 }
 
 .list.dark>header {

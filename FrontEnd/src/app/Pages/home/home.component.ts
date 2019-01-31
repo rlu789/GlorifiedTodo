@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Board, BoardsService } from '../../Services/boards.service';
 import { HttpErrorResponse } from "@angular/common/http";
 import { ConfirmModalComponent } from '../../Modals/confirm-modal/confirm-modal.component';
-import { CustomValidators, CustomFormControl } from '../../Custom/Base';
+import { CustomValidators, CustomFormControl, CustomFormGroup } from '../../Custom/Base';
 
 import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -16,9 +16,12 @@ export class HomeComponent implements OnInit {
   loading = true;
   boardData: Array<Board>;
   boardTitle: string;
-  boardPassword = new CustomFormControl('');
+  boardPassword = new CustomFormControl('', [CustomValidators.whiteSpaceValidator()]);
   boardPasswordRepeat = new CustomFormControl('', [CustomValidators.matchValidator(this.boardPassword)]);
-  boardPasswordRepeatFocus = false;
+  boardFormGroup = new CustomFormGroup({
+    "boardPassword": this.boardPassword,
+    "boardPasswordRepeat": this.boardPasswordRepeat
+  });
 
   constructor(private boardsService: BoardsService, public snackBar: MatSnackBar, private router: Router,
     public dialog: MatDialog) {
@@ -53,7 +56,7 @@ export class HomeComponent implements OnInit {
   }
 
   addBoard($event) {
-    if (this.boardPasswordRepeat.controlSubmittable()) {
+    if (this.boardFormGroup.formSubmittable()) {
       var board = new Board(this.boardTitle);
 
       if (this.boardPassword.value) {
