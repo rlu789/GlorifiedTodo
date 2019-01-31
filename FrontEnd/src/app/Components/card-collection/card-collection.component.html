@@ -40,7 +40,7 @@
               Add Card
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <app-card-collection-edit [index]="i" [collectionId]="col.id" (addEvent)="addCard($event)"></app-card-collection-edit>
+          <app-card-collection-edit [addEvent]="addCard.bind(this, i, col.id)"></app-card-collection-edit>
         </mat-expansion-panel>
       </mat-accordion>
     </div>

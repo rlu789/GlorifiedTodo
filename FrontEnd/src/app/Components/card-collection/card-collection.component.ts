@@ -6,6 +6,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { ConfirmModalComponent } from '../../Modals/confirm-modal/confirm-modal.component';
 import { EditCardModalComponent } from '../../Modals/edit-card-modal/edit-card-modal.component';
 import { EditCollectionModalComponent } from '../../Modals/edit-collection-modal/edit-collection-modal.component';
+import { CustomFormControl, CustomFormGroup } from 'src/app/Custom/Base';
 
 import { MatDialog } from '@angular/material';
 
@@ -116,12 +117,12 @@ export class CardCollectionComponent implements OnInit {
     })
   }
 
-  addCard($event: { onCompleteEvent: Function, card: Card, index: number, collectionId: number }) {
-    if (!this.collectionData[$event.index].card) this.collectionData[$event.index].card = [];
-    this.cardsService.add($event.card, this.password).subscribe((data: Card) => {
+  addCard(index: number, collectionId: number, card: Card) {
+    if (!this.collectionData[index].card) this.collectionData[index].card = [];
+    card.cardCollectionId = collectionId;
+    return this.cardsService.add(card, this.password).subscribe((data: Card) => {
       // console.log(data);
-      this.collectionData[$event.index].card.push(data);
-      $event.onCompleteEvent();
+      this.collectionData[index].card.push(data);
     }, (err: HttpErrorResponse) => {
     });
   }

@@ -11,7 +11,6 @@ export class CustomTextComponent implements OnInit {
   // todo phase out vanilla formcontrol is no longer used
   private control: CustomFormControl | FormControl;
   private isRawValue: boolean = false;
-  private focusValue: boolean;
   private errMsg: string;
 
   @Input('placeholder') placeholder: string;

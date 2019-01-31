@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Card } from '../../Services/cards.service';
+import { Subscriber } from 'rxjs';
 import { CustomFormGroup, CustomFormControl } from 'src/app/Custom/Base';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-card-collection-edit',
@@ -8,14 +10,17 @@ import { CustomFormGroup, CustomFormControl } from 'src/app/Custom/Base';
   styleUrls: ['./card-collection-edit.component.css']
 })
 export class CardCollectionEditComponent implements OnInit {
-  cardTitle = new CustomFormControl('');
-  cardDesc = new CustomFormControl('');
+  addSubscriber: Subscriber<any>;
+
+  cardTitle = new CustomFormControl('', Validators.required);
+  cardDesc = new CustomFormControl('', Validators.required);
   imgData: string;
+  addCardGroup = new CustomFormGroup({
+    cardTitle: this.cardTitle,
+    cardDesc: this.cardDesc
+  });
 
-  @Input('index') index: number;
-  @Input('collectionId') collectionId: number;
-
-  @Output('addEvent') addEvent = new EventEmitter<{ onCompleteEvent: Function, card: Card, index: number, collectionId: number }>();
+  @Input('addEvent') addEvent: (...args: any[]) => Subscriber<any> | null;
 
   constructor() {
   }
@@ -24,21 +29,18 @@ export class CardCollectionEditComponent implements OnInit {
   }
 
   addFunc() {
-    var self = this;
-    var card = new Card(this.cardTitle.value, this.cardDesc.value, this.collectionId);
-    card.imgData = this.imgData;
-
-    var onCompleteEvent = function () {
-      self.cardTitle.reset();
-      self.cardDesc.reset();
-      self.imgData = '';
+    if (this.addCardGroup.formSubmittable()) {
+      var card = new Card(this.cardTitle.value, this.cardDesc.value);
+      card.imgData = this.imgData;
+      this.addSubscriber = this.addEvent(card);
+      if (this.addSubscriber instanceof Subscriber) {
+        // add a callback to be triggered when the complete func is called
+        return this.addSubscriber.add(() => {
+          this.cardTitle.reset();
+          this.cardDesc.reset();
+          this.imgData = '';
+        });
+      }
     }
-
-    this.addEvent.emit({
-      onCompleteEvent: onCompleteEvent,
-      card: card,
-      index: this.index,
-      collectionId: this.collectionId
-    });
   }
 }

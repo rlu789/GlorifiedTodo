@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Observable, Subscriber } from 'rxjs';
+import { Subscription, Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-custom-button',
@@ -12,9 +12,9 @@ export class CustomButtonComponent implements OnInit {
   @Input('text') text: string;
   @Input('color') color: string;
   @Input('floatRight') floatRight: boolean;
-  @Input('btnFunc') btnFunc: () => Subscriber<any> | null;
+  @Input('btnFunc') btnFunc: () => Subscriber<any> | Subscription | null;
 
-  loading = false;
+  private loading = false;
 
   constructor() { }
 
@@ -23,9 +23,12 @@ export class CustomButtonComponent implements OnInit {
 
   click() {
     var ret = this.btnFunc();
-    if (ret instanceof Subscriber) {
+    const isSubscription = ret instanceof Subscription;
+    const isSubscriber = ret instanceof Subscriber;
+
+    if (isSubscription || isSubscriber) {
       this.loading = true;
-      // add a callback to be trigger when the complete func is called
+      // add a callback to be triggered when the complete func of an observable is called
       ret.add(() => {
         this.loading = false;
       });
