@@ -116,15 +116,13 @@ export class CardCollectionComponent implements OnInit {
     })
   }
 
-  addCard($event: { btnEvent: any, onCompleteEvent: Function, card: Card, index: number, collectionId: number }) {
+  addCard($event: { onCompleteEvent: Function, card: Card, index: number, collectionId: number }) {
     if (!this.collectionData[$event.index].card) this.collectionData[$event.index].card = [];
     this.cardsService.add($event.card, this.password).subscribe((data: Card) => {
       // console.log(data);
       this.collectionData[$event.index].card.push(data);
       $event.onCompleteEvent();
-      $event.btnEvent.complete();
     }, (err: HttpErrorResponse) => {
-      $event.btnEvent.complete();
     });
   }
 }

@@ -55,25 +55,20 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addBoard($event) {
+  addBoard() {
     if (this.boardFormGroup.formSubmittable()) {
       var board = new Board(this.boardTitle);
 
       if (this.boardPassword.value) {
         board.password = this.boardPassword.value;
       }
-      this.boardsService.add(board).subscribe((data: any) => {
+      return this.boardsService.add(board).subscribe((data: any) => {
         this.boardTitle = '';
         this.boardPassword.setValue('');
         this.boardData.push(data);
-        $event.complete();
         // console.log(data);
       }, (err: HttpErrorResponse) => {
-        $event.complete();
       });
-    }
-    else {
-      $event.complete();
     }
   }
 

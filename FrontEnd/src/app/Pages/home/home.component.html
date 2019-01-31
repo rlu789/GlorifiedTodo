@@ -12,17 +12,17 @@
     <div class='board-tile-title'><span>{{board.title}}</span></div>
   </div>
   <div>
-    <app-custom-text [placeholder]="'Board Title'" [(fld)]="boardTitle" (onEnterFunc)="addBoard($event)"></app-custom-text>
+    <app-custom-text [placeholder]="'Board Title'" [(fld)]="boardTitle" (onEnterFunc)="addBoard()"></app-custom-text>
     <br />
     <!-- TODO get rid of the break shit  -->
     <app-custom-text [type]="'password'" [placeholder]="'Board Password (Optional)'" [(fld)]="boardPassword"
-      (onEnterFunc)="addBoard($event)"></app-custom-text>
+      (onEnterFunc)="addBoard()"></app-custom-text>
     <br />
     <app-custom-text [type]="'password'" [placeholder]="'Repeat Board Password'" [(fld)]="boardPasswordRepeat"
-      (onEnterFunc)="addBoard($event)" [visible]="boardPassword.value"></app-custom-text>
+      (onEnterFunc)="addBoard()" [visible]="boardPassword.value"></app-custom-text>
     <br />
     <br />
-    <app-custom-button [color]="'primary'" [text]="'Add Board'" (clickFunc)='addBoard($event)'></app-custom-button>
+    <app-custom-button [color]="'primary'" [text]="'Add Board'" [btnFunc]='addBoard.bind(this)'></app-custom-button>
     <app-custom-alert [type]="'i'" [title]="'Password Protected Boards'">
       <p>Adding a password is completely optional but will prevent unknown users from editing a board</p>
     </app-custom-alert>

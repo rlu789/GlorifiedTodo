@@ -16,7 +16,7 @@ export class EditBoardModalComponent implements OnInit {
   boardCurrentPassword: string;
 
   title: CustomFormControl;
-  passwordCtrl = new CustomFormControl('');
+  passwordCtrl = new CustomFormControl('', CustomValidators.whiteSpaceValidator());
   passwordCtrlRepeat = new CustomFormControl('', CustomValidators.matchValidator(this.passwordCtrl));
   group: CustomFormGroup;
 

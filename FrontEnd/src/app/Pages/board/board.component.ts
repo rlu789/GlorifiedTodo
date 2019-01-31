@@ -53,24 +53,21 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  addCollection($event) {
-    this.cardCollectionsService.add(new CardCollection(this.collectionTitle, this.boardId, this.collectionColor), this.password).subscribe((data: any) => {
+  addCollection() {
+    return this.cardCollectionsService.add(new CardCollection(this.collectionTitle, this.boardId, this.collectionColor), this.password).subscribe((data: any) => {
       this.board.cardCollection.push(data);
-      $event.complete();
+      this.collectionTitle = '';
+      this.collectionColor = '';
       // console.log(data);
     }, (err: HttpErrorResponse) => {
-      $event.complete();
     });
-    this.collectionTitle = '';
   }
 
-  unlock($event) {
-    this.boardsService.authorize(this.boardId, this.password).subscribe((data: any) => {
+  unlock() {
+    return this.boardsService.authorize(this.boardId, this.password).subscribe((data: any) => {
       this.editable = true;
       this.openSnackBar("Unlocked for edit");
-      $event.complete();
     }, (err: HttpErrorResponse) => {
-      $event.complete();
     });
   }
 
@@ -78,7 +75,7 @@ export class BoardComponent implements OnInit {
     this.snackBar.open(message, 'Close', { duration: 1500 });
   }
 
-  exportToExcel($event) {
+  exportToExcel() {
     var b = this.board;
     console.log(b);
 
@@ -102,7 +99,6 @@ export class BoardComponent implements OnInit {
     /* save to file */
     XLSX.writeFile(wb, 'test.xlsx');
 
-    $event.complete();
   }
 
   ngOnInit() {

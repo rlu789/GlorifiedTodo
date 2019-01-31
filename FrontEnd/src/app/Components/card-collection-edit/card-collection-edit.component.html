@@ -3,6 +3,6 @@
 <app-custom-file [(imgData)]="imgData"></app-custom-file>
 
 <div class="form-actions">
-  <app-custom-button [color]="'primary'" [text]="'Add Card'" (clickFunc)='addFunc($event)'></app-custom-button>
+  <app-custom-button [color]="'primary'" [text]="'Add Card'" [btnFunc]='addFunc.bind(this)'></app-custom-button>
   <!-- <app-custom-button [color]="'warn'" [text]="'Delete List'" (clickFunc)='deleteFunc($event)' [floatRight]="true"></app-custom-button> -->
 </div>

@@ -9,16 +9,16 @@
     <br />
     <app-custom-select [(fld)]="collectionColor" [options]="boardColors" [placeholder]="'Color'"></app-custom-select>
     <br />
-    <app-custom-button [color]="'primary'" [text]="'Add List'" (clickFunc)='addCollection($event)'></app-custom-button>
+    <app-custom-button [color]="'primary'" [text]="'Add List'" [btnFunc]='addCollection.bind(this)'></app-custom-button>
     <br />
   </div>
   <div *ngIf="!editable">
     <app-custom-text [type]="'password'" [placeholder]="'Password'" [(fld)]="password" (onEnterFunc)="unlock()"></app-custom-text>
     <br />
-    <app-custom-button [color]="'primary'" [text]="'Unlock for Edit'" (clickFunc)='unlock($event)'></app-custom-button>
+    <app-custom-button [color]="'primary'" [text]="'Unlock for Edit'" [btnFunc]='unlock.bind(this)'></app-custom-button>
     <app-custom-alert [type]="'i'" [title]="'Password Required'">
       <p>This board is protected by a password. Please enter the password to unlock the ability to edit this board</p>
     </app-custom-alert>
   </div>
-  <!-- <app-custom-button [color]="'primary'" [text]="'Export To Excel'" (clickFunc)='exportToExcel($event)'></app-custom-button> -->
+  <!-- <app-custom-button [color]="'primary'" [text]="'Export To Excel'" [btnFunc]='exportToExcel.bind(this)'></app-custom-button> -->
 </div>

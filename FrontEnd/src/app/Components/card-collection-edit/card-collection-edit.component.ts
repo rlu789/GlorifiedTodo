@@ -15,7 +15,7 @@ export class CardCollectionEditComponent implements OnInit {
   @Input('index') index: number;
   @Input('collectionId') collectionId: number;
 
-  @Output('addEvent') addEvent = new EventEmitter<{ btnEvent: any, onCompleteEvent: Function, card: Card, index: number, collectionId: number }>();
+  @Output('addEvent') addEvent = new EventEmitter<{ onCompleteEvent: Function, card: Card, index: number, collectionId: number }>();
 
   constructor() {
   }
@@ -23,7 +23,7 @@ export class CardCollectionEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  addFunc($event) {
+  addFunc() {
     var self = this;
     var card = new Card(this.cardTitle.value, this.cardDesc.value, this.collectionId);
     card.imgData = this.imgData;
@@ -35,7 +35,6 @@ export class CardCollectionEditComponent implements OnInit {
     }
 
     this.addEvent.emit({
-      btnEvent: $event,
       onCompleteEvent: onCompleteEvent,
       card: card,
       index: this.index,

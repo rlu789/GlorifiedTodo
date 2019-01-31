@@ -38,6 +38,7 @@ export class ServiceBaseService {
       }
       call.subscribe((data: any) => {
         observableToReturn.next(data);
+        observableToReturn.complete(); // call complete so that any btnFuncs can stop their loading animation
       }, (err: HttpErrorResponse) => {
         console.log(err);
         var errMsg: string = err.error && err.error.message || err.statusText;
