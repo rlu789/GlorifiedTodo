@@ -10,6 +10,7 @@
     <app-custom-select [(fld)]="collectionColor" [options]="boardColors" [placeholder]="'Color'"></app-custom-select>
     <br />
     <app-custom-button [color]="'primary'" [text]="'Add List'" [btnFunc]='addCollection.bind(this)'></app-custom-button>
+    <app-custom-button *ngIf="password" [type]="'mat-stroked-button'" [floatRight]="true" [color]="'warn'" [text]="'Remove Password'" [btnFunc]='removePassword.bind(this)'></app-custom-button>
     <br />
   </div>
   <div *ngIf="!editable">

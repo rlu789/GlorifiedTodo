@@ -39,6 +39,11 @@ export class BoardsService {
     return this.serviceBase.call(this.serviceBase.Constants.Post, 
       this.accessPointUrl + '/' + id + '/authorize', this.serviceBase.generateHeaders(password));
   }
+
+  public removeAuthorize(id: number, password: string) {
+    return this.serviceBase.call(this.serviceBase.Constants.Post, 
+      this.accessPointUrl + '/' + id + '/removeAuthorize', this.serviceBase.generateHeaders(password));
+  }
 }
 
 export class Board {

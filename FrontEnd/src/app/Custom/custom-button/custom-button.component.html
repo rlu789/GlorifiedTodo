@@ -4,6 +4,12 @@
   </button>
 </ng-container>
 
+<ng-container *ngIf="type === 'mat-stroked-button'">
+  <button mat-stroked-button [color]="color" (click)='click()' [class.float-right]="floatRight" [disabled]='loading'>
+    <ng-container *ngTemplateOutlet="buttonInner"></ng-container>
+  </button>
+</ng-container>
+
 <ng-template #buttonInner>
   <div *ngIf="loading">
     &nbsp;

@@ -58,6 +58,7 @@ namespace BackEnd4._5.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (board.Password != null) board.Password.Trim();
             _context.Boards.Add(board);
             _context.SaveChanges();
 
@@ -83,7 +84,7 @@ namespace BackEnd4._5.Controllers
             if (!AuthorizationHandler.PasswordMatched(b.Password, Request)) return Unauthorized();
 
             b.Title = board.Title;
-            if (board.Password != null && board.Password.Length > 0) b.Password = board.Password;
+            if (board.Password != null && board.Password.Trim().Length > 0) b.Password = board.Password.Trim();
             _context.SaveChanges();
             b.PasswordConvert();
             return Ok(b);
@@ -138,6 +139,22 @@ namespace BackEnd4._5.Controllers
             {
                 return Unauthorized();
             }
+        }
+
+        [System.Web.Mvc.Route("boards/{id}/removeAuthorize")]
+        public IHttpActionResult RemoveAuthorize(int id)
+        {
+            var board = _context.Boards.Find(id);
+
+            if (board == null)
+            {
+                return NotFound();
+            }
+            
+            if (!AuthorizationHandler.PasswordMatched(board.Password, Request)) return Unauthorized();
+            board.Password = null;
+            _context.SaveChanges();
+            return Ok();
         }
     }
 }

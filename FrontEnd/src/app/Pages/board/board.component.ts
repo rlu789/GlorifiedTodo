@@ -71,6 +71,13 @@ export class BoardComponent implements OnInit {
     });
   }
 
+  removePassword() {
+    return this.boardsService.removeAuthorize(this.boardId, this.password).subscribe(() => {
+      this.password = undefined;
+      this.openSnackBar("Password removed");
+    });
+  }
+
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Close', { duration: 1500 });
   }
