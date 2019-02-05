@@ -6,6 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./custom-file.component.css']
 })
 export class CustomFileComponent implements OnInit {
+  private maxFileSize: number = 500000; // 0.5mb
   imgDataValue: string;
 
   @Output()
@@ -29,7 +30,7 @@ export class CustomFileComponent implements OnInit {
     const blob = new Blob([event.target.files[0]], { type: "image/jpeg" });
     // console.log(blob);
 
-    if (blob.size <= 1000000) { // 1mb
+    if (blob.size <= this.maxFileSize) { 
       var r = new FileReader();
       r.onload = function () {
         // console.log(r.result);
@@ -40,7 +41,7 @@ export class CustomFileComponent implements OnInit {
       r.readAsDataURL(blob);
     }
     else {
-      console.log("resized");
+      // console.log("resized");
       window.URL = window.URL;
       var blobURL = window.URL.createObjectURL(blob); // and get it's URL
 
@@ -49,7 +50,7 @@ export class CustomFileComponent implements OnInit {
       image.src = blobURL;
       image.onload = function () {
         // have to wait till it's loaded
-        var resized = self.resizeMe(image, image.width, image.height, 1000000/blob.size); // resized image url
+        var resized = self.resizeMe(image, image.width, image.height, self.maxFileSize/blob.size); // resized image url
         // console.log(resized);
         self.imgData = resized;
       }

@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./custom-menu.component.css']
 })
 export class CustomMenuComponent implements OnInit {
-  private iconClass: string;
+  iconClass: string;
 
   @Input('icon') icon: string;
   @Input('items') items: {text: string, icon: string}[];
